@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.venv/
+dist/
+
+# Tokenizer vocabulary — large binary files
+tokenizer/*.model
+tokenizer/*.vocab
+tokenizer-data/
+
+.env
+.DS_Store
+.vscode/
