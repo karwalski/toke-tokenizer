@@ -60,7 +60,7 @@ def deduplicate(sources: list[str]) -> list[str]:
 
 
 def load_jsonl(path: Path) -> list[str]:
-    """Load JSONL file, extract 'source' field from each entry."""
+    """Load JSONL file, extract 'tk_source' field from each entry."""
     sources: list[str] = []
     with open(path, encoding="utf-8") as f:
         for lineno, line in enumerate(f, 1):
@@ -72,9 +72,9 @@ def load_jsonl(path: Path) -> list[str]:
             except json.JSONDecodeError:
                 print(f"WARNING: skipping malformed JSON at line {lineno}", file=sys.stderr)
                 continue
-            source = entry.get("source")
+            source = entry.get("tk_source")
             if not source:
-                print(f"WARNING: missing 'source' field at line {lineno}", file=sys.stderr)
+                print(f"WARNING: missing 'tk_source' field at line {lineno}", file=sys.stderr)
                 continue
             sources.append(source)
     return sources

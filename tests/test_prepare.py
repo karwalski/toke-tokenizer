@@ -69,8 +69,8 @@ class TestLoadJsonl:
     def test_valid_entries(self, tmp_path: Path) -> None:
         p = tmp_path / "corpus.jsonl"
         entries = [
-            {"id": "1", "source": "M=test;"},
-            {"id": "2", "source": "M=hello;"},
+            {"id": "1", "tk_source": "M=test;"},
+            {"id": "2", "tk_source": "M=hello;"},
         ]
         p.write_text("\n".join(json.dumps(e) for e in entries))
         result = load_jsonl(p)
@@ -78,13 +78,13 @@ class TestLoadJsonl:
 
     def test_skips_malformed_json(self, tmp_path: Path) -> None:
         p = tmp_path / "bad.jsonl"
-        p.write_text('{"source": "ok"}\nnot json\n{"source": "also ok"}\n')
+        p.write_text('{"tk_source": "ok"}\nnot json\n{"tk_source": "also ok"}\n')
         result = load_jsonl(p)
         assert result == ["ok", "also ok"]
 
     def test_skips_missing_source(self, tmp_path: Path) -> None:
         p = tmp_path / "nosource.jsonl"
-        p.write_text('{"id": "1"}\n{"id": "2", "source": "code"}\n')
+        p.write_text('{"id": "1"}\n{"id": "2", "tk_source": "code"}\n')
         result = load_jsonl(p)
         assert result == ["code"]
 
@@ -95,7 +95,7 @@ class TestLoadJsonl:
 
     def test_blank_lines_skipped(self, tmp_path: Path) -> None:
         p = tmp_path / "blanks.jsonl"
-        p.write_text('\n{"source": "a"}\n\n{"source": "b"}\n\n')
+        p.write_text('\n{"tk_source": "a"}\n\n{"tk_source": "b"}\n\n')
         assert load_jsonl(p) == ["a", "b"]
 
 
@@ -148,7 +148,7 @@ class TestMainIntegration:
     def test_end_to_end(self, tmp_path: Path) -> None:
         corpus = tmp_path / "corpus.jsonl"
         entries = [
-            {"id": f"e{i}", "source": f'M=mod{i};\nF=f():str{{"hello{i}"}};'}
+            {"id": f"e{i}", "tk_source": f'M=mod{i};\nF=f():str{{"hello{i}"}};'}
             for i in range(20)
         ]
         # Add a duplicate

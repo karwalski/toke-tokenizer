@@ -48,6 +48,13 @@ def build_config(
         "unk_id": UNK_ID,
         "bos_id": BOS_ID,
         "eos_id": EOS_ID,
+        # Code-specific: disable natural-language normalization defaults.
+        # toke uses 80 ASCII chars — no Unicode normalization needed.
+        "normalization_rule_name": "identity",
+        "add_dummy_prefix": False,
+        "remove_extra_whitespaces": False,
+        # Ensure all byte values can be represented (newlines, etc.)
+        "byte_fallback": True,
     }
 
 
