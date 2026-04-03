@@ -8,6 +8,11 @@ tokenizer/*.model
 tokenizer/*.vocab
 tokenizer-data/
 
+# Corpus data — large, local only
+*.jsonl
+data/
+models/
+
 .env
 .DS_Store
 .vscode/
