@@ -1,0 +1,352 @@
+{
+  "story": "11.4.6",
+  "title": "BPE tokenizer validation with final syntax",
+  "vocab_size": 8000,
+  "training_data_check": {
+    "total_chars": 19838493,
+    "pattern_counts": {
+      "$": 0,
+      "@(": 0,
+      "m=": 35231,
+      "f=": 1733,
+      "M=": 42445,
+      "F=": 100263,
+      "T=": 4673,
+      "I=": 75
+    },
+    "uses_new_syntax": false,
+    "uses_old_syntax": true
+  },
+  "pattern_tokenization": {
+    "type_sigils": [
+      {
+        "pattern": "$i64",
+        "pieces": [
+          "<0x24>",
+          "i",
+          "64"
+        ],
+        "num_pieces": 3,
+        "is_single_token": false
+      },
+      {
+        "pattern": "$str",
+        "pieces": [
+          "<0x24>",
+          "str"
+        ],
+        "num_pieces": 2,
+        "is_single_token": false
+      },
+      {
+        "pattern": "$bool",
+        "pieces": [
+          "<0x24>",
+          "bool"
+        ],
+        "num_pieces": 2,
+        "is_single_token": false
+      },
+      {
+        "pattern": "$f64",
+        "pieces": [
+          "<0x24>",
+          "f",
+          "64"
+        ],
+        "num_pieces": 3,
+        "is_single_token": false
+      },
+      {
+        "pattern": "$u64",
+        "pieces": [
+          "<0x24>",
+          "u",
+          "64"
+        ],
+        "num_pieces": 3,
+        "is_single_token": false
+      },
+      {
+        "pattern": "$i32",
+        "pieces": [
+          "<0x24>",
+          "i",
+          "32"
+        ],
+        "num_pieces": 3,
+        "is_single_token": false
+      },
+      {
+        "pattern": "$u32",
+        "pieces": [
+          "<0x24>",
+          "u",
+          "32"
+        ],
+        "num_pieces": 3,
+        "is_single_token": false
+      },
+      {
+        "pattern": "$mytype",
+        "pieces": [
+          "<0x24>",
+          "my",
+          "type"
+        ],
+        "num_pieces": 3,
+        "is_single_token": false
+      }
+    ],
+    "array_map_open": [
+      {
+        "pattern": "@(",
+        "pieces": [
+          "<0x40>",
+          "("
+        ],
+        "num_pieces": 2,
+        "is_single_token": false
+      }
+    ],
+    "declaration_keywords": [
+      {
+        "pattern": "m=",
+        "pieces": [
+          "m",
+          "="
+        ],
+        "num_pieces": 2,
+        "is_single_token": false
+      },
+      {
+        "pattern": "f=",
+        "pieces": [
+          "f",
+          "="
+        ],
+        "num_pieces": 2,
+        "is_single_token": false
+      },
+      {
+        "pattern": "i=",
+        "pieces": [
+          "i",
+          "="
+        ],
+        "num_pieces": 2,
+        "is_single_token": false
+      },
+      {
+        "pattern": "t=",
+        "pieces": [
+          "t",
+          "="
+        ],
+        "num_pieces": 2,
+        "is_single_token": false
+      }
+    ],
+    "operators": [
+      {
+        "pattern": "&&",
+        "pieces": [
+          "<0x26>",
+          "<0x26>"
+        ],
+        "num_pieces": 2,
+        "is_single_token": false
+      },
+      {
+        "pattern": "||",
+        "pieces": [
+          "|",
+          "|"
+        ],
+        "num_pieces": 2,
+        "is_single_token": false
+      },
+      {
+        "pattern": "!=",
+        "pieces": [
+          "!",
+          "="
+        ],
+        "num_pieces": 2,
+        "is_single_token": false
+      },
+      {
+        "pattern": ">=",
+        "pieces": [
+          ">",
+          "="
+        ],
+        "num_pieces": 2,
+        "is_single_token": false
+      },
+      {
+        "pattern": "<=",
+        "pieces": [
+          "<",
+          "="
+        ],
+        "num_pieces": 2,
+        "is_single_token": false
+      }
+    ],
+    "indexing": [
+      {
+        "pattern": ".get(",
+        "pieces": [
+          ".",
+          "get",
+          "("
+        ],
+        "num_pieces": 3,
+        "is_single_token": false
+      },
+      {
+        "pattern": ".len",
+        "pieces": [
+          ".",
+          "len"
+        ],
+        "num_pieces": 2,
+        "is_single_token": false
+      }
+    ],
+    "old_syntax_keywords": [
+      {
+        "pattern": "M=",
+        "pieces": [
+          "M",
+          "="
+        ],
+        "num_pieces": 2,
+        "is_single_token": false
+      },
+      {
+        "pattern": "F=",
+        "pieces": [
+          "F",
+          "="
+        ],
+        "num_pieces": 2,
+        "is_single_token": false
+      },
+      {
+        "pattern": "T=",
+        "pieces": [
+          "T",
+          "="
+        ],
+        "num_pieces": 2,
+        "is_single_token": false
+      },
+      {
+        "pattern": "I=",
+        "pieces": [
+          "I",
+          "="
+        ],
+        "num_pieces": 2,
+        "is_single_token": false
+      }
+    ],
+    "old_syntax_types": [
+      {
+        "pattern": "i64",
+        "pieces": [
+          "i",
+          "64"
+        ],
+        "num_pieces": 2,
+        "is_single_token": false
+      },
+      {
+        "pattern": "f64",
+        "pieces": [
+          "f",
+          "64"
+        ],
+        "num_pieces": 2,
+        "is_single_token": false
+      },
+      {
+        "pattern": "Str",
+        "pieces": [
+          "Str"
+        ],
+        "num_pieces": 1,
+        "is_single_token": true
+      },
+      {
+        "pattern": "bool",
+        "pieces": [
+          "bool"
+        ],
+        "num_pieces": 1,
+        "is_single_token": true
+      },
+      {
+        "pattern": "u64",
+        "pieces": [
+          "u",
+          "64"
+        ],
+        "num_pieces": 2,
+        "is_single_token": false
+      },
+      {
+        "pattern": ":i64",
+        "pieces": [
+          ":",
+          "i",
+          "64"
+        ],
+        "num_pieces": 3,
+        "is_single_token": false
+      },
+      {
+        "pattern": ":f64",
+        "pieces": [
+          ":",
+          "f",
+          "64"
+        ],
+        "num_pieces": 3,
+        "is_single_token": false
+      },
+      {
+        "pattern": ":Str",
+        "pieces": [
+          ":",
+          "Str"
+        ],
+        "num_pieces": 2,
+        "is_single_token": false
+      }
+    ]
+  },
+  "vocab_search_summary": {
+    "Str": 65,
+    "mut": 19,
+    "bool": 25,
+    "br": 4,
+    "str": 76
+  },
+  "corpus_stats": {
+    "num_samples": 200,
+    "token_count_mean": 59.6,
+    "token_count_median": 52.0,
+    "token_count_p95": 99,
+    "chars_per_token_mean": 2.344,
+    "tokens_per_line_mean": 59.6
+  },
+  "verdict": {
+    "new_syntax_single_token_rate": "0/13",
+    "old_syntax_single_token_rate": "2/12",
+    "needs_retraining": true,
+    "reason": "Tokenizer was trained on OLD syntax (M=, F=, T=, bare type names). Training data contains zero instances of $ type sigils or @( array syntax. Retraining on corpus with final syntax is required."
+  }
+}

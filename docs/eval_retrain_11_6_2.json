@@ -1,0 +1,125 @@
+{
+  "story": "11.6.2",
+  "title": "Retrain BPE on default syntax corpus",
+  "vocab_size": 8000,
+  "corpus_entries": 46754,
+  "training_bytes": 22223649,
+  "user_defined_symbols": [
+    "$i64",
+    "$f64",
+    "$str",
+    "$bool",
+    "$u64",
+    "$byte",
+    "@(",
+    "m=",
+    "f=",
+    "t=",
+    "i=",
+    ".get(",
+    "&&",
+    "||"
+  ],
+  "new_model": {
+    "path": "/Users/matthew.watt/tk/toke-tokenizer/output/models/toke_default_8k.model",
+    "char_to_token_ratio": 0.352,
+    "tokens_per_line": 158.98,
+    "single_token_patterns": "14/14",
+    "vocab_coverage_pct": 100.0,
+    "roundtrip_fidelity": "200/200"
+  },
+  "pattern_results": {
+    "$i64": {
+      "is_single_token": true,
+      "pieces": [
+        "$i64"
+      ]
+    },
+    "$f64": {
+      "is_single_token": true,
+      "pieces": [
+        "$f64"
+      ]
+    },
+    "$str": {
+      "is_single_token": true,
+      "pieces": [
+        "$str"
+      ]
+    },
+    "$bool": {
+      "is_single_token": true,
+      "pieces": [
+        "$bool"
+      ]
+    },
+    "$u64": {
+      "is_single_token": true,
+      "pieces": [
+        "$u64"
+      ]
+    },
+    "$byte": {
+      "is_single_token": true,
+      "pieces": [
+        "$byte"
+      ]
+    },
+    "@(": {
+      "is_single_token": true,
+      "pieces": [
+        "@("
+      ]
+    },
+    "m=": {
+      "is_single_token": true,
+      "pieces": [
+        "m="
+      ]
+    },
+    "f=": {
+      "is_single_token": true,
+      "pieces": [
+        "f="
+      ]
+    },
+    "t=": {
+      "is_single_token": true,
+      "pieces": [
+        "t="
+      ]
+    },
+    "i=": {
+      "is_single_token": true,
+      "pieces": [
+        "i="
+      ]
+    },
+    ".get(": {
+      "is_single_token": true,
+      "pieces": [
+        ".get("
+      ]
+    },
+    "&&": {
+      "is_single_token": true,
+      "pieces": [
+        "&&"
+      ]
+    },
+    "||": {
+      "is_single_token": true,
+      "pieces": [
+        "||"
+      ]
+    }
+  },
+  "old_model_comparison": {
+    "old_ctr": 0.3807,
+    "new_ctr": 0.352,
+    "ctr_improvement": 0.0287,
+    "old_tokens_per_line": 171.95,
+    "new_tokens_per_line": 158.98,
+    "tpl_improvement": 12.97
+  }
+}
