@@ -1,5 +1,7 @@
 # toke Tokenizer Design
 
+> **Superseded (2026-08-18):** this doc describes the v0.3-era design. Its 32,768 vocab target and ≥2.5x gate are both contradicted by measurement (32k: 23.5% utilization, +0.6pp over 8k; same-tokenizer reduction 12.5%, see TEMSpec). Current plan: toke repo, `docs/architecture/tokenizer-v04-plan.md` (story 116.9).
+
 **Status:** Planned — Phase 2 work, after Gate 1 is passed.
 
 ## Goal
