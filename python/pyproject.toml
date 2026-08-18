@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "toke-tokenizer"
+version = "0.1.0"
+description = "BPE tokenizer for the toke programming language (16K vocab)"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [{name = "Matt Watt"}]
+keywords = ["tokenizer", "bpe", "toke", "programming-language"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Compilers",
+    "Topic :: Text Processing",
+]
+
+[project.urls]
+Homepage = "https://github.com/karwalski/toke-tokenizer"
+Repository = "https://github.com/karwalski/toke-tokenizer"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7",
+    "ruff>=0.4",
+]
+
+[tool.setuptools.packages.find]
+include = ["toke_tokenizer*"]
+
+[tool.setuptools.package-data]
+toke_tokenizer = ["data/*.json"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

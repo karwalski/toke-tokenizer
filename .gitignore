@@ -2,6 +2,7 @@ __pycache__/
 *.pyc
 .venv/
 dist/
+*.egg-info
 
 # Tokenizer vocabulary — large binary files
 tokenizer/*.model
