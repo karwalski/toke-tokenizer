@@ -4,6 +4,18 @@
 Computes compression ratio, vocabulary utilization, fertility, and
 per-program token counts for both the toke tokenizer and baseline.
 
+Metric orientation follows TEMSpec v1.0 §2 (toke-spec/docs/temspec.md):
+
+* ``fertility``        = tokens / character   (§2.4; lower is better)
+* ``chars_per_token``  = characters / token   (the inverse; higher is better;
+                          this is what the ``>= 1.8`` compression gate reads)
+* ``compression_ratio``= sum(toke tokens) / sum(baseline tokens)  (§2.2)
+* ``vocab_utilization``= unique tokens used / vocab size          (§2.5)
+* ``tokens_per_program``: mean / median / p95 of per-program token counts.
+  ``tokens_per_line`` is only meaningful on multi-line source; on ``tkc --min``
+  canonical text (one program per line) it degenerates to tokens/program, which
+  is why story 131.20 renamed the headline metric.
+
 Usage:
     python eval.py --model models/toke.model --test-data data/valid.txt
     python eval.py --model models/toke.model --test-data data/valid.txt --output eval_report.json
@@ -15,7 +27,9 @@ import argparse
 import json
 import statistics
 import sys
+from collections.abc import Callable
 from pathlib import Path
+from typing import Any
 
 
 def load_programs(path: Path) -> list[str]:
@@ -33,14 +47,14 @@ def load_programs(path: Path) -> list[str]:
     return [p.strip() for p in programs if p.strip()]
 
 
-def tokenize_programs_sp(sp_model: object, programs: list[str]) -> list[list[int]]:
+def tokenize_programs_sp(sp_model: Any, programs: list[str]) -> list[list[int]]:
     """Tokenize each program using a SentencePiece model."""
-    return [sp_model.encode(p, out_type=int) for p in programs]  # type: ignore[union-attr]
+    return [list(sp_model.encode(p, out_type=int)) for p in programs]
 
 
-def tokenize_programs_tiktoken(enc: object, programs: list[str]) -> list[list[int]]:
+def tokenize_programs_tiktoken(enc: Any, programs: list[str]) -> list[list[int]]:
     """Tokenize each program using a tiktoken encoding."""
-    return [enc.encode(p) for p in programs]  # type: ignore[union-attr]
+    return [list(enc.encode(p)) for p in programs]
 
 
 def compute_token_stats(token_lists: list[list[int]]) -> dict[str, float]:
@@ -82,8 +96,18 @@ def compute_vocab_utilization(
     return len(unique) / vocab_size
 
 
+# Compression gate (story 131.20): the canonical text must average at least this
+# many characters per token.  Expressed in chars/token, NOT tokens/char -- the
+# pre-131.20 ``retrain_bpe.char_to_token_ratio`` computed tokens/char (~0.3) and
+# compared it against 1.8, so the gate could never fail.
+CHARS_PER_TOKEN_GATE_MIN = 1.8
+
+
 def compute_fertility(programs: list[str], token_lists: list[list[int]]) -> float:
-    """Compute fertility: mean tokens per character across all programs."""
+    """Fertility per TEMSpec §2.4: tokens per character, mean over programs.
+
+    Lower is better.  Programs with zero characters are skipped.
+    """
     if not programs:
         return 0.0
     ratios = []
@@ -96,12 +120,74 @@ def compute_fertility(programs: list[str], token_lists: list[list[int]]) -> floa
     return statistics.mean(ratios)
 
 
+def compute_corpus_fertility(programs: list[str], token_lists: list[list[int]]) -> float:
+    """Corpus-level fertility: total tokens / total characters (tokens per char)."""
+    total_chars = sum(len(p) for p in programs)
+    total_tokens = sum(len(t) for t in token_lists)
+    if total_chars == 0:
+        return 0.0
+    return total_tokens / total_chars
+
+
+def compute_chars_per_token(programs: list[str], token_lists: list[list[int]]) -> float:
+    """Characters per token: total characters / total tokens (higher is better).
+
+    This is the inverse of :func:`compute_corpus_fertility` and the quantity the
+    compression gate (:func:`compression_gate`) is defined on.
+    """
+    total_chars = sum(len(p) for p in programs)
+    total_tokens = sum(len(t) for t in token_lists)
+    if total_tokens == 0:
+        return 0.0
+    return total_chars / total_tokens
+
+
+def compression_gate(
+    chars_per_token: float, minimum: float = CHARS_PER_TOKEN_GATE_MIN
+) -> bool:
+    """Return True when ``chars_per_token`` (chars/token) meets the gate minimum.
+
+    Takes chars/token, never tokens/char: passing a fertility value here is a
+    bug (it would sit around 0.3 and always fail, the mirror image of the
+    pre-131.20 bug where tokens/char was compared against 1.8 and always passed).
+    """
+    if chars_per_token <= 0:
+        return False
+    return chars_per_token >= minimum
+
+
+def compute_tokens_per_program(token_lists: list[list[int]]) -> dict[str, float]:
+    """Mean / median / p95 tokens per program (alias of :func:`compute_token_stats`)."""
+    return compute_token_stats(token_lists)
+
+
+def compute_tokens_per_line(
+    programs: list[str], encode: Callable[[str], list[int]]
+) -> float:
+    """Mean tokens per non-empty source LINE, tokenising each line separately.
+
+    Only meaningful for multi-line (readable) source.  On ``tkc --min`` output
+    every program is a single line, so this equals tokens/program -- report
+    :func:`compute_tokens_per_program` there instead.
+    """
+    total_tokens = 0
+    total_lines = 0
+    for prog in programs:
+        for line in prog.split("\n"):
+            if line.strip():
+                total_tokens += len(encode(line))
+                total_lines += 1
+    if total_lines == 0:
+        return 0.0
+    return total_tokens / total_lines
+
+
 def build_report(
     programs: list[str],
     toke_tokens: list[list[int]],
     baseline_tokens: list[list[int]],
     vocab_size: int,
-) -> dict:
+) -> dict[str, Any]:
     """Build the full evaluation report as a dictionary."""
     return {
         "program_count": len(programs),
@@ -110,11 +196,17 @@ def build_report(
         "compression_ratio": compute_compression_ratio(toke_tokens, baseline_tokens),
         "vocab_utilization": compute_vocab_utilization(toke_tokens, vocab_size),
         "fertility": compute_fertility(programs, toke_tokens),
+        "corpus_fertility": compute_corpus_fertility(programs, toke_tokens),
+        "chars_per_token": compute_chars_per_token(programs, toke_tokens),
+        "compression_gate_min_chars_per_token": CHARS_PER_TOKEN_GATE_MIN,
+        "compression_gate_pass": compression_gate(
+            compute_chars_per_token(programs, toke_tokens)
+        ),
         "vocab_size": vocab_size,
     }
 
 
-def format_summary(report: dict) -> str:
+def format_summary(report: dict[str, Any]) -> str:
     """Format a human-readable summary table from the report."""
     lines = [
         "Tokenizer Evaluation Report",
@@ -132,6 +224,12 @@ def format_summary(report: dict) -> str:
         f"Vocab utilization:     {report['vocab_utilization']:.4f}",
         f"Fertility (tok/char):  {report['fertility']:.4f}",
     ]
+    if "chars_per_token" in report:
+        gate = "PASS" if report.get("compression_gate_pass") else "FAIL"
+        lines.append(
+            f"Chars per token:       {report['chars_per_token']:.4f}"
+            f"  (gate >= {report['compression_gate_min_chars_per_token']}: {gate})"
+        )
     return "\n".join(lines)
 
 
@@ -187,7 +285,7 @@ def main(argv: list[str] | None = None) -> int:
 
     # Load tokenizers (deferred imports so dry-run works without deps)
     try:
-        import sentencepiece as spm  # type: ignore[import-untyped]
+        import sentencepiece as spm
     except ImportError:
         print("ERROR: sentencepiece is not installed", file=sys.stderr)
         return 1

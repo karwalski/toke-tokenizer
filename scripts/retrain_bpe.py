@@ -13,12 +13,20 @@ Usage:
 from __future__ import annotations
 
 import argparse
-import csv
 import json
 import random
 import sys
-import tempfile
 from pathlib import Path
+
+# Metric definitions live in the repo-root eval.py (TEMSpec orientation, story 131.20).
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from eval import (
+    CHARS_PER_TOKEN_GATE_MIN,
+    compression_gate,
+    compute_chars_per_token,
+    compute_corpus_fertility,
+    compute_tokens_per_program,
+)
 
 # ---------------------------------------------------------------------------
 # Dependency check
@@ -145,20 +153,32 @@ def load_model(model_path: Path) -> spm.SentencePieceProcessor:
     return sp
 
 
-def char_to_token_ratio(sp: spm.SentencePieceProcessor, sources: list[str]) -> float:
-    """Tokens-per-character ratio (fertility) across all sources.
+def encode_all(sp: spm.SentencePieceProcessor, sources: list[str]) -> list[list[int]]:
+    """Encode every source once; the metric helpers below share the result."""
+    return [list(sp.encode(src, out_type=int)) for src in sources]
 
-    A lower value means better compression. Target is <= 1.8.
+
+def compression_metrics(
+    sp: spm.SentencePieceProcessor, sources: list[str]
+) -> dict[str, float | bool]:
+    """Fertility (tokens/char, TEMSpec §2.4), chars/token, gate verdict, tokens/program.
+
+    Replaces the pre-131.20 ``char_to_token_ratio`` (which computed tokens/char
+    but was gated ``<= 1.8`` as if it were chars/token, so the gate could never
+    fail) and ``tokens_per_line`` (which on single-line ``--min`` input was
+    really tokens/program).
     """
-    total_chars = 0
-    total_tokens = 0
-    for src in sources:
-        tokens = sp.encode(src, out_type=int)
-        total_chars += len(src)
-        total_tokens += len(tokens)
-    if total_chars == 0:
-        return 0.0
-    return total_tokens / total_chars
+    token_lists = encode_all(sp, sources)
+    cpt = compute_chars_per_token(sources, token_lists)
+    tpp = compute_tokens_per_program(token_lists)
+    return {
+        "fertility": compute_corpus_fertility(sources, token_lists),
+        "chars_per_token": cpt,
+        "compression_gate_pass": compression_gate(cpt),
+        "tokens_per_program_mean": tpp["mean"],
+        "tokens_per_program_median": tpp["median"],
+        "tokens_per_program_p95": tpp["p95"],
+    }
 
 
 def check_single_tokens(sp: spm.SentencePieceProcessor, patterns: list[str]) -> dict[str, bool]:
@@ -202,27 +222,13 @@ def roundtrip_fidelity(
     return passes, len(samples), failures
 
 
-def tokens_per_line(sp: spm.SentencePieceProcessor, sources: list[str]) -> float:
-    """Average tokens per non-empty line across all sources."""
-    total_tokens = 0
-    total_lines = 0
-    for src in sources:
-        for line in src.split("\n"):
-            if line.strip():
-                total_tokens += len(sp.encode(line, out_type=int))
-                total_lines += 1
-    if total_lines == 0:
-        return 0.0
-    return total_tokens / total_lines
-
-
 # ---------------------------------------------------------------------------
 # Reporting
 # ---------------------------------------------------------------------------
 
 def print_report(
     vocab_size: int,
-    ctr: float,
+    metrics: dict[str, float | bool],
     single_tok: dict[str, bool],
     coverage: float,
     rt_pass: int,
@@ -232,14 +238,19 @@ def print_report(
     print(f"\n{'=' * 60}")
     print(f"  Vocab size: {vocab_size}")
     print(f"{'=' * 60}")
-    target_met = "PASS" if ctr <= 1.8 else "FAIL"
-    print(f"  Char-to-token ratio: {ctr:.3f}  (target <= 1.8: {target_met})")
+    target_met = "PASS" if metrics["compression_gate_pass"] else "FAIL"
+    print(f"  Fertility (tokens/char): {metrics['fertility']:.4f}")
+    print(
+        f"  Chars per token:         {metrics['chars_per_token']:.3f}"
+        f"  (gate >= {CHARS_PER_TOKEN_GATE_MIN}: {target_met})"
+    )
+    print(f"  Tokens/program mean:     {metrics['tokens_per_program_mean']:.2f}")
     print(f"  Vocabulary coverage: {coverage:.2f}%")
     print(f"  Round-trip fidelity: {rt_pass}/{rt_total}")
-    print(f"  Single-token patterns:")
+    print("  Single-token patterns:")
     for pattern, is_single in single_tok.items():
         status = "YES" if is_single else " no"
-        print(f"    {status}  {repr(pattern)}")
+        print(f"    {status}  {pattern!r}")
 
 
 # ---------------------------------------------------------------------------
@@ -306,49 +317,49 @@ def main(argv: list[str] | None = None) -> int:
     # ---- Evaluate new model ----
     sp_new = load_model(model_path)
 
-    ctr = char_to_token_ratio(sp_new, sources)
+    metrics_new = compression_metrics(sp_new, sources)
     single_tok = check_single_tokens(sp_new, EXPECTED_SINGLE_TOKENS)
     coverage = vocab_coverage(sp_new, sources)
     rt_pass, rt_total, rt_failures = roundtrip_fidelity(sp_new, sources, n_samples=200)
-    tpl_new = tokens_per_line(sp_new, sources)
     single_count = sum(1 for v in single_tok.values() if v)
 
-    print_report(VOCAB_SIZE, ctr, single_tok, coverage, rt_pass, rt_total)
-    print(f"  Avg tokens per line: {tpl_new:.2f}")
+    print_report(VOCAB_SIZE, metrics_new, single_tok, coverage, rt_pass, rt_total)
 
     if rt_failures:
         print(f"  Round-trip failures ({len(rt_failures)}):")
         for fail in rt_failures[:5]:
-            print(f"    {repr(fail)}")
+            print(f"    {fail!r}")
 
     # ---- Compare with old model ----
-    old_ctr = None
-    old_tpl = None
+    metrics_old: dict[str, float | bool] | None = None
     old_single_tok = None
     if args.old_model.is_file():
         print(f"\n{'=' * 60}")
         print("  COMPARISON WITH OLD MODEL")
         print(f"{'=' * 60}")
         sp_old = load_model(args.old_model)
-        old_ctr = char_to_token_ratio(sp_old, sources)
-        old_tpl = tokens_per_line(sp_old, sources)
+        metrics_old = compression_metrics(sp_old, sources)
         old_single_tok = check_single_tokens(sp_old, EXPECTED_SINGLE_TOKENS)
         old_single_count = sum(1 for v in old_single_tok.values() if v)
 
-        print(f"  Old model CTR:           {old_ctr:.4f}")
-        print(f"  New model CTR:           {ctr:.4f}  (delta: {ctr - old_ctr:+.4f})")
-        print(f"  Old tokens/line:         {old_tpl:.2f}")
-        print(f"  New tokens/line:         {tpl_new:.2f}  (delta: {tpl_new - old_tpl:+.2f})")
+        old_cpt = float(metrics_old["chars_per_token"])
+        new_cpt = float(metrics_new["chars_per_token"])
+        old_tpp = float(metrics_old["tokens_per_program_mean"])
+        new_tpp = float(metrics_new["tokens_per_program_mean"])
+        print(f"  Old chars/token:         {old_cpt:.4f}")
+        print(f"  New chars/token:         {new_cpt:.4f}  (delta: {new_cpt - old_cpt:+.4f})")
+        print(f"  Old tokens/program:      {old_tpp:.2f}")
+        print(f"  New tokens/program:      {new_tpp:.2f}  (delta: {new_tpp - old_tpp:+.2f})")
         print(f"  Old single-token:        {old_single_count}/{len(EXPECTED_SINGLE_TOKENS)}")
         print(f"  New single-token:        {single_count}/{len(EXPECTED_SINGLE_TOKENS)}")
 
         # Show per-pattern comparison
-        print(f"\n  Pattern breakdown:")
+        print("\n  Pattern breakdown:")
         for pattern in EXPECTED_SINGLE_TOKENS:
             old_ok = "YES" if old_single_tok[pattern] else " no"
             new_ok = "YES" if single_tok[pattern] else " no"
             changed = " *" if old_single_tok[pattern] != single_tok[pattern] else ""
-            print(f"    {old_ok} -> {new_ok}  {repr(pattern)}{changed}")
+            print(f"    {old_ok} -> {new_ok}  {pattern!r}{changed}")
 
     # ---- Write evaluation JSON ----
     eval_result = {
@@ -360,8 +371,10 @@ def main(argv: list[str] | None = None) -> int:
         "user_defined_symbols": USER_DEFINED_SYMBOLS,
         "new_model": {
             "path": str(model_path),
-            "char_to_token_ratio": round(ctr, 4),
-            "tokens_per_line": round(tpl_new, 2),
+            "fertility_tokens_per_char": round(float(metrics_new["fertility"]), 4),
+            "chars_per_token": round(float(metrics_new["chars_per_token"]), 4),
+            "compression_gate_pass": bool(metrics_new["compression_gate_pass"]),
+            "tokens_per_program_mean": round(float(metrics_new["tokens_per_program_mean"]), 2),
             "single_token_patterns": f"{single_count}/{len(EXPECTED_SINGLE_TOKENS)}",
             "vocab_coverage_pct": round(coverage, 2),
             "roundtrip_fidelity": f"{rt_pass}/{rt_total}",
@@ -371,14 +384,18 @@ def main(argv: list[str] | None = None) -> int:
             for p, v in single_tok.items()
         },
     }
-    if old_ctr is not None:
+    if metrics_old is not None:
+        old_cpt = float(metrics_old["chars_per_token"])
+        new_cpt = float(metrics_new["chars_per_token"])
+        old_tpp = float(metrics_old["tokens_per_program_mean"])
+        new_tpp = float(metrics_new["tokens_per_program_mean"])
         eval_result["old_model_comparison"] = {
-            "old_ctr": round(old_ctr, 4),
-            "new_ctr": round(ctr, 4),
-            "ctr_improvement": round(old_ctr - ctr, 4),
-            "old_tokens_per_line": round(old_tpl, 2),
-            "new_tokens_per_line": round(tpl_new, 2),
-            "tpl_improvement": round(old_tpl - tpl_new, 2),
+            "old_chars_per_token": round(old_cpt, 4),
+            "new_chars_per_token": round(new_cpt, 4),
+            "chars_per_token_improvement": round(new_cpt - old_cpt, 4),
+            "old_tokens_per_program_mean": round(old_tpp, 2),
+            "new_tokens_per_program_mean": round(new_tpp, 2),
+            "tokens_per_program_improvement": round(old_tpp - new_tpp, 2),
         }
 
     eval_path = args.output_dir / "eval_retrain_11_6_2.json"
