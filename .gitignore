@@ -12,7 +12,11 @@ tokenizer-data/
 # Corpus data — large, local only
 *.jsonl
 data/
-models/
+# models/ stays ignored, but provenance records (story 131.24) are tracked.
+**/models/**
+!**/models/**/
+!**/models/**/*.provenance.json
+!**/models/**/provenance.json
 
 .env
 .DS_Store

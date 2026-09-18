@@ -1,0 +1,13 @@
+{
+  "artifact": "toke.model",
+  "sha256": "9a754777212d340b29cd566512bea6d4c68a20ee6e21353905a548769f15de5a",
+  "training_script": "unknown (legacy)",
+  "training_script_sha": "unknown (legacy)",
+  "config_sha": "unknown (legacy)",
+  "corpus_manifest_sha": "unknown (legacy)",
+  "created": "2026-09-18",
+  "created_by": "scripts/check_provenance.py --fix-legacy",
+  "legacy": true,
+  "provenance": "unknown (legacy)",
+  "note": "Artefact predates the provenance rule (story 131.24); its generator and inputs were not recorded. Do not treat as reproducible."
+}

@@ -1,0 +1,13 @@
+{
+  "artifact": "toke.vocab",
+  "sha256": "a35792c014471c375f2b07b36d81ca1da96c46b99967f40b084598da5b669ecb",
+  "training_script": "unknown (legacy)",
+  "training_script_sha": "unknown (legacy)",
+  "config_sha": "unknown (legacy)",
+  "corpus_manifest_sha": "unknown (legacy)",
+  "created": "2026-09-18",
+  "created_by": "scripts/check_provenance.py --fix-legacy",
+  "legacy": true,
+  "provenance": "unknown (legacy)",
+  "note": "Artefact predates the provenance rule (story 131.24); its generator and inputs were not recorded. Do not treat as reproducible."
+}
