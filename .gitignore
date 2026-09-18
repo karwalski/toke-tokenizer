@@ -11,7 +11,7 @@ tokenizer-data/
 
 # Corpus data — large, local only
 *.jsonl
-data/
+data/*
 # models/ stays ignored, but provenance records (story 131.24) are tracked.
 **/models/**
 !**/models/**/
@@ -21,3 +21,8 @@ data/
 .env
 .DS_Store
 .vscode/
+
+# Story 131.20 baseline artefacts: the sample ids MUST be tracked so 131.21 measures the same records.
+!data/baseline_sample_ids_v04.txt
+!data/baseline_v04_*.json
+!data/baseline_v04_*_per_record.csv

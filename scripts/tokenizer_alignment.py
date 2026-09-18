@@ -1,409 +1,365 @@
 #!/usr/bin/env python3
-"""Analyze overlap between the toke BPE tokenizer and the Qwen base model tokenizer.
+"""Vocabulary alignment between the toke tokenizer and the Qwen2.5-Coder tokenizer.
 
-Computes vocabulary intersection, Jaccard similarity, identifies novel toke tokens,
-and compares per-sample tokenization on corpus programs.  Outputs structured JSON
-analysis and a human-readable recommendation.
+Story 131.20 (plan Phase 0 item 2) rewrite of the 9.8.2 script.  Fixes:
+
+* ``transformers`` is REQUIRED.  The 9.8.2 run silently degraded to a
+  "partial analysis" with ``qwen_vocab_size: 0`` and still emitted a
+  ``vocab_extension_prototype`` verdict -- that verdict was an artefact.  This
+  script now exits 2 with a clear message if ``transformers`` is missing, and
+  never writes a report without the Qwen side.
+* Piece representations are normalised before any set comparison: SentencePiece
+  ``▁`` (word-boundary marker) and ``<0xNN>`` byte-fallback pieces, and
+  HuggingFace byte-level pieces (``Ġ`` = space, ``Ċ`` = newline, ...)
+  are all mapped to the surface text they stand for.  Without this, ``▁io``
+  and ``Ġio`` are counted as different tokens although both mean `` io``.
+* Adds an occurrence-weighted coverage: the fraction of toke token
+  *occurrences* over the canonical (``tkc --min`` + masked, plan D2/D6) sample
+  whose surface text is also a single Qwen token.  That -- not raw vocab
+  set overlap -- is what a vocab-extension decision (Epic 128) should read.
 
 Usage:
-    python tokenizer_alignment.py \
-        --toke-model models/toke.model \
-        --corpus-dir /path/to/toke-corpus/corpus \
-        --output-dir data \
-        --sample-count 100
-
-If the ``transformers`` package is not installed, produces partial analysis
-with toke BPE statistics only.
+    python3 scripts/tokenizer_alignment.py \\
+        --toke-model models/toke.model \\
+        --qwen-model Qwen/Qwen2.5-Coder-7B \\
+        --corpus /path/to/regen_v04 --ids data/baseline_sample_ids_v04.txt \\
+        --output-dir docs/alignment
 """
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import random
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
+from typing import Any
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import tkcanon
 
 # ---------------------------------------------------------------------------
-# Dependency checks
+# Dependency checks -- hard failures, no partial mode
 # ---------------------------------------------------------------------------
 
 try:
-    import sentencepiece as spm
-except ImportError:
+    from transformers import AutoTokenizer
+except ImportError:  # pragma: no cover - exercised by tests via monkeypatching
     print(
-        "ERROR: sentencepiece is not installed.\n"
-        "Install it with:\n"
-        "  pip install sentencepiece",
+        "ERROR: the `transformers` package is required for tokenizer alignment "
+        "(the Qwen side of the comparison).  Install it with:\n"
+        "  pip install transformers\n"
+        "Refusing to produce a partial analysis: the 9.8.2 partial run "
+        "(qwen_vocab_size=0) produced a meaningless verdict.",
         file=sys.stderr,
     )
-    sys.exit(1)
-
-_HAS_TRANSFORMERS = True
-try:
-    from transformers import AutoTokenizer  # type: ignore[import-untyped]
-except ImportError:
-    _HAS_TRANSFORMERS = False
-
-# ---------------------------------------------------------------------------
-# Defaults
-# ---------------------------------------------------------------------------
+    sys.exit(2)
 
 DEFAULT_TOKE_MODEL = "models/toke.model"
-DEFAULT_QWEN_MODEL = "Qwen/Qwen2.5-Coder-7B-Instruct"
-DEFAULT_CORPUS_DIR = "/Users/matthew.watt/tk/toke-corpus/corpus"
-DEFAULT_OUTPUT_DIR = "data"
-DEFAULT_SAMPLE_COUNT = 100
+DEFAULT_QWEN_MODEL = "Qwen/Qwen2.5-Coder-7B"
+DEFAULT_OUTPUT_DIR = "docs/alignment"
+DEFAULT_SAMPLE_COUNT = 200
 
 # ---------------------------------------------------------------------------
-# Corpus collection (reused from retrain_bpe.py)
+# Piece normalisation
 # ---------------------------------------------------------------------------
 
+SP_WORD_BOUNDARY = "▁"
+SP_SPECIALS = {"<unk>", "<s>", "</s>", "<pad>"}
 
-def collect_corpus_sources(corpus_dir: Path) -> list[str]:
-    """Walk the corpus directory, extracting tk_source from JSON/JSONL files."""
-    sources: list[str] = []
 
-    for json_path in sorted(corpus_dir.rglob("*.json")):
-        if json_path.name in ("manifest.json", "schema.json"):
-            continue
+def _bytes_to_unicode() -> dict[int, str]:
+    """GPT-2 / HF ByteLevel byte -> printable-unicode mapping."""
+    bs = list(range(ord("!"), ord("~") + 1)) + list(range(ord("¡"), ord("¬") + 1)) \
+        + list(range(ord("®"), ord("ÿ") + 1))
+    cs = bs[:]
+    n = 0
+    for b in range(256):
+        if b not in bs:
+            bs.append(b)
+            cs.append(256 + n)
+            n += 1
+    return dict(zip(bs, (chr(c) for c in cs), strict=True))
+
+
+_B2U = _bytes_to_unicode()
+_U2B = {u: b for b, u in _B2U.items()}
+
+
+def normalise_piece(piece: str, kind: str) -> str | None:
+    """Map a vocabulary piece to the surface text it stands for.
+
+    ``kind`` is ``"sentencepiece"``, ``"bytelevel"`` (HF ByteLevel alphabet) or
+    ``"plain"`` (HF char-level BPE such as ``tokenizer_v03.json``).  Returns
+    ``None`` for control/special pieces that have no surface form.  A byte-level
+    piece that is not a complete UTF-8 sequence is returned as ``<bytes:HEX>``
+    so it never spuriously equals a real string.
+    """
+    if kind == "sentencepiece":
+        if piece in SP_SPECIALS:
+            return None
+        if len(piece) == 6 and piece.startswith("<0x") and piece.endswith(">"):
+            b = int(piece[3:5], 16)
+            return chr(b) if b < 0x80 else f"<bytes:{b:02x}>"
+        return piece.replace(SP_WORD_BOUNDARY, " ")
+    if kind == "bytelevel":
         try:
-            with open(json_path, encoding="utf-8") as f:
-                entry = json.load(f)
-        except (json.JSONDecodeError, OSError):
-            continue
-        source = (
-            entry.get("tk_source")
-            or entry.get("toke_source")
-            or entry.get("source")
-            or entry.get("code")
-        )
-        if source and isinstance(source, str) and source.strip():
-            sources.append(source.strip())
-
-    for jsonl_path in sorted(corpus_dir.rglob("*.jsonl")):
+            raw = bytes(_U2B[ch] for ch in piece)
+        except KeyError:
+            return piece  # an added/special token written in plain text
         try:
-            with open(jsonl_path, encoding="utf-8") as f:
-                for line in f:
-                    line = line.strip()
-                    if not line:
-                        continue
-                    try:
-                        entry = json.loads(line)
-                    except json.JSONDecodeError:
-                        continue
-                    source = (
-                        entry.get("tk_source")
-                        or entry.get("toke_source")
-                        or entry.get("source")
-                        or entry.get("code")
-                    )
-                    if source and isinstance(source, str) and source.strip():
-                        sources.append(source.strip())
-        except OSError:
+            return raw.decode("utf-8")
+        except UnicodeDecodeError:
+            return f"<bytes:{raw.hex()}>"
+    if kind == "plain":
+        return piece
+    raise ValueError(f"unknown piece kind {kind!r}")
+
+
+def normalise_vocab(pieces: list[str], kind: str, specials: set[str]) -> set[str]:
+    out: set[str] = set()
+    for p in pieces:
+        if p in specials:
             continue
-
-    return sources
-
-
-def deduplicate(sources: list[str]) -> list[str]:
-    seen: set[str] = set()
-    unique: list[str] = []
-    for src in sources:
-        if src not in seen:
-            seen.add(src)
-            unique.append(src)
-    return unique
+        n = normalise_piece(p, kind)
+        if n is not None:
+            out.add(n)
+    return out
 
 
 # ---------------------------------------------------------------------------
-# Tokenizer loading
+# Tokenizer adapters
 # ---------------------------------------------------------------------------
 
 
-def load_toke_tokenizer(model_path: Path) -> spm.SentencePieceProcessor:
-    """Load the toke SentencePiece BPE model."""
-    if not model_path.exists():
-        print(f"ERROR: toke model not found: {model_path}", file=sys.stderr)
-        sys.exit(1)
-    sp = spm.SentencePieceProcessor()
-    sp.Load(str(model_path))
-    return sp
+class TokeAdapter:
+    """Uniform view over a SentencePiece ``.model`` or an HF ``tokenizer.json``."""
+
+    def __init__(self, path: Path) -> None:
+        self.path = path
+        self.sha256 = hashlib.sha256(path.read_bytes()).hexdigest()
+        if path.suffix == ".model":
+            import sentencepiece as spm
+
+            self.kind = "sentencepiece"
+            self._sp = spm.SentencePieceProcessor()
+            self._sp.Load(str(path))
+            self.vocab_size = int(self._sp.GetPieceSize())
+            self.pieces = [self._sp.IdToPiece(i) for i in range(self.vocab_size)]
+            self.specials = set(SP_SPECIALS)
+        else:
+            from tokenizers import Tokenizer
+
+            self._hf = Tokenizer.from_file(str(path))
+            data = json.loads(path.read_text(encoding="utf-8"))
+            self.kind = "bytelevel" if _uses_bytelevel(data) else "plain"
+            vocab = self._hf.get_vocab()
+            self.vocab_size = len(vocab)
+            self.pieces = [p for p, _ in sorted(vocab.items(), key=lambda kv: kv[1])]
+            self.specials = {t["content"] for t in data.get("added_tokens", []) if t.get("special")}
+
+    def encode_pieces(self, text: str) -> list[str]:
+        if self.kind == "sentencepiece":
+            return list(self._sp.encode(text, out_type=str))
+        return list(self._hf.encode(text).tokens)
 
 
-def extract_toke_vocab(sp: spm.SentencePieceProcessor) -> set[str]:
-    """Extract all vocabulary tokens from a SentencePiece model."""
-    vocab: set[str] = set()
-    for i in range(sp.GetPieceSize()):
-        piece = sp.IdToPiece(i)
-        if piece:
-            vocab.add(piece)
-    return vocab
+def _uses_bytelevel(data: dict[str, Any]) -> bool:
+    pre = data.get("pre_tokenizer") or {}
+    stack = [pre] + list(pre.get("pretokenizers", []))
+    return any(p.get("type") == "ByteLevel" for p in stack)
 
 
-def load_qwen_tokenizer(model_name: str) -> "AutoTokenizer | None":
-    """Load the Qwen tokenizer via transformers, returning None if unavailable."""
-    if not _HAS_TRANSFORMERS:
-        return None
+def load_qwen(model_name: str, local_files_only: bool) -> Any:
     try:
-        return AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
-    except Exception as exc:
-        print(f"WARNING: could not load Qwen tokenizer: {exc}", file=sys.stderr)
-        return None
-
-
-def extract_qwen_vocab(tokenizer: "AutoTokenizer") -> set[str]:
-    """Extract full vocabulary from a HuggingFace tokenizer."""
-    vocab_dict = tokenizer.get_vocab()
-    return set(vocab_dict.keys())
+        return AutoTokenizer.from_pretrained(model_name, local_files_only=local_files_only)
+    except Exception as exc:  # network / cache miss
+        print(
+            f"ERROR: could not load Qwen tokenizer {model_name!r}: {exc}\n"
+            "If offline, make sure the model is in the HF cache (~/.cache/huggingface/hub).",
+            file=sys.stderr,
+        )
+        sys.exit(2)
 
 
 # ---------------------------------------------------------------------------
-# Overlap analysis
+# Analysis
 # ---------------------------------------------------------------------------
 
 
-def compute_overlap(toke_vocab: set[str], qwen_vocab: set[str]) -> dict:
-    """Compute intersection, union, Jaccard similarity, and novel token sets."""
-    intersection = toke_vocab & qwen_vocab
-    union = toke_vocab | qwen_vocab
-    jaccard = len(intersection) / len(union) if union else 0.0
-    novel_in_toke = toke_vocab - qwen_vocab
-    overlap_pct = len(intersection) / len(toke_vocab) if toke_vocab else 0.0
-
+def compute_overlap(toke_norm: set[str], qwen_norm: set[str]) -> dict[str, Any]:
+    inter = toke_norm & qwen_norm
+    union = toke_norm | qwen_norm
+    novel = toke_norm - qwen_norm
     return {
-        "toke_vocab_size": len(toke_vocab),
-        "qwen_vocab_size": len(qwen_vocab),
-        "intersection_size": len(intersection),
+        "toke_vocab_size": len(toke_norm),
+        "qwen_vocab_size": len(qwen_norm),
+        "intersection_size": len(inter),
         "union_size": len(union),
-        "jaccard_similarity": round(jaccard, 6),
-        "overlap_pct": round(100.0 * overlap_pct, 2),
-        "novel_toke_token_count": len(novel_in_toke),
-        "novel_pct": round(100.0 * len(novel_in_toke) / len(toke_vocab), 2) if toke_vocab else 0.0,
-        "novel_tokens_sample": sorted(novel_in_toke)[:200],
+        "jaccard_similarity": round(len(inter) / len(union), 6) if union else 0.0,
+        "overlap_pct": round(100.0 * len(inter) / len(toke_norm), 2) if toke_norm else 0.0,
+        "novel_toke_token_count": len(novel),
+        "novel_pct": round(100.0 * len(novel) / len(toke_norm), 2) if toke_norm else 0.0,
+        "novel_tokens_sample": sorted(novel, key=lambda s: (len(s), s))[:200],
     }
 
 
-# ---------------------------------------------------------------------------
-# Per-sample comparison
-# ---------------------------------------------------------------------------
+def occurrence_coverage(
+    toke: TokeAdapter, qwen_norm: set[str], texts: list[str]
+) -> dict[str, Any]:
+    """Share of toke token occurrences whose surface text is a single Qwen token."""
+    total = 0
+    covered = 0
+    missing: dict[str, int] = {}
+    for t in texts:
+        for p in toke.encode_pieces(t):
+            n = normalise_piece(p, toke.kind)
+            if n is None:
+                continue
+            total += 1
+            if n in qwen_norm:
+                covered += 1
+            else:
+                missing[n] = missing.get(n, 0) + 1
+    top = sorted(missing.items(), key=lambda kv: -kv[1])[:100]
+    return {
+        "toke_token_occurrences": total,
+        "covered_by_single_qwen_token": covered,
+        "coverage_pct": round(100.0 * covered / total, 2) if total else 0.0,
+        "top_uncovered": [{"piece": p, "count": c} for p, c in top],
+    }
 
 
-def compare_tokenization(
-    toke_sp: spm.SentencePieceProcessor,
-    qwen_tok: "AutoTokenizer",
-    sources: list[str],
-) -> list[dict]:
-    """Tokenize each source with both tokenizers and compare."""
-    results: list[dict] = []
-
-    for i, src in enumerate(sources):
-        toke_pieces = toke_sp.encode(src, out_type=str)
-        qwen_tokens = qwen_tok.tokenize(src)
-
-        toke_set = set(toke_pieces)
-        qwen_set = set(qwen_tokens)
-        shared = toke_set & qwen_set
-
-        results.append({
-            "sample_index": i,
-            "source_length_chars": len(src),
-            "toke_token_count": len(toke_pieces),
-            "qwen_token_count": len(qwen_tokens),
-            "ratio_qwen_to_toke": round(len(qwen_tokens) / len(toke_pieces), 3) if toke_pieces else 0.0,
-            "shared_unique_tokens": len(shared),
-            "toke_only_unique": len(toke_set - qwen_set),
-            "qwen_only_unique": len(qwen_set - toke_set),
-            "source_preview": src[:120],
+def compare_tokenization(toke: TokeAdapter, qwen: Any, recs: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    out: list[dict[str, Any]] = []
+    for r in recs:
+        tp = toke.encode_pieces(r["text"])
+        qn = len(qwen.encode(r["text"], add_special_tokens=False))
+        out.append({
+            "task_id": r["task_id"],
+            "category": r["category"],
+            "chars": len(r["text"]),
+            "toke_token_count": len(tp),
+            "qwen_token_count": qn,
+            "ratio_qwen_to_toke": round(qn / len(tp), 3) if tp else 0.0,
         })
-
-    return results
-
-
-def identify_expansion_patterns(comparisons: list[dict]) -> list[dict]:
-    """Find samples where Qwen produces significantly more tokens."""
-    expansions = []
-    for cmp in comparisons:
-        ratio = cmp["ratio_qwen_to_toke"]
-        if ratio > 1.5:
-            expansions.append({
-                "sample_index": cmp["sample_index"],
-                "ratio": ratio,
-                "toke_tokens": cmp["toke_token_count"],
-                "qwen_tokens": cmp["qwen_token_count"],
-                "source_preview": cmp["source_preview"],
-            })
-    return sorted(expansions, key=lambda x: x["ratio"], reverse=True)
+    return out
 
 
-# ---------------------------------------------------------------------------
-# Recommendation
-# ---------------------------------------------------------------------------
-
-
-def build_recommendation(overlap: dict, comparisons: list[dict] | None) -> dict:
-    """Produce a recommendation based on novel-token percentage."""
+def build_recommendation(overlap: dict[str, Any], cov: dict[str, Any], comps: list[dict[str, Any]]) -> dict[str, Any]:
     novel_pct = overlap["novel_pct"]
-
-    avg_ratio = None
-    if comparisons:
-        ratios = [c["ratio_qwen_to_toke"] for c in comparisons if c["ratio_qwen_to_toke"] > 0]
-        avg_ratio = round(sum(ratios) / len(ratios), 3) if ratios else None
-
-    if novel_pct > 30:
-        action = "vocab_extension_prototype"
-        summary = (
-            f"{novel_pct:.1f}% of toke vocabulary tokens are not in Qwen vocabulary. "
-            "Recommend prototyping a vocabulary extension that adds toke-specific "
-            "tokens to the base Qwen tokenizer."
-        )
-        feasibility = "low"
-    else:
+    cov_pct = cov["coverage_pct"]
+    ratios = [c["ratio_qwen_to_toke"] for c in comps if c["ratio_qwen_to_toke"] > 0]
+    avg_ratio = round(sum(ratios) / len(ratios), 3) if ratios else None
+    # Occurrence coverage is the decision variable: if most toke tokens the model
+    # would actually see are already single Qwen tokens, extension buys little.
+    if cov_pct >= 80.0:
         action = "use_qwen_tokenizer_directly"
-        summary = (
-            f"Only {novel_pct:.1f}% of toke vocabulary tokens are novel (not in Qwen). "
-            "Using the Qwen tokenizer directly is feasible. The base model already "
-            "covers the majority of tokens needed for toke programs."
-        )
         feasibility = "high"
-
+        summary = (
+            f"{cov_pct:.1f}% of toke token occurrences on canonical code are already single "
+            f"Qwen tokens ({novel_pct:.1f}% of toke vocab entries are novel by set overlap). "
+            "Qwen's tokenizer can be used directly; extension is optional."
+        )
+    elif cov_pct >= 50.0:
+        action = "targeted_vocab_extension"
+        feasibility = "medium"
+        summary = (
+            f"{cov_pct:.1f}% occurrence coverage; the uncovered mass is concentrated in a few "
+            "hundred toke-specific pieces (see top_uncovered). Recommend a small targeted "
+            "extension rather than a full merge of the toke vocab."
+        )
+    else:
+        action = "vocab_extension_prototype"
+        feasibility = "low"
+        summary = (
+            f"Only {cov_pct:.1f}% of toke token occurrences are single Qwen tokens "
+            f"({novel_pct:.1f}% novel vocab). Prototype a vocabulary extension."
+        )
     rec = {
         "action": action,
-        "novel_token_pct": novel_pct,
+        "decision_variable": "occurrence_coverage_pct",
+        "occurrence_coverage_pct": cov_pct,
+        "novel_token_pct_set_overlap": novel_pct,
         "feasibility_of_qwen_direct": feasibility,
         "summary": summary,
     }
     if avg_ratio is not None:
         rec["avg_qwen_to_toke_token_ratio"] = avg_ratio
-
     return rec
 
 
 # ---------------------------------------------------------------------------
-# Output
+# Reports
 # ---------------------------------------------------------------------------
 
 
-def write_json_report(
-    output_dir: Path,
-    overlap: dict,
-    comparisons: list[dict] | None,
-    expansion_patterns: list[dict] | None,
-    recommendation: dict,
-    partial: bool,
-) -> Path:
-    """Write the full analysis JSON."""
-    report = {
-        "generated": datetime.now(timezone.utc).isoformat(),
-        "partial_analysis": partial,
-        "overlap_stats": overlap,
-        "recommendation": recommendation,
-    }
-    if comparisons is not None:
-        report["per_sample_comparison"] = comparisons
-    if expansion_patterns is not None:
-        report["expansion_patterns"] = expansion_patterns
+def write_reports(out_dir: Path, report: dict[str, Any]) -> tuple[Path, Path]:
+    out_dir.mkdir(parents=True, exist_ok=True)
+    jp = out_dir / "tokenizer_alignment.json"
+    jp.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
-    path = output_dir / "tokenizer_alignment.json"
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(report, f, indent=2, ensure_ascii=False)
-    return path
-
-
-def write_markdown_report(
-    output_dir: Path,
-    overlap: dict,
-    comparisons: list[dict] | None,
-    expansion_patterns: list[dict] | None,
-    recommendation: dict,
-    partial: bool,
-) -> Path:
-    """Write the human-readable recommendation markdown."""
-    lines: list[str] = []
-    lines.append("# Tokenizer Alignment Report")
-    lines.append("")
-    lines.append(f"Generated: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}")
-    if partial:
-        lines.append("")
-        lines.append("> **Partial analysis** -- `transformers` package not available.")
-        lines.append("> Install with `pip install transformers` for full Qwen comparison.")
-    lines.append("")
-
-    lines.append("## Vocabulary Overlap")
-    lines.append("")
-    lines.append(f"| Metric | Value |")
-    lines.append(f"|--------|-------|")
-    lines.append(f"| Toke vocab size | {overlap['toke_vocab_size']} |")
-    if overlap.get("qwen_vocab_size"):
-        lines.append(f"| Qwen vocab size | {overlap['qwen_vocab_size']} |")
-        lines.append(f"| Intersection | {overlap['intersection_size']} |")
-        lines.append(f"| Union | {overlap['union_size']} |")
-        lines.append(f"| Jaccard similarity | {overlap['jaccard_similarity']:.4f} |")
-        lines.append(f"| Overlap (intersection / toke vocab) | {overlap['overlap_pct']:.1f}% |")
-        lines.append(f"| Novel toke tokens | {overlap['novel_toke_token_count']} ({overlap['novel_pct']:.1f}%) |")
-    lines.append("")
-
-    if overlap.get("novel_tokens_sample"):
-        lines.append("### Novel toke tokens (sample, up to 200)")
-        lines.append("")
-        lines.append("```")
-        for tok in overlap["novel_tokens_sample"][:50]:
-            lines.append(f"  {repr(tok)}")
-        if len(overlap["novel_tokens_sample"]) > 50:
-            lines.append(f"  ... and {len(overlap['novel_tokens_sample']) - 50} more")
-        lines.append("```")
-        lines.append("")
-
-    if comparisons:
-        lines.append("## Per-Sample Tokenization Comparison")
-        lines.append("")
-        avg_toke = sum(c["toke_token_count"] for c in comparisons) / len(comparisons)
-        avg_qwen = sum(c["qwen_token_count"] for c in comparisons) / len(comparisons)
-        avg_ratio = sum(c["ratio_qwen_to_toke"] for c in comparisons if c["ratio_qwen_to_toke"] > 0) / max(1, sum(1 for c in comparisons if c["ratio_qwen_to_toke"] > 0))
-        lines.append(f"- Samples analyzed: {len(comparisons)}")
-        lines.append(f"- Avg toke tokens per sample: {avg_toke:.1f}")
-        lines.append(f"- Avg Qwen tokens per sample: {avg_qwen:.1f}")
-        lines.append(f"- Avg Qwen/toke token ratio: {avg_ratio:.2f}")
-        lines.append("")
-
-    if expansion_patterns:
-        lines.append("### Samples where Qwen tokenizer expands significantly (ratio > 1.5x)")
-        lines.append("")
-        for ep in expansion_patterns[:10]:
-            lines.append(f"- Sample {ep['sample_index']}: ratio {ep['ratio']:.2f}x "
-                         f"(toke={ep['toke_tokens']}, qwen={ep['qwen_tokens']})")
-        lines.append("")
-
-    lines.append("## Recommendation")
-    lines.append("")
-    lines.append(f"**Action:** `{recommendation['action']}`")
-    lines.append("")
-    lines.append(recommendation["summary"])
-    lines.append("")
-    if recommendation.get("avg_qwen_to_toke_token_ratio") is not None:
-        lines.append(f"Average Qwen-to-toke token ratio on corpus samples: "
-                     f"{recommendation['avg_qwen_to_toke_token_ratio']:.2f}x")
-        lines.append("")
-
-    if recommendation["action"] == "vocab_extension_prototype":
-        lines.append("### Next Steps")
-        lines.append("")
-        lines.append("1. Build prototype vocabulary extension adding toke-specific tokens to Qwen tokenizer")
-        lines.append("2. Measure downstream LLM perplexity with extended vocab")
-        lines.append("3. Compare fine-tuning loss convergence with/without extension")
-        lines.append("")
-    else:
-        lines.append("### Next Steps")
-        lines.append("")
-        lines.append("1. Confirm Qwen tokenizer covers toke syntax adequately in fine-tuning")
-        lines.append("2. Monitor token fertility during training runs")
-        lines.append("3. Consider adding only high-frequency novel tokens if fertility is problematic")
-        lines.append("")
-
-    path = output_dir / "alignment_recommendation.md"
-    with open(path, "w", encoding="utf-8") as f:
-        f.write("\n".join(lines))
-    return path
+    o = report["overlap_stats"]
+    c = report["occurrence_coverage"]
+    r = report["recommendation"]
+    comps = report["per_sample_comparison"]
+    lines = [
+        "# Tokenizer Alignment Report (toke vs Qwen2.5-Coder)",
+        "",
+        f"Generated: {report['generated']}  ",
+        f"toke model: `{report['toke_model']}` (kind={report['toke_kind']}, sha256 `{report['toke_model_sha256'][:16]}…`)  ",
+        f"Qwen model: `{report['qwen_model']}` (transformers {report['transformers_version']})  ",
+        f"Sample: {len(comps)} canonical (`tkc --min` + masked) programs, seed {report['sample_seed']}",
+        "",
+        "## Vocabulary overlap (pieces normalised to surface text)",
+        "",
+        "| Metric | Value |",
+        "|---|---|",
+        f"| toke vocab (normalised, non-special) | {o['toke_vocab_size']} |",
+        f"| Qwen vocab (normalised, non-special) | {o['qwen_vocab_size']} |",
+        f"| Intersection | {o['intersection_size']} |",
+        f"| Jaccard | {o['jaccard_similarity']:.4f} |",
+        f"| Overlap (intersection / toke vocab) | {o['overlap_pct']:.1f}% |",
+        f"| Novel toke tokens | {o['novel_toke_token_count']} ({o['novel_pct']:.1f}%) |",
+        "",
+        "## Occurrence-weighted coverage on canonical code",
+        "",
+        f"- toke token occurrences: {c['toke_token_occurrences']}",
+        f"- covered by a single Qwen token: {c['covered_by_single_qwen_token']} "
+        f"(**{c['coverage_pct']:.1f}%**)",
+        "",
+        "Top uncovered toke pieces (surface text, count):",
+        "",
+        "```",
+    ]
+    for item in c["top_uncovered"][:40]:
+        lines.append(f"  {item['count']:6d}  {item['piece']!r}")
+    lines += ["```", "", "## Per-sample tokenization", ""]
+    if comps:
+        avg_t = sum(x["toke_token_count"] for x in comps) / len(comps)
+        avg_q = sum(x["qwen_token_count"] for x in comps) / len(comps)
+        lines += [
+            f"- mean toke tokens/program: {avg_t:.1f}",
+            f"- mean Qwen tokens/program: {avg_q:.1f}",
+            f"- mean Qwen/toke ratio: {r.get('avg_qwen_to_toke_token_ratio', 0):.2f}x",
+            "",
+        ]
+    lines += [
+        "## Recommendation",
+        "",
+        f"**Action:** `{r['action']}` (decision variable: {r['decision_variable']} = {r['occurrence_coverage_pct']:.1f}%)",
+        "",
+        r["summary"],
+        "",
+        "Thresholds: coverage >= 80% -> use Qwen directly; 50-80% -> targeted extension; "
+        "< 50% -> extension prototype.  Set-overlap novelty is reported for continuity with "
+        "the 9.8.2 run but is not the decision variable (it counts every rare merge equally).",
+        "",
+    ]
+    mp = out_dir / "alignment_recommendation.md"
+    mp.write_text("\n".join(lines), encoding="utf-8")
+    return jp, mp
 
 
 # ---------------------------------------------------------------------------
@@ -412,111 +368,67 @@ def write_markdown_report(
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(
-        description="Analyze overlap between toke BPE tokenizer and Qwen base model tokenizer."
-    )
-    parser.add_argument(
-        "--toke-model",
-        type=Path,
-        default=Path(DEFAULT_TOKE_MODEL),
-        help=f"Path to toke SentencePiece .model file (default: {DEFAULT_TOKE_MODEL})",
-    )
-    parser.add_argument(
-        "--qwen-model",
-        type=str,
-        default=DEFAULT_QWEN_MODEL,
-        help=f"HuggingFace model ID for Qwen tokenizer (default: {DEFAULT_QWEN_MODEL})",
-    )
-    parser.add_argument(
-        "--corpus-dir",
-        type=Path,
-        default=Path(DEFAULT_CORPUS_DIR),
-        help="Root of the toke corpus directory",
-    )
-    parser.add_argument(
-        "--output-dir",
-        type=Path,
-        default=Path(DEFAULT_OUTPUT_DIR),
-        help=f"Directory for output files (default: {DEFAULT_OUTPUT_DIR})",
-    )
-    parser.add_argument(
-        "--sample-count",
-        type=int,
-        default=DEFAULT_SAMPLE_COUNT,
-        help=f"Number of corpus samples for per-sample comparison (default: {DEFAULT_SAMPLE_COUNT})",
-    )
-    args = parser.parse_args(argv)
+    ap = argparse.ArgumentParser(description="toke vs Qwen tokenizer alignment (131.20)")
+    ap.add_argument("--toke-model", type=Path, default=Path(DEFAULT_TOKE_MODEL),
+                    help="SentencePiece .model or HF tokenizer .json")
+    ap.add_argument("--qwen-model", type=str, default=DEFAULT_QWEN_MODEL)
+    ap.add_argument("--corpus", type=Path, required=True, help="regen_v04 record dir")
+    ap.add_argument("--ids", type=Path, default=None, help="ids file (baseline_sample.py)")
+    ap.add_argument("--sample-count", type=int, default=DEFAULT_SAMPLE_COUNT)
+    ap.add_argument("--seed", type=int, default=42)
+    ap.add_argument("--no-mask", action="store_true", help="skip D2 string masking")
+    ap.add_argument("--allow-download", action="store_true",
+                    help="allow HF hub download (default: HF cache only)")
+    ap.add_argument("--output-dir", type=Path, default=Path(DEFAULT_OUTPUT_DIR))
+    ap.add_argument("--tkc", type=Path, default=None)
+    args = ap.parse_args(argv)
 
-    args.output_dir.mkdir(parents=True, exist_ok=True)
+    import transformers
 
-    # ---- Load toke tokenizer ----
-    print(f"Loading toke tokenizer from {args.toke_model} ...")
-    toke_sp = load_toke_tokenizer(args.toke_model)
-    toke_vocab = extract_toke_vocab(toke_sp)
-    print(f"  Toke vocab size: {len(toke_vocab)}")
+    toke = TokeAdapter(args.toke_model)
+    print(f"toke model: {args.toke_model} kind={toke.kind} vocab={toke.vocab_size}")
+    qwen = load_qwen(args.qwen_model, local_files_only=not args.allow_download)
+    qwen_specials = set(qwen.all_special_tokens)
+    qwen_norm = normalise_vocab(list(qwen.get_vocab().keys()), "bytelevel", qwen_specials)
+    toke_norm = normalise_vocab(toke.pieces, toke.kind, toke.specials)
+    print(f"Qwen model: {args.qwen_model} vocab={len(qwen.get_vocab())} (normalised {len(qwen_norm)})")
 
-    # ---- Load Qwen tokenizer ----
-    qwen_tok = load_qwen_tokenizer(args.qwen_model)
-    partial = qwen_tok is None
-    if partial:
-        print("WARNING: transformers not available -- running partial analysis (toke BPE only)")
-        qwen_vocab: set[str] = set()
-    else:
-        qwen_vocab = extract_qwen_vocab(qwen_tok)
-        print(f"  Qwen vocab size: {len(qwen_vocab)}")
+    overlap = compute_overlap(toke_norm, qwen_norm)
+    print(f"  overlap {overlap['overlap_pct']:.1f}%  novel {overlap['novel_pct']:.1f}%  "
+          f"jaccard {overlap['jaccard_similarity']:.4f}")
 
-    # ---- Overlap analysis ----
-    print("\nComputing vocabulary overlap ...")
-    overlap = compute_overlap(toke_vocab, qwen_vocab)
-    print(f"  Intersection: {overlap['intersection_size']}")
-    if not partial:
-        print(f"  Jaccard similarity: {overlap['jaccard_similarity']:.4f}")
-        print(f"  Overlap (intersection/toke): {overlap['overlap_pct']:.1f}%")
-        print(f"  Novel toke tokens: {overlap['novel_toke_token_count']} ({overlap['novel_pct']:.1f}%)")
+    tkc = tkcanon.find_tkc(args.tkc)
+    recs, fails = tkcanon.load_canonical_sample(args.corpus, args.ids, tkc, mask=not args.no_mask)
+    if fails:
+        print(f"  WARNING: {len(fails)} records failed --min and were dropped")
+    rng = random.Random(args.seed)
+    sample = rng.sample(recs, min(args.sample_count, len(recs)))
+    cov = occurrence_coverage(toke, qwen_norm, [r["text"] for r in sample])
+    comps = compare_tokenization(toke, qwen, sample)
+    rec = build_recommendation(overlap, cov, comps)
+    print(f"  occurrence coverage {cov['coverage_pct']:.1f}%  -> {rec['action']}")
 
-    # ---- Per-sample comparison ----
-    comparisons: list[dict] | None = None
-    expansion_patterns: list[dict] | None = None
-
-    if not partial and args.corpus_dir.is_dir():
-        print(f"\nCollecting corpus from {args.corpus_dir} ...")
-        sources = deduplicate(collect_corpus_sources(args.corpus_dir))
-        print(f"  Total unique sources: {len(sources)}")
-
-        n = min(args.sample_count, len(sources))
-        if n > 0:
-            rng = random.Random(42)
-            samples = rng.sample(sources, n)
-            print(f"  Comparing tokenization on {n} samples ...")
-            comparisons = compare_tokenization(toke_sp, qwen_tok, samples)
-            expansion_patterns = identify_expansion_patterns(comparisons)
-            if expansion_patterns:
-                print(f"  Expansion patterns (Qwen > 1.5x toke): {len(expansion_patterns)}")
-        else:
-            print("  WARNING: no corpus sources found for per-sample comparison")
-    elif not partial:
-        print(f"\nWARNING: corpus directory not found: {args.corpus_dir}")
-
-    # ---- Recommendation ----
-    recommendation = build_recommendation(overlap, comparisons)
-    print(f"\n{'=' * 60}")
-    print(f"  RECOMMENDATION: {recommendation['action']}")
-    print(f"{'=' * 60}")
-    print(f"  {recommendation['summary']}")
-    if recommendation.get("avg_qwen_to_toke_token_ratio") is not None:
-        print(f"  Avg Qwen/toke token ratio: {recommendation['avg_qwen_to_toke_token_ratio']:.2f}x")
-
-    # ---- Write outputs ----
-    json_path = write_json_report(
-        args.output_dir, overlap, comparisons, expansion_patterns, recommendation, partial
-    )
-    print(f"\nJSON report: {json_path}")
-
-    md_path = write_markdown_report(
-        args.output_dir, overlap, comparisons, expansion_patterns, recommendation, partial
-    )
-    print(f"Markdown report: {md_path}")
-
+    report = {
+        "story": "131.20",
+        "generated": datetime.now(UTC).isoformat(),
+        "partial_analysis": False,
+        "toke_model": str(args.toke_model),
+        "toke_kind": toke.kind,
+        "toke_model_sha256": toke.sha256,
+        "qwen_model": args.qwen_model,
+        "transformers_version": transformers.__version__,
+        "tkc_version": tkcanon.tkc_version(tkc),
+        "masked": not args.no_mask,
+        "sample_seed": args.seed,
+        "sample_source": str(args.corpus),
+        "sample_ids_file": str(args.ids) if args.ids else None,
+        "overlap_stats": overlap,
+        "occurrence_coverage": cov,
+        "recommendation": rec,
+        "per_sample_comparison": comps,
+    }
+    jp, mp = write_reports(args.output_dir, report)
+    print(f"JSON report: {jp}\nMarkdown report: {mp}")
     return 0
 
 
