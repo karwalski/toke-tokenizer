@@ -26,3 +26,8 @@ data/*
 !data/baseline_sample_ids_v04.txt
 !data/baseline_v04_*.json
 !data/baseline_v04_*_per_record.csv
+
+# Story 131.23 must-merge list: the data file AND the seeded corpus sample it was derived from
+# are tracked so tests/test_derive_must_merge.py can re-derive it hermetically (byte-identical).
+!data/must_merge_v04.json
+!data/must_merge_sample_v04.txt

@@ -1,0 +1,47 @@
+# corpus: ~/tk/toke-corpus/corpus/regen_v04 (first 40 records of data/must_merge_sample_v04.txt)
+# accepted_records: 23382
+# requested: 40
+# seed: 131
+# tkc_version: toke 2.8.0
+# min_failures: 0
+# format: task_id<TAB>masked tkc --min text (plan D2/D6), one record per line
+A-ARR-0001v28	m=arrsum;i=io:std.io;f=sum(first:@i64):i64{let total=mut.0;lp(let i=0;i<first.len;i=i+1){let v=first.get(i);if(v<0){total=total-(0-v)}el{total=total+v}};<total};f=main():i64{io.println("\(sum(@(1;2;3)))");io.println("\(sum(@()))");io.println("\(sum(@(-4;10;-6)))");<0};
+A-ARR-0001v68	m=harness;i=io:std.io;i=s:std.str;f=sum(arr:@i64):i64{let total=mut.0;lp(let i=0;i<arr.len;i=i+1){let v=arr.get(i);let add=if(v<0){0-(0-v)}el{v};total=total+add;};<total};
+A-ARR-0002v39	m=sumprog;i=io:std.io;f=sum(arr:@u64):u64{if(arr.len==0){<0 as u64};let total=mut.arr.get(0);lp(let i=1;i<arr.len;i=i+1){total=total+arr.get(i)};<total};f=main():i64{io.println("\(sum(@(1 as u64;2 as u64;3 as u64)))");io.println("\(sum(@(10 as u64)))");io.println("\(sum(@()))");<0};
+A-ARR-0003v12	m=sumarr;i=io:std.io;f=sum(arr:@f64):f64{let n=arr.len;let total=mut.0.0;lp(let i=0;i<n;i=i+1){let v=arr.get(i);let contrib=if(v<0.0){0.0-(0.0-v)}el{v};total=total+contrib};<total};f=main():i64{io.println("\(sum(@(1.0;2.0;3.0)))");io.println("\(sum(@(-1.0;5.0;-2.0)))");io.println("\(sum(@()))");<0};
+A-ARR-0004v35	m=product;i=io:std.io;f=product(arr:@i64):i64{let p=mut.1;lp(let i=0;i<arr.len;i=i+1){p=p*arr.get(i);};<p};f=main():i64{io.println("\(product(@(1;2;3;4)))");io.println("\(product(@(5)))");io.println("\(product(@()))");<0};
+A-ARR-0004v57	m=arrproduct;i=io:std.io;f=mul(a:i64;b:i64):i64{let times=if(b<0){0-b}el{b};let acc=mut.0;lp(let i=0;i<times;i=i+1){acc=acc+a};<if(b<0){0-acc}el{acc}};f=product(n:@i64):i64{let acc=mut.1;lp(let i=0;i<n.len;i=i+1){acc=mul(acc;n.get(i))};<acc};f=main():i64{let r1=product(@(1;2;3;4));io.println("\(r1)");let r2=product(@(5;-2;3));io.println("\(r2)");let r3=product(@(7));io.println("\(r3)");<0};
+A-ARR-0004v69	m=productprog;i=io:std.io;f=product(arr:@i64):i64{let acc=mut.1;lp(let i=0;i<arr.len;i=i+1){acc=acc*arr.get(i);};<acc};f=main():i64{let r1=product(@(1;2;3;4));io.println("\(r1)");let r2=product(@(5;-2));io.println("\(r2)");let r3=product(@());io.println("\(r3)");<0};
+A-ARR-0005v10	m=product;i=io:std.io;f=product(arr:@u64):u64{let p=mut.1 as u64;lp(let i=0;i<arr.len;i=i+1){p=p*arr.get(i);};<p};f=main():i64{let a=@(2 as u64;3 as u64;4 as u64);let b=@(5 as u64;5 as u64);let c=@();io.println("\(product(a))");io.println("\(product(b))");io.println("\(product(c))");<0};
+A-ARR-0005v35	m=product;i=io:std.io;f=product(lhs:@u64):u64{let acc=mut.1 as u64;lp(let i=0;i<lhs.len;i=i+1){acc=acc*lhs.get(i);};<acc};f=main():i64{io.println("\(product(@(1 as u64;2 as u64;3 as u64;4 as u64)))");io.println("\(product(@(5 as u64;5 as u64)))");<0};
+A-ARR-0005v63	m=arrproduct;i=io:std.io;f=product(left:@u64):u64{let acc=mut.1;lp(let i=0;i<left.len;i=i+1){let v=left.get(i);if(v==0){acc=0}el{if(acc==0){acc=0}el{acc=acc*v}}};<acc};f=main():i64{io.println("\(product(@(2 as u64;3 as u64;4 as u64)))");io.println("\(product(@(7 as u64)))");io.println("\(product(@()))");<0};
+A-ARR-0006v13	m=harness;i=io:std.io;i=s:std.str;f=product(arr:@f64):f64{let acc=mut.1.0;let n=arr.len;lp(let i=0;i<n;i=i+1){acc=acc*arr.get(i)};<acc};
+A-ARR-0006v46	m=harness;i=io:std.io;i=s:std.str;f=product(num1:@f64):f64{let p=mut.1.0;lp(let i=0;i<num1.len;i=i+1){p=p*num1.get(i);};<p};
+A-ARR-0006v53	m=arrproduct;i=io:std.io;f=product(arr:@f64):f64{let p=mut.1.0;lp(let i=0;i<arr.len;i=i+1){p=p*arr.get(i)};<p};f=main():i64{io.println("\(product(@(2.0;3.0;4.0)))");io.println("\(product(@(1.5;2.0)))");io.println("\(product(@()))");<0};
+A-ARR-0007v59	m=harness;i=io:std.io;i=s:std.str;f=arrlen(arr:@i64):i64{let count=mut.0;lp(let i=0;i<arr.len;i=i+1){count=count+1};<count};
+A-ARR-0008v17	m=arrlen;i=io:std.io;f=arrlen(arr:@u64):i64{let count=mut.0;lp(let i=0;i<arr.len;i=i+1){count=count+1};<count};f=main():i64{let r1=arrlen(@(1;2;3)as@u64);io.println("\(r1)");let r2=arrlen(@()as@u64);io.println("\(r2)");let r3=arrlen(@(7;8;9;10;11)as@u64);io.println("\(r3)");<0};
+A-ARR-0008v25	m=arraylength;i=io:std.io;f=arrlen(arr:@u64):i64{let n=arr.len as i64;let total=mut.0;lp(let i=0;i<n;i=i+1){total=total+1;};<total};f=main():i64{io.println("\(arrlen(@(1 as u64;2 as u64;3 as u64)))");io.println("\(arrlen(@(7 as u64)))");<0};
+A-ARR-0008v32	m=harness;i=io:std.io;i=s:std.str;f=arrlen(arr:@u64):i64{let n=arr.len;<n};
+A-ARR-0008v34	m=arrlenmod;i=io:std.io;f=arrlen(arr:@u64):i64{<arr.len as i64};f=main():i64{io.println("\(arrlen(@(1 as u64;2 as u64;3 as u64)))");io.println("\(arrlen(@(7 as u64)))");<0};
+A-ARR-0008v61	m=harness;i=io:std.io;i=s:std.str;f=arrlen(p:@u64):i64{let total=mut.0;lp(let i=0;i<p.len;i=i+1){total=total+1};<total};
+A-ARR-0010v31	m=harness;i=io:std.io;i=s:std.str;f=arrlen(left:@str):i64{let n=left.len as i64;if(n==0){<0}el{if(n>0){<n}el{<0}}};
+A-ARR-0013v21	m=arr0013;i=io:std.io;f=first(p:@f64):f64{let result=mut.0.0;result=p.get(0);<result};f=main():i64{io.println("\(first(@(3.5;1.2;9.9)))");io.println("\(first(@(42.0)))");<0};
+A-ARR-0013v44	m=firstelem;i=io:std.io;f=first(arr:@f64):f64{if(arr.len==0){<0.0};<arr.get(0)};f=main():i64{io.println("\(first(@(3.5;1.2;9.9)))");io.println("\(first(@(-4.0;2.0)))");<0};
+A-ARR-0014v25	m=arrfirst;i=io:std.io;f=first(arr:@str):str{<arr.get(0)};f=main():i64{io.println("\(first(@("_";"_";"_")))");<0};
+A-ARR-0014v63	m=harness;i=io:std.io;f=first(arr:@str):str{if(arr.len>0){<arr.get(0)}el{<""}};f=main():i64{io.println("\(first(@("_";"_";"_")))");<0};
+A-ARR-0015v14	m=lastelem;i=io:std.io;f=last(arr:@i64):i64{<arr.get(arr.len-1)};f=main():i64{io.println("\(last(@(1;2;3)))");io.println("\(last(@(5;9;7;4)))");io.println("\(last(@(42)))");<0};
+A-ARR-0015v19	m=harness;i=io:std.io;i=s:std.str;f=last(arr:@i64):i64{let r=mut.0;lp(let i=0;i<arr.len;i=i+1){r=arr.get(i)};<r};
+A-ARR-0015v25	m=lastelem;i=io:std.io;f=last(arr:@i64):i64{if(arr.len==0){<0};<arr.get(arr.len-1)};f=main():i64{io.println("\(last(@(1;2;3)))");io.println("\(last(@(42)))");io.println("\(last(@()))");<0};
+A-ARR-0015v29	m=arr0015;i=io:std.io;f=last(p:@i64):i64{let result=mut.0;lp(let i=0;i<p.len;i=i+1){result=p.get(i)};<result};f=main():i64{io.println("\(last(@(1;2;3)))");io.println("\(last(@(42)))");io.println("\(last(@(5;9;7;3)))");<0};
+A-ARR-0015v4	m=lastelem;i=io:std.io;f=last(first:@i64):i64{let n=first.len as i64;if(n<=0){<0};<first.get(n-1)};f=main():i64{io.println("\(last(@(10;20;30)))");io.println("\(last(@(-5;-9;-1)))");io.println("\(last(@(42)))");<0};
+A-ARR-0015v58	m=harness;i=io:std.io;i=s:std.str;f=last(arr:@i64):i64{if(arr.len==0){<0};<arr.get(arr.len-1)};
+A-ARR-0015v60	m=arrlast;i=io:std.io;f=last(first:@i64):i64{if(first.len==0){<-1};<first.get(first.len-1)};f=main():i64{let r1=last(@(1;2;3));io.println("\(r1)");let r2=last(@(-7;-2));io.println("\(r2)");let r3=last(@(42));io.println("\(r3)");<0};
+A-ARR-0016v1	m=harness;i=io:std.io;i=s:std.str;f=last(arr:@u64):u64{<arr.get(arr.len-1)};
+A-ARR-0016v49	m=arrlast;i=io:std.io;f=last(arr:@u64):u64{<arr.get(arr.len-1)};f=main():i64{io.println("\(last(@(3;7;1;9) as @u64))");io.println("\(last(@(42) as @u64))");io.println("\(last(@(5;10;15) as @u64))");<0};
+A-ARR-0016v5	m=harness;i=io:std.io;i=s:std.str;f=last(arr:@u64):u64{let result=mut.arr.get(0);lp(let i=0;i<arr.len;i=i+1){result=arr.get(i);};<result};
+A-ARR-0016v6	m=lastelem;i=io:std.io;f=last(num1:@u64):u64{<num1.get(num1.len-1)};f=main():i64{io.println("\(last(@(1;2;3) as @u64))");io.println("\(last(@(42) as @u64))");io.println("\(last(@(7;9;11;13) as @u64))");<0};
+A-ARR-0019v32	m=arrcontains;i=io:std.io;f=arrcontains(arr:@i64;val:i64):bool{let found=mut.false;lp(let i=0;i<arr.len;i=i+1){if(arr.get(i)==val){found=true};};<found};f=main():i64{io.println("\(arrcontains(@(1;2;3);2))");io.println("\(arrcontains(@(1;2;3);5))");io.println("\(arrcontains(@();7))");<0};
+A-ARR-0020v26	m=harness;i=io:std.io;i=s:std.str;f=arrcontains(arr:@u64;val:u64):bool{lp(let other=0;other<arr.len;other=other+1){if(arr.get(other)==val){<true}};<false};
+A-ARR-0020v38	m=solve;i=io:std.io;f=arrcontains(num1:@u64;num2:u64):bool{let found=mut.false;lp(let i=0;i<num1.len;i=i+1){if(num1.get(i)==num2){found=true;br}};<found};f=main():i64{let a=@(1 as u64;2 as u64;3 as u64);io.println("\(arrcontains(a;2 as u64))");io.println("\(arrcontains(a;9 as u64))");<0};
+A-ARR-0020v49	m=arrcontains;i=io:std.io;f=arrcontains(n:@u64;m:u64):bool{lp(let i=0;i<n.len;i=i+1){let v=n.get(i);if(v-m==0&&m-v==0){<true}};<false};f=main():i64{let a=@(1 as u64;2 as u64;3 as u64);io.println("\(arrcontains(a;2 as u64))");io.println("\(arrcontains(a;5 as u64))");let e=@()as@u64;io.println("\(arrcontains(e;7 as u64))");<0};
+A-ARR-0021v29	m=arrcontains;i=io:std.io;f=arrcontains(p:@f64;q:f64):bool{let found=mut.false;lp(let i=0;i<p.len;i=i+1){if(p.get(i)==q){found=true;br};};<found};f=main():i64{io.println("\(arrcontains(@(1.5;2.5;3.5);2.5))");io.println("\(arrcontains(@(1.5;2.5;3.5);9.0))");io.println("\(arrcontains(@();4.0))");<0};

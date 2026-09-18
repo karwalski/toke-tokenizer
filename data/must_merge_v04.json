@@ -1,0 +1,3717 @@
+{
+  "story": "131.23",
+  "generated_by": "scripts/derive_must_merge.py",
+  "grammar_version": 1,
+  "function": "pat",
+  "catalogues": [
+    {
+      "path": "catalogue.json",
+      "sha256": "fa57606a3a04a98f84e194c6568e2381693408fd0fa14a53f55a5b4625ba46f1",
+      "protocol": "0.4",
+      "entries": 19
+    },
+    {
+      "path": "catalogue.wave2.json",
+      "sha256": "7c6dadb64b68123bcd1dc146807dfa8968938f06c0bccd339e56213d891e0aaa",
+      "protocol": "0.4",
+      "entries": 27
+    }
+  ],
+  "corpus_sample": {
+    "corpus": "~/tk/toke-corpus/corpus/regen_v04",
+    "accepted_records": "23382",
+    "requested": "5000",
+    "seed": "131",
+    "tkc_version": "toke 2.8.0",
+    "min_failures": "0",
+    "records": 5000,
+    "sample_file_sha256": "92340fc9fb8f111bebc2808e3f04e463587da61d32e0353c4abdf8302a36bd8d"
+  },
+  "thresholds": {
+    "promote_canonical_share": 0.5,
+    "promote_corpus_programs_share": 0.05,
+    "min_fragment_length": 2
+  },
+  "summary": {
+    "forms_extracted": 52,
+    "canonical_forms": 46,
+    "hot_path_forms": 6,
+    "unparsed": 0,
+    "forced": 18,
+    "verify": 117
+  },
+  "forms": [
+    {
+      "id": "cond-bind-if",
+      "role": "canonical",
+      "form": "c",
+      "fixture": "patterns/cond-bind-if/c.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.json",
+      "masked_pat": "f=pat(x:i64):i64{if(x>0){<1*x+1}el{<2*x+2}}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":i64):i64{": 1,
+        "if(": 1,
+        ">": 1,
+        "){<": 1,
+        "*": 2,
+        "+": 2,
+        "}": 1,
+        "el{": 1,
+        "<": 1,
+        "}}": 1
+      }
+    },
+    {
+      "id": "cond-elif-chain",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/cond-elif-chain/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.json",
+      "masked_pat": "f=pat(x:i64):i64{<if(x>90){4}el if(x>80){3}el if(x>70){2}el{1}}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":i64):i64{<": 1,
+        "if(": 1,
+        ">": 3,
+        "){": 3,
+        "}": 3,
+        "el if(": 2,
+        "el{": 1,
+        "}}": 1
+      }
+    },
+    {
+      "id": "cond-bool-combine",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/cond-bool-combine/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.json",
+      "masked_pat": "f=pat(a:i64;b:i64):i64{<if(a>0||b>0){1}el{0}}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":i64;": 1,
+        ":i64):i64{<": 1,
+        "if(": 1,
+        ">": 2,
+        "||": 1,
+        "){": 1,
+        "}": 1,
+        "el{": 1,
+        "}}": 1
+      }
+    },
+    {
+      "id": "cond-clamp",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/cond-clamp/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.json",
+      "masked_pat": "f=pat(x:i64;lo:i64;hi:i64):i64{<if(x<lo){lo}el if(x>hi){hi}el{x}}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":i64;": 2,
+        ":i64):i64{<": 1,
+        "if(": 1,
+        "<": 1,
+        "){": 2,
+        "}": 2,
+        "el if(": 1,
+        ">": 1,
+        "el{": 1,
+        "}}": 1
+      }
+    },
+    {
+      "id": "cond-bool-render",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/cond-bool-render/a.tk",
+      "status": "blocked",
+      "catalogue": "catalogue.json",
+      "masked_pat": "f=pat(x:i64):str{<if(x%2==0){\"_\"}el{\"_\"}}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":i64):str{<": 1,
+        "if(": 1,
+        "%": 1,
+        "==": 1,
+        "){\"": 1,
+        "\"}": 1,
+        "el{": 1,
+        "\"": 1,
+        "\"}}": 1
+      }
+    },
+    {
+      "id": "acc-sum",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/acc-sum/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.json",
+      "masked_pat": "f=pat(xs:@i64):i64{let t=mut.0;lp(let i=0;i<xs.len;i=i+1){t=t+xs.get(i)};<t}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":@i64):i64{": 1,
+        "let ": 2,
+        "=": 4,
+        "mut.": 1,
+        ";": 3,
+        "lp(": 1,
+        "<": 1,
+        ".len": 1,
+        "+": 2,
+        "){": 1,
+        ".get(": 1,
+        ")};<": 1,
+        "}": 1
+      }
+    },
+    {
+      "id": "acc-count-if",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/acc-count-if/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.json",
+      "masked_pat": "f=pat(xs:@i64):i64{let c=mut.0;lp(let i=0;i<xs.len;i=i+1){if(xs.get(i)%3==0){c=c+1}};<c}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":@i64):i64{": 1,
+        "let ": 2,
+        "=": 4,
+        "mut.": 1,
+        ";": 3,
+        "lp(": 1,
+        "<": 1,
+        ".len": 1,
+        "+": 2,
+        "){": 2,
+        "if(": 1,
+        ".get(": 1,
+        ")%": 1,
+        "==": 1,
+        "}};<": 1,
+        "}": 1
+      }
+    },
+    {
+      "id": "acc-min-max",
+      "role": "canonical",
+      "form": "c",
+      "fixture": "patterns/acc-min-max/c.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.json",
+      "masked_pat": "f=pat(xs:@i64):i64{<xs.sort(&cmp).get(0)}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":@i64):i64{<": 1,
+        ".sort(": 1,
+        "&": 1,
+        ")": 1,
+        ".get(": 1,
+        ")}": 1
+      }
+    },
+    {
+      "id": "acc-min-max",
+      "role": "hot_path",
+      "form": "a",
+      "fixture": "patterns/acc-min-max/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.json",
+      "masked_pat": "f=pat(xs:@i64):i64{let m=mut.xs.get(0);lp(let i=1;i<xs.len;i=i+1){if(xs.get(i)<m){m=xs.get(i)}};<m}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":@i64):i64{": 1,
+        "let ": 2,
+        "=": 4,
+        "mut.": 1,
+        ".get(": 3,
+        ");": 1,
+        "lp(": 1,
+        ";": 2,
+        "<": 1,
+        ".len": 1,
+        "+": 1,
+        "){": 2,
+        "if(": 1,
+        ")<": 1,
+        ")}};<": 1,
+        "}": 1
+      }
+    },
+    {
+      "id": "acc-array",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/acc-array/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.json",
+      "masked_pat": "f=pat(n:i64):@i64{let x=mut.@();lp(let i=0;i<n;i=i+1){x=x.append(i*3)};<x}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":i64):@i64{": 1,
+        "let ": 2,
+        "=": 4,
+        "mut.": 1,
+        "@();": 1,
+        "lp(": 1,
+        ";": 2,
+        "<": 1,
+        "+": 1,
+        "){": 1,
+        ".append(": 1,
+        "*": 1,
+        ")};<": 1,
+        "}": 1
+      }
+    },
+    {
+      "id": "acc-map-build",
+      "role": "canonical",
+      "form": "b",
+      "fixture": "patterns/acc-map-build/b.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.json",
+      "masked_pat": "f=pat(keys:@str;n:i64):i64{let c=mut.@(0;0;0;0);lp(let i=0;i<n;i=i+1){let k=keys.get(i%4);lp(let j=0;j<keys.len;j=j+1){if(keys.get(j)==k){c=c.set(j;c.get(j)+i);br}}};<c.get(0)+2*c.get(1)+3*c.get(2)+4*c.get(3)}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":@str;": 1,
+        ":i64):i64{": 1,
+        "let ": 4,
+        "=": 7,
+        "mut.": 1,
+        "@(": 1,
+        ";": 8,
+        ");": 3,
+        "lp(": 2,
+        "<": 2,
+        "+": 2,
+        "){": 3,
+        ".get(": 7,
+        "%": 1,
+        ".len": 1,
+        "if(": 1,
+        ")==": 1,
+        ".set(": 1,
+        ")+": 4,
+        "}}};<": 1,
+        "*": 3,
+        ")}": 1
+      }
+    },
+    {
+      "id": "acc-dedupe",
+      "role": "canonical",
+      "form": "c",
+      "fixture": "patterns/acc-dedupe/c.tk",
+      "status": "blocked",
+      "catalogue": "catalogue.json",
+      "masked_pat": "f=pat(xs:@i64):@i64{let ys=xs.sort(&cmp);let out=mut.@();lp(let i=0;i<ys.len;i=i+1){if(i==0||ys.get(i)!=ys.get(i-1)){out=out.append(ys.get(i))}};<out}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":@i64):@i64{": 1,
+        "let ": 3,
+        "=": 5,
+        ".sort(": 1,
+        "&": 1,
+        ");": 1,
+        "mut.": 1,
+        "@();": 1,
+        "lp(": 1,
+        ";": 2,
+        "<": 1,
+        ".len": 1,
+        "+": 1,
+        "){": 1,
+        "if(": 1,
+        "==": 1,
+        "||": 1,
+        ".get(": 3,
+        ")!=": 1,
+        "-": 1,
+        ")){": 1,
+        ".append(": 1,
+        "))}};<": 1,
+        "}": 1
+      }
+    },
+    {
+      "id": "str-build-loop",
+      "role": "canonical",
+      "form": "b",
+      "fixture": "patterns/str-build-loop/b.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.json",
+      "masked_pat": "f=pat(parts:@str;n:i64):str{let b=s.builder();lp(let i=0;i<n;i=i+1){s.add(b;parts.get(i%4))};<s.build(b)}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":@str;": 1,
+        ":i64):str{": 1,
+        "let ": 2,
+        "=": 3,
+        ".builder(": 1,
+        ");": 1,
+        "lp(": 1,
+        ";": 3,
+        "<": 1,
+        "+": 1,
+        "){": 1,
+        ".add(": 1,
+        ".get(": 1,
+        "%": 1,
+        "))};<": 1,
+        ".build(": 1,
+        ")}": 1
+      }
+    },
+    {
+      "id": "str-interp-vs-join",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/str-interp-vs-join/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.json",
+      "masked_pat": "f=pat(a:str;b:str;c:i64):str{<\"\\(a)_\\(b)_\\(c)\"}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":str;": 2,
+        ":i64):str{<\"\\(": 1,
+        ")": 2,
+        "\\(": 2,
+        ")\"}": 1
+      }
+    },
+    {
+      "id": "str-num-format",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/str-num-format/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.json",
+      "masked_pat": "f=pat(n:i64):str{<\"\\(n)\"}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":i64):str{<\"\\(": 1,
+        ")\"}": 1
+      }
+    },
+    {
+      "id": "str-repeat-pad",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/str-repeat-pad/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.json",
+      "masked_pat": "f=pat(n:i64;w:i64):str{let r=mut.s.fromint(n);lp(let i=s.len(r);i<w;i=i+1){r=s.concat(\"_\";r)};<r}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":i64;": 1,
+        ":i64):str{": 1,
+        "let ": 2,
+        "=": 4,
+        "mut.": 1,
+        ".fromint(": 1,
+        ");": 2,
+        "lp(": 1,
+        ".len(": 1,
+        "<": 1,
+        ";": 1,
+        "+": 1,
+        "){": 1,
+        ".concat(": 1,
+        "\"": 1,
+        "\";": 1,
+        ")};<": 1,
+        "}": 1
+      }
+    },
+    {
+      "id": "str-array-render",
+      "role": "canonical",
+      "form": "c",
+      "fixture": "patterns/str-array-render/c.tk",
+      "status": "blocked",
+      "catalogue": "catalogue.json",
+      "masked_pat": "f=pat(n:i64):str{let labels=mut.@();lp(let i=0;i<n;i=i+1){labels=labels.append(\"_\\(i)\")};let b=s.builder();lp(let i=0;i<labels.len;i=i+1){s.add(b;\"_\");s.add(b;labels.get(i));s.add(b;\"_\")};<s.build(b)}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":i64):str{": 1,
+        "let ": 4,
+        "=": 7,
+        "mut.": 1,
+        "@();": 1,
+        "lp(": 2,
+        ";": 5,
+        "<": 2,
+        "+": 2,
+        "){": 2,
+        ".append(": 1,
+        "\"": 1,
+        "\\(": 1,
+        ")\")};": 1,
+        ".builder(": 1,
+        ");": 1,
+        ".len": 1,
+        ".add(": 3,
+        ";\"": 2,
+        "\");": 1,
+        ".get(": 1,
+        "));": 1,
+        "\")};<": 1,
+        ".build(": 1,
+        ")}": 1
+      }
+    },
+    {
+      "id": "err-propagate",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/err-propagate/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.json",
+      "masked_pat": "f=pat(x:i64):i64!$myerr{let v=chk(x)!$myerr;<v+1}",
+      "fragments": {
+        "f=": 1,
+        "(": 2,
+        ":i64):i64!$": 1,
+        "{": 1,
+        "let ": 1,
+        "=": 1,
+        ")!$": 1,
+        ";<": 1,
+        "+": 1,
+        "}": 1
+      }
+    },
+    {
+      "id": "err-default",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/err-default/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.json",
+      "masked_pat": "f=pat(x:i64):i64{<mt chk(x){$ok:v v;$err:e-1}}",
+      "fragments": {
+        "f=": 1,
+        "(": 2,
+        ":i64):i64{<": 1,
+        "mt ": 1,
+        "){": 1,
+        "$ok:": 1,
+        " ": 1,
+        ";": 1,
+        "$err:": 1,
+        "-": 1,
+        "}}": 1
+      }
+    },
+    {
+      "id": "err-validate-early",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/err-validate-early/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.json",
+      "masked_pat": "f=pat(a:i64;b:i64):i64{if(a<0){<-1};if(b==0){<-2};<a/b}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":i64;": 1,
+        ":i64):i64{": 1,
+        "if(": 2,
+        "<": 1,
+        "){<-": 2,
+        "};": 1,
+        "==": 1,
+        "};<": 1,
+        "/": 1,
+        "}": 1
+      }
+    },
+    {
+      "id": "parse-json",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/parse-json/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(src:str):i64{let d=mt json.dec(src){$ok:v v;$err:e<-1};let a=mt json.i64(d;\"_\"){$ok:v v;$err:e<-1};let b=mt json.str(d;\"_\"){$ok:v v;$err:e<-1};<a+s.len(b)}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":str):i64{": 1,
+        "let ": 3,
+        "=": 3,
+        "mt ": 3,
+        ".dec(": 1,
+        "){": 1,
+        "$ok:": 3,
+        " ": 3,
+        ";": 3,
+        "$err:": 3,
+        "<-": 3,
+        "};": 2,
+        ".i64(": 1,
+        ";\"": 2,
+        "\"){": 2,
+        ".str(": 1,
+        "};<": 1,
+        "+": 1,
+        ".len(": 1,
+        ")}": 1
+      }
+    },
+    {
+      "id": "parse-json",
+      "role": "hot_path",
+      "form": "c",
+      "fixture": "patterns/parse-json/c.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(src:str):i64{let n=s.len(src);let a=mut.0;let i=mut.5;lp(let k=0;k<n;k=k+1){let c=s.charcode(src;i);if(c<48||c>57){br};a=a*10+c-48;i=i+1};let j=mut.i+6;let bl=mut.0;lp(let k=0;k<n;k=k+1){if(s.charcode(src;j)==34){br};bl=bl+1;j=j+1};<a+bl}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":str):i64{": 1,
+        "let ": 8,
+        "=": 14,
+        ".len(": 1,
+        ");": 2,
+        "mut.": 4,
+        ";": 12,
+        "lp(": 2,
+        "<": 3,
+        "+": 8,
+        "){": 4,
+        ".charcode(": 2,
+        "if(": 2,
+        "||": 1,
+        ">": 1,
+        "};": 3,
+        "*": 1,
+        "-": 1,
+        ")==": 1,
+        "};<": 1,
+        "}": 1
+      }
+    },
+    {
+      "id": "parse-csv-line",
+      "role": "canonical",
+      "form": "b",
+      "fixture": "patterns/parse-csv-line/b.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(txt:str):i64{let ls=s.split(txt;\"_\");let t=mut.0;lp(let r=0;r<ls.len;r=r+1){if(ls.get(r)!=\"\"){let fs=s.split(ls.get(r);\"_\");t=t+fs.len*100;lp(let j=0;j<fs.len;j=j+1){t=t+s.len(fs.get(j))}}};<t}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":str):i64{": 1,
+        "let ": 5,
+        "=": 9,
+        ".split(": 2,
+        ";\"": 1,
+        "\");": 2,
+        "mut.": 1,
+        ";": 6,
+        "lp(": 2,
+        "<": 2,
+        ".len": 3,
+        "+": 4,
+        "){": 2,
+        "if(": 1,
+        ".get(": 3,
+        ")!=\"\"){": 1,
+        ");\"": 1,
+        "*": 1,
+        ".len(": 1,
+        "))}}};<": 1,
+        "}": 1
+      }
+    },
+    {
+      "id": "parse-delim-split",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/parse-delim-split/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(line:str):@str{<s.split(line;\"_\")}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":str):@str{<": 1,
+        ".split(": 1,
+        ";\"": 1,
+        "\")}": 1
+      }
+    },
+    {
+      "id": "parse-fields",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/parse-fields/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(line:str):@str{<s.fields(line)}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":str):@str{<": 1,
+        ".fields(": 1,
+        ")}": 1
+      }
+    },
+    {
+      "id": "parse-int",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/parse-int/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(txt:str):i64{<mt s.toint(txt){$ok:v v;$err:e-1}}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":str):i64{<": 1,
+        "mt ": 1,
+        ".toint(": 1,
+        "){": 1,
+        "$ok:": 1,
+        " ": 1,
+        ";": 1,
+        "$err:": 1,
+        "-": 1,
+        "}}": 1
+      }
+    },
+    {
+      "id": "parse-kv-lines",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/parse-kv-lines/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(txt:str):i64{let m=mut.@(\"\":\"\");let ls=s.split(txt;\"_\");lp(let i=0;i<ls.len;i=i+1){let kv=s.split(ls.get(i);\"_\");if(kv.len==2){m=m.set(kv.get(0);kv.get(1))}};<chk(m)}",
+      "fragments": {
+        "f=": 1,
+        "(": 2,
+        ":str):i64{": 1,
+        "let ": 4,
+        "=": 6,
+        "mut.": 1,
+        "@(\"\":\"\");": 1,
+        ".split(": 2,
+        ";\"": 1,
+        "\");": 2,
+        "lp(": 1,
+        ";": 2,
+        "<": 1,
+        ".len": 2,
+        "+": 1,
+        "){": 2,
+        ".get(": 3,
+        ");\"": 1,
+        "if(": 1,
+        "==": 1,
+        ".set(": 1,
+        ");": 1,
+        "))}};<": 1,
+        ")}": 1
+      }
+    },
+    {
+      "id": "parse-kv-lines",
+      "role": "hot_path",
+      "form": "b",
+      "fixture": "patterns/parse-kv-lines/b.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(txt:str):i64{let m=mut.@(\"\":\"\");let ls=s.split(txt;\"_\");lp(let i=0;i<ls.len;i=i+1){let l=ls.get(i);let p=s.indexof(l;\"_\");if(p>0){m=m.set(s.slice(l;0;p);s.slice(l;p+1;s.len(l)))}};<chk(m)}",
+      "fragments": {
+        "f=": 1,
+        "(": 2,
+        ":str):i64{": 1,
+        "let ": 5,
+        "=": 7,
+        "mut.": 1,
+        "@(\"\":\"\");": 1,
+        ".split(": 1,
+        ";\"": 2,
+        "\");": 2,
+        "lp(": 1,
+        ";": 6,
+        "<": 1,
+        ".len": 1,
+        "+": 2,
+        "){": 2,
+        ".get(": 1,
+        ");": 2,
+        ".indexof(": 1,
+        "if(": 1,
+        ">": 1,
+        ".set(": 1,
+        ".slice(": 2,
+        ".len(": 1,
+        ")))}};<": 1,
+        ")}": 1
+      }
+    },
+    {
+      "id": "iter-map",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/iter-map/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(xs:@i64):@i64{<xs.map(&dbl)}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":@i64):@i64{<": 1,
+        ".map(": 1,
+        "&": 1,
+        ")}": 1
+      }
+    },
+    {
+      "id": "iter-filter",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/iter-filter/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(xs:@i64):@i64{<xs.filter(&isev)}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":@i64):@i64{<": 1,
+        ".filter(": 1,
+        "&": 1,
+        ")}": 1
+      }
+    },
+    {
+      "id": "iter-filter-sum",
+      "role": "canonical",
+      "form": "c",
+      "fixture": "patterns/iter-filter-sum/c.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(xs:@i64):i64{<xs.reduce(0;&addev)}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":@i64):i64{<": 1,
+        ".reduce(": 1,
+        ";&": 1,
+        ")}": 1
+      }
+    },
+    {
+      "id": "iter-filter-sum",
+      "role": "hot_path",
+      "form": "b",
+      "fixture": "patterns/iter-filter-sum/b.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(xs:@i64):i64{let t=mut.0;lp(let i=0;i<xs.len;i=i+1){if(xs.get(i)%2==0){t=t+xs.get(i)}};<t}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":@i64):i64{": 1,
+        "let ": 2,
+        "=": 4,
+        "mut.": 1,
+        ";": 3,
+        "lp(": 1,
+        "<": 1,
+        ".len": 1,
+        "+": 2,
+        "){": 2,
+        "if(": 1,
+        ".get(": 2,
+        ")%": 1,
+        "==": 1,
+        ")}};<": 1,
+        "}": 1
+      }
+    },
+    {
+      "id": "iter-find-first",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/iter-find-first/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(xs:@i64):i64{lp(let i=0;i<xs.len;i=i+1){if(xs.get(i)>990){<xs.get(i)}};<-1}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":@i64):i64{": 1,
+        "lp(": 1,
+        "let ": 1,
+        "=": 2,
+        ";": 2,
+        "<": 1,
+        ".len": 1,
+        "+": 1,
+        "){": 1,
+        "if(": 1,
+        ".get(": 2,
+        ")>": 1,
+        "){<": 1,
+        ")}};<-": 1,
+        "}": 1
+      }
+    },
+    {
+      "id": "iter-count",
+      "role": "canonical",
+      "form": "b",
+      "fixture": "patterns/iter-count/b.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(xs:@i64):i64{let c=mut.0;lp(let i=0;i<xs.len;i=i+1){if(xs.get(i)%2==0){c=c+1}};<c}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":@i64):i64{": 1,
+        "let ": 2,
+        "=": 4,
+        "mut.": 1,
+        ";": 3,
+        "lp(": 1,
+        "<": 1,
+        ".len": 1,
+        "+": 2,
+        "){": 2,
+        "if(": 1,
+        ".get(": 1,
+        ")%": 1,
+        "==": 1,
+        "}};<": 1,
+        "}": 1
+      }
+    },
+    {
+      "id": "iter-nested-early-exit",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/iter-nested-early-exit/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(xs:@i64):i64{lp(let i=0;i<xs.len;i=i+1){lp(let j=i+1;j<xs.len;j=j+1){if(xs.get(i)+xs.get(j)==1985){<i*xs.len+j}}};<-1}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":@i64):i64{": 1,
+        "lp(": 2,
+        "let ": 2,
+        "=": 4,
+        ";": 4,
+        "<": 2,
+        ".len": 3,
+        "+": 4,
+        "){": 2,
+        "if(": 1,
+        ".get(": 2,
+        ")+": 1,
+        ")==": 1,
+        "){<": 1,
+        "*": 1,
+        "}}};<-": 1,
+        "}": 1
+      }
+    },
+    {
+      "id": "coll-lookup-default",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/coll-lookup-default/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(m:@(str:i64);ks:@str):i64{let t=mut.0;lp(let i=0;i<ks.len;i=i+1){let v=mt m.get(ks.get(i)){$ok:x x;$err:e 7};t=t+v};<t}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":@(": 1,
+        ":i64);": 1,
+        ":@str):i64{": 1,
+        "let ": 3,
+        "=": 5,
+        "mut.": 1,
+        ";": 4,
+        "lp(": 1,
+        "<": 1,
+        ".len": 1,
+        "+": 2,
+        "){": 1,
+        "mt ": 1,
+        ".get(": 2,
+        ")){": 1,
+        "$ok:": 1,
+        " ": 2,
+        "$err:": 1,
+        "};": 1,
+        "};<": 1,
+        "}": 1
+      }
+    },
+    {
+      "id": "coll-membership",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/coll-membership/a.tk",
+      "status": "blocked",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(xs:@i64;qs:@i64):i64{let set=mut.@(\"\":1);lp(let i=0;i<xs.len;i=i+1){set=set.set(\"\\(xs.get(i))\";1)};let c=mut.0;lp(let i=0;i<qs.len;i=i+1){let h=mt set.get(\"\\(qs.get(i))\"){$ok:v 1;$err:e 0};c=c+h};<c}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":@i64;": 1,
+        ":@i64):i64{": 1,
+        "let ": 5,
+        "=": 9,
+        "mut.": 2,
+        "@(\"\":": 1,
+        ");": 1,
+        "lp(": 2,
+        ";": 6,
+        "<": 2,
+        ".len": 2,
+        "+": 3,
+        "){": 2,
+        ".set(": 1,
+        "\"\\(": 2,
+        ".get(": 3,
+        "))\";": 1,
+        ")};": 1,
+        "mt ": 1,
+        "))\"){": 1,
+        "$ok:": 1,
+        " ": 2,
+        "$err:": 1,
+        "};": 1,
+        "};<": 1,
+        "}": 1
+      }
+    },
+    {
+      "id": "coll-sort-take",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/coll-sort-take/a.tk",
+      "status": "blocked",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(xs:@i64;k:i64):@i64{let so=xs.sort(&cmp);let r=mut.@();lp(let i=0;i<k;i=i+1){r=r.append(so.get(i))};<r}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":@i64;": 1,
+        ":i64):@i64{": 1,
+        "let ": 3,
+        "=": 5,
+        ".sort(": 1,
+        "&": 1,
+        ");": 1,
+        "mut.": 1,
+        "@();": 1,
+        "lp(": 1,
+        ";": 2,
+        "<": 1,
+        "+": 1,
+        "){": 1,
+        ".append(": 1,
+        ".get(": 1,
+        "))};<": 1,
+        "}": 1
+      }
+    },
+    {
+      "id": "coll-group-by",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/coll-group-by/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(xs:@i64):i64{let g=mut.@(\"\":@());lp(let i=0;i<xs.len;i=i+1){let k=\"_\\(xs.get(i)%13)\";let cur=mt g.get(k){$ok:v v;$err:e@()};g=g.set(k;cur.append(xs.get(i)))};let ks=g.keys();let t=mut.0;lp(let i=0;i<ks.len;i=i+1){let sz=g.get(ks.get(i)).len;t=t+sz*sz};<t+(ks.len-1)*100000}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":@i64):i64{": 1,
+        "let ": 8,
+        "=": 11,
+        "mut.": 2,
+        "@(\"\":@());": 1,
+        "lp(": 2,
+        ";": 8,
+        "<": 2,
+        ".len": 4,
+        "+": 3,
+        "){": 3,
+        "=\"": 1,
+        "\\(": 1,
+        ".get(": 5,
+        ")%": 1,
+        ")\";": 1,
+        "mt ": 1,
+        "$ok:": 1,
+        " ": 1,
+        "$err:": 1,
+        "@()};": 1,
+        ".set(": 1,
+        ".append(": 1,
+        ")))};": 1,
+        ".keys(": 1,
+        ");": 1,
+        "))": 1,
+        "*": 1,
+        "};<": 1,
+        "+(": 1,
+        "-": 1,
+        ")*": 1,
+        "}": 1
+      }
+    },
+    {
+      "id": "coll-reverse",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/coll-reverse/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(xs:@i64):@i64{let r=mut.@();lp(let i=xs.len-1;i>=0;i=i-1){r=r.append(xs.get(i))};<r}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":@i64):@i64{": 1,
+        "let ": 2,
+        "=": 4,
+        "mut.": 1,
+        "@();": 1,
+        "lp(": 1,
+        ".len": 1,
+        "-": 2,
+        ";": 2,
+        ">=": 1,
+        "){": 1,
+        ".append(": 1,
+        ".get(": 1,
+        "))};<": 1,
+        "}": 1
+      }
+    },
+    {
+      "id": "coll-swap",
+      "role": "canonical",
+      "form": "b",
+      "fixture": "patterns/coll-swap/b.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(xs:@i64):@i64{let r=mut.xs;let n=xs.len;lp(let i=0;i<n-1;i=i+2){r=r.set(i;r.get(i+1)).set(i+1;r.get(i))};<r}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":@i64):@i64{": 1,
+        "let ": 3,
+        "=": 5,
+        "mut.": 1,
+        ";": 6,
+        ".len": 1,
+        "lp(": 1,
+        "<": 1,
+        "-": 1,
+        "+": 3,
+        "){": 1,
+        ".set(": 2,
+        ".get(": 2,
+        "))": 1,
+        "))};<": 1,
+        "}": 1
+      }
+    },
+    {
+      "id": "coll-dedupe",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/coll-dedupe/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(xs:@i64):i64{let seen=mut.@(\"\":1);let c=mut.0;lp(let i=0;i<xs.len;i=i+1){let x=xs.get(i);let dup=mt seen.get(\"\\(x)\"){$ok:v 1;$err:e 0};if(dup==0){seen=seen.set(\"\\(x)\";1);c=c+1}};<c}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":@i64):i64{": 1,
+        "let ": 5,
+        "=": 8,
+        "mut.": 2,
+        "@(\"\":": 1,
+        ");": 3,
+        ";": 4,
+        "lp(": 1,
+        "<": 1,
+        ".len": 1,
+        "+": 2,
+        "){": 2,
+        ".get(": 2,
+        "mt ": 1,
+        "\"\\(": 2,
+        ")\"){": 1,
+        "$ok:": 1,
+        " ": 2,
+        "$err:": 1,
+        "};": 1,
+        "if(": 1,
+        "==": 1,
+        ".set(": 1,
+        ")\";": 1,
+        "}};<": 1,
+        "}": 1
+      }
+    },
+    {
+      "id": "cli-argv",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/cli-argv/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat():str{<mt args.get(1){$ok:v v;$err:e\"_\"}}",
+      "fragments": {
+        "f=": 1,
+        "():str{<": 1,
+        "mt ": 1,
+        ".get(": 1,
+        "){": 1,
+        "$ok:": 1,
+        " ": 1,
+        ";": 1,
+        "$err:": 1,
+        "\"": 1,
+        "\"}}": 1
+      }
+    },
+    {
+      "id": "cli-flag-filter",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/cli-flag-filter/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(av:@str):@str{<av.filter(&notflag)}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":@str):@str{<": 1,
+        ".filter(": 1,
+        "&": 1,
+        ")}": 1
+      }
+    },
+    {
+      "id": "cli-print-results",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/cli-print-results/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(k:str;v:i64):str{<\"\\(k)_\\(v)\"}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":str;": 1,
+        ":i64):str{<\"\\(": 1,
+        ")": 1,
+        "\\(": 1,
+        ")\"}": 1
+      }
+    },
+    {
+      "id": "fn-helper-vs-inline",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/fn-helper-vs-inline/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(xs:@i64):i64{let c=mut.0;lp(let i=0;i<xs.len;i=i+1){if(isok(xs.get(i))){c=c+1}};<c}",
+      "fragments": {
+        "f=": 1,
+        "(": 2,
+        ":@i64):i64{": 1,
+        "let ": 2,
+        "=": 4,
+        "mut.": 1,
+        ";": 3,
+        "lp(": 1,
+        "<": 1,
+        ".len": 1,
+        "+": 2,
+        "){": 1,
+        "if(": 1,
+        ".get(": 1,
+        "))){": 1,
+        "}};<": 1,
+        "}": 1
+      }
+    },
+    {
+      "id": "fn-chain-vs-let",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/fn-chain-vs-let/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(line:str):i64{<s.len(s.split(line;\"_\").get(1))}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":str):i64{<": 1,
+        ".len(": 1,
+        ".split(": 1,
+        ";\"": 1,
+        "\")": 1,
+        ".get(": 1,
+        "))}": 1
+      }
+    },
+    {
+      "id": "fn-recursion-vs-loop",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/fn-recursion-vs-loop/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(x:i64):i64{<if(x<10){x}el{x%10+pat(x/10)}}",
+      "fragments": {
+        "f=": 1,
+        "(": 2,
+        ":i64):i64{<": 1,
+        "if(": 1,
+        "<": 1,
+        "){": 1,
+        "}": 1,
+        "el{": 1,
+        "%": 1,
+        "+": 1,
+        "/": 1,
+        ")}}": 1
+      }
+    },
+    {
+      "id": "fn-recursion-vs-loop",
+      "role": "hot_path",
+      "form": "b",
+      "fixture": "patterns/fn-recursion-vs-loop/b.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(x:i64):i64{let t=mut.0;let v=mut.x;lp(let k=0;v>0;k=k+1){t=t+v%10;v=v/10};<t}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":i64):i64{": 1,
+        "let ": 3,
+        "=": 6,
+        "mut.": 2,
+        ";": 5,
+        "lp(": 1,
+        ">": 1,
+        "+": 2,
+        "){": 1,
+        "%": 1,
+        "/": 1,
+        "};<": 1,
+        "}": 1
+      }
+    },
+    {
+      "id": "io-read-lines",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/io-read-lines/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(path:str):@str{let txt=mt file.read(path){$ok:v v;$err:e<@()};<s.split(txt;\"_\")}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":str):@str{": 1,
+        "let ": 1,
+        "=": 1,
+        "mt ": 1,
+        ".read(": 1,
+        "){": 1,
+        "$ok:": 1,
+        " ": 1,
+        ";": 1,
+        "$err:": 1,
+        "<@()};<": 1,
+        ".split(": 1,
+        ";\"": 1,
+        "\")}": 1
+      }
+    },
+    {
+      "id": "io-write-accumulate",
+      "role": "canonical",
+      "form": "b",
+      "fixture": "patterns/io-write-accumulate/b.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(path:str;n:i64):i64{lp(let i=0;i<n;i=i+1){let ok=mt file.append(path;\"_\\(i)_\"){$ok:v 1;$err:e<0}};<1}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":str;": 1,
+        ":i64):i64{": 1,
+        "lp(": 1,
+        "let ": 2,
+        "=": 3,
+        ";": 3,
+        "<": 2,
+        "+": 1,
+        "){": 1,
+        "mt ": 1,
+        ".append(": 1,
+        ";\"": 1,
+        "\\(": 1,
+        ")": 1,
+        "\"){": 1,
+        "$ok:": 1,
+        " ": 1,
+        "$err:": 1,
+        "}};<": 1,
+        "}": 1
+      }
+    },
+    {
+      "id": "io-write-accumulate",
+      "role": "hot_path",
+      "form": "a",
+      "fixture": "patterns/io-write-accumulate/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.wave2.json",
+      "masked_pat": "f=pat(path:str;n:i64):i64{let b=s.builder();lp(let i=0;i<n;i=i+1){s.add(b;\"_\\(i)_\")};<mt file.write(path;s.build(b)){$ok:v 1;$err:e 0}}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":str;": 1,
+        ":i64):i64{": 1,
+        "let ": 2,
+        "=": 3,
+        ".builder(": 1,
+        ");": 1,
+        "lp(": 1,
+        ";": 4,
+        "<": 1,
+        "+": 1,
+        "){": 1,
+        ".add(": 1,
+        ";\"": 1,
+        "\\(": 1,
+        ")": 1,
+        "\")};<": 1,
+        "mt ": 1,
+        ".write(": 1,
+        ".build(": 1,
+        ")){": 1,
+        "$ok:": 1,
+        " ": 2,
+        "$err:": 1,
+        "}}": 1
+      }
+    }
+  ],
+  "unparsed": [],
+  "fragments": [
+    {
+      "fragment": "let ",
+      "in_canonical_forms": [
+        "acc-array",
+        "acc-count-if",
+        "acc-dedupe",
+        "acc-map-build",
+        "acc-sum",
+        "coll-dedupe",
+        "coll-group-by",
+        "coll-lookup-default",
+        "coll-membership",
+        "coll-reverse",
+        "coll-sort-take",
+        "coll-swap",
+        "err-propagate",
+        "fn-helper-vs-inline",
+        "io-read-lines",
+        "io-write-accumulate",
+        "iter-count",
+        "iter-find-first",
+        "iter-nested-early-exit",
+        "parse-csv-line",
+        "parse-json",
+        "parse-kv-lines",
+        "str-array-render",
+        "str-build-loop",
+        "str-repeat-pad"
+      ],
+      "in_hot_path_forms": [
+        "acc-min-max",
+        "fn-recursion-vs-loop",
+        "io-write-accumulate",
+        "iter-filter-sum",
+        "parse-json",
+        "parse-kv-lines"
+      ],
+      "canonical_occurrences": 73,
+      "corpus_freq": 14764,
+      "corpus_programs": 4044,
+      "corpus_programs_share": 0.8088,
+      "class": "forced",
+      "rationale": "promoted: in 25/46 canonical forms (>= 50%) and 80.9% of corpus programs (>= 5%)"
+    },
+    {
+      "fragment": "){",
+      "in_canonical_forms": [
+        "acc-array",
+        "acc-count-if",
+        "acc-dedupe",
+        "acc-map-build",
+        "acc-sum",
+        "cli-argv",
+        "coll-dedupe",
+        "coll-group-by",
+        "coll-lookup-default",
+        "coll-membership",
+        "coll-reverse",
+        "coll-sort-take",
+        "coll-swap",
+        "cond-bool-combine",
+        "cond-clamp",
+        "cond-elif-chain",
+        "err-default",
+        "fn-helper-vs-inline",
+        "fn-recursion-vs-loop",
+        "io-read-lines",
+        "io-write-accumulate",
+        "iter-count",
+        "iter-find-first",
+        "iter-nested-early-exit",
+        "parse-csv-line",
+        "parse-int",
+        "parse-json",
+        "parse-kv-lines",
+        "str-array-render",
+        "str-build-loop",
+        "str-repeat-pad"
+      ],
+      "in_hot_path_forms": [
+        "acc-min-max",
+        "fn-recursion-vs-loop",
+        "io-write-accumulate",
+        "iter-filter-sum",
+        "parse-json",
+        "parse-kv-lines"
+      ],
+      "canonical_occurrences": 46,
+      "corpus_freq": 13934,
+      "corpus_programs": 4429,
+      "corpus_programs_share": 0.8858,
+      "class": "forced",
+      "rationale": "promoted: in 31/46 canonical forms (>= 50%) and 88.6% of corpus programs (>= 5%)"
+    },
+    {
+      "fragment": "i=",
+      "in_canonical_forms": [],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 0,
+      "corpus_freq": 13799,
+      "corpus_programs": 4863,
+      "corpus_programs_share": 0.9726,
+      "class": "forced",
+      "rationale": "D4 declaration head -- SEEDED MERGE, not AddedToken (131.20 wart 17.1%); not in any current canonical form (closed-class, listed regardless)"
+    },
+    {
+      "fragment": "f=",
+      "in_canonical_forms": [
+        "acc-array",
+        "acc-count-if",
+        "acc-dedupe",
+        "acc-map-build",
+        "acc-min-max",
+        "acc-sum",
+        "cli-argv",
+        "cli-flag-filter",
+        "cli-print-results",
+        "coll-dedupe",
+        "coll-group-by",
+        "coll-lookup-default",
+        "coll-membership",
+        "coll-reverse",
+        "coll-sort-take",
+        "coll-swap",
+        "cond-bind-if",
+        "cond-bool-combine",
+        "cond-bool-render",
+        "cond-clamp",
+        "cond-elif-chain",
+        "err-default",
+        "err-propagate",
+        "err-validate-early",
+        "fn-chain-vs-let",
+        "fn-helper-vs-inline",
+        "fn-recursion-vs-loop",
+        "io-read-lines",
+        "io-write-accumulate",
+        "iter-count",
+        "iter-filter",
+        "iter-filter-sum",
+        "iter-find-first",
+        "iter-map",
+        "iter-nested-early-exit",
+        "parse-csv-line",
+        "parse-delim-split",
+        "parse-fields",
+        "parse-int",
+        "parse-json",
+        "parse-kv-lines",
+        "str-array-render",
+        "str-build-loop",
+        "str-interp-vs-join",
+        "str-num-format",
+        "str-repeat-pad"
+      ],
+      "in_hot_path_forms": [
+        "acc-min-max",
+        "fn-recursion-vs-loop",
+        "io-write-accumulate",
+        "iter-filter-sum",
+        "parse-json",
+        "parse-kv-lines"
+      ],
+      "canonical_occurrences": 46,
+      "corpus_freq": 11348,
+      "corpus_programs": 5000,
+      "corpus_programs_share": 1.0,
+      "class": "forced",
+      "rationale": "D4 declaration head -- SEEDED MERGE, not AddedToken (131.20 wart 17.1%)"
+    },
+    {
+      "fragment": "if(",
+      "in_canonical_forms": [
+        "acc-count-if",
+        "acc-dedupe",
+        "acc-map-build",
+        "coll-dedupe",
+        "cond-bind-if",
+        "cond-bool-combine",
+        "cond-bool-render",
+        "cond-clamp",
+        "cond-elif-chain",
+        "err-validate-early",
+        "fn-helper-vs-inline",
+        "fn-recursion-vs-loop",
+        "iter-count",
+        "iter-find-first",
+        "iter-nested-early-exit",
+        "parse-csv-line",
+        "parse-kv-lines"
+      ],
+      "in_hot_path_forms": [
+        "acc-min-max",
+        "iter-filter-sum",
+        "parse-json",
+        "parse-kv-lines"
+      ],
+      "canonical_occurrences": 18,
+      "corpus_freq": 9325,
+      "corpus_programs": 4112,
+      "corpus_programs_share": 0.8224,
+      "class": "forced",
+      "rationale": "D4 (131.20 amendment) expression/statement-if head"
+    },
+    {
+      "fragment": "\\(",
+      "in_canonical_forms": [
+        "cli-print-results",
+        "coll-group-by",
+        "io-write-accumulate",
+        "str-array-render",
+        "str-interp-vs-join"
+      ],
+      "in_hot_path_forms": [
+        "io-write-accumulate"
+      ],
+      "canonical_occurrences": 6,
+      "corpus_freq": 6648,
+      "corpus_programs": 2303,
+      "corpus_programs_share": 0.4606,
+      "class": "forced",
+      "rationale": "D4 interpolation open"
+    },
+    {
+      "fragment": "m=",
+      "in_canonical_forms": [],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 0,
+      "corpus_freq": 5291,
+      "corpus_programs": 5000,
+      "corpus_programs_share": 1.0,
+      "class": "forced",
+      "rationale": "D4 declaration head -- SEEDED MERGE, not AddedToken (131.20 wart 17.1%); not in any current canonical form (closed-class, listed regardless)"
+    },
+    {
+      "fragment": "==",
+      "in_canonical_forms": [
+        "acc-count-if",
+        "acc-dedupe",
+        "coll-dedupe",
+        "cond-bool-render",
+        "err-validate-early",
+        "iter-count",
+        "parse-kv-lines"
+      ],
+      "in_hot_path_forms": [
+        "iter-filter-sum"
+      ],
+      "canonical_occurrences": 7,
+      "corpus_freq": 4559,
+      "corpus_programs": 2561,
+      "corpus_programs_share": 0.5122,
+      "class": "forced",
+      "rationale": "D4 operator"
+    },
+    {
+      "fragment": "lp(",
+      "in_canonical_forms": [
+        "acc-array",
+        "acc-count-if",
+        "acc-dedupe",
+        "acc-map-build",
+        "acc-sum",
+        "coll-dedupe",
+        "coll-group-by",
+        "coll-lookup-default",
+        "coll-membership",
+        "coll-reverse",
+        "coll-sort-take",
+        "coll-swap",
+        "fn-helper-vs-inline",
+        "io-write-accumulate",
+        "iter-count",
+        "iter-find-first",
+        "iter-nested-early-exit",
+        "parse-csv-line",
+        "parse-kv-lines",
+        "str-array-render",
+        "str-build-loop",
+        "str-repeat-pad"
+      ],
+      "in_hot_path_forms": [
+        "acc-min-max",
+        "fn-recursion-vs-loop",
+        "io-write-accumulate",
+        "iter-filter-sum",
+        "parse-json",
+        "parse-kv-lines"
+      ],
+      "canonical_occurrences": 28,
+      "corpus_freq": 3885,
+      "corpus_programs": 2636,
+      "corpus_programs_share": 0.5272,
+      "class": "forced",
+      "rationale": "D4 loop head"
+    },
+    {
+      "fragment": "@(",
+      "in_canonical_forms": [
+        "acc-map-build"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 3768,
+      "corpus_programs": 1700,
+      "corpus_programs_share": 0.34,
+      "class": "forced",
+      "rationale": "D4 collection open"
+    },
+    {
+      "fragment": "el{",
+      "in_canonical_forms": [
+        "cond-bind-if",
+        "cond-bool-combine",
+        "cond-bool-render",
+        "cond-clamp",
+        "cond-elif-chain",
+        "fn-recursion-vs-loop"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 6,
+      "corpus_freq": 3077,
+      "corpus_programs": 1968,
+      "corpus_programs_share": 0.3936,
+      "class": "forced",
+      "rationale": "D4 (131.20 amendment) else head"
+    },
+    {
+      "fragment": "&&",
+      "in_canonical_forms": [],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 0,
+      "corpus_freq": 906,
+      "corpus_programs": 562,
+      "corpus_programs_share": 0.1124,
+      "class": "forced",
+      "rationale": "D4 operator; not in any current canonical form (closed-class, listed regardless)"
+    },
+    {
+      "fragment": ">=",
+      "in_canonical_forms": [
+        "coll-reverse"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 902,
+      "corpus_programs": 547,
+      "corpus_programs_share": 0.1094,
+      "class": "forced",
+      "rationale": "D4 operator"
+    },
+    {
+      "fragment": "<=",
+      "in_canonical_forms": [],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 0,
+      "corpus_freq": 781,
+      "corpus_programs": 511,
+      "corpus_programs_share": 0.1022,
+      "class": "forced",
+      "rationale": "D4 operator; not in any current canonical form (closed-class, listed regardless)"
+    },
+    {
+      "fragment": "mt ",
+      "in_canonical_forms": [
+        "cli-argv",
+        "coll-dedupe",
+        "coll-group-by",
+        "coll-lookup-default",
+        "coll-membership",
+        "err-default",
+        "io-read-lines",
+        "io-write-accumulate",
+        "parse-int",
+        "parse-json"
+      ],
+      "in_hot_path_forms": [
+        "io-write-accumulate"
+      ],
+      "canonical_occurrences": 12,
+      "corpus_freq": 777,
+      "corpus_programs": 403,
+      "corpus_programs_share": 0.0806,
+      "class": "forced",
+      "rationale": "D4 match head (surface form in --min text is `mt `)"
+    },
+    {
+      "fragment": "||",
+      "in_canonical_forms": [
+        "acc-dedupe",
+        "cond-bool-combine"
+      ],
+      "in_hot_path_forms": [
+        "parse-json"
+      ],
+      "canonical_occurrences": 2,
+      "corpus_freq": 765,
+      "corpus_programs": 347,
+      "corpus_programs_share": 0.0694,
+      "class": "forced",
+      "rationale": "D4 operator"
+    },
+    {
+      "fragment": "t=",
+      "in_canonical_forms": [],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 0,
+      "corpus_freq": 442,
+      "corpus_programs": 415,
+      "corpus_programs_share": 0.083,
+      "class": "forced",
+      "rationale": "D4 declaration head -- SEEDED MERGE, not AddedToken (131.20 wart: `t=` dominates); not in any current canonical form (closed-class, listed regardless)"
+    },
+    {
+      "fragment": "!=",
+      "in_canonical_forms": [],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 0,
+      "corpus_freq": 434,
+      "corpus_programs": 358,
+      "corpus_programs_share": 0.0716,
+      "class": "forced",
+      "rationale": "D4 operator; not in any current canonical form (closed-class, listed regardless)"
+    },
+    {
+      "fragment": "};",
+      "in_canonical_forms": [
+        "coll-dedupe",
+        "coll-lookup-default",
+        "coll-membership",
+        "err-validate-early",
+        "parse-json"
+      ],
+      "in_hot_path_forms": [
+        "parse-json"
+      ],
+      "canonical_occurrences": 6,
+      "corpus_freq": 21040,
+      "corpus_programs": 5000,
+      "corpus_programs_share": 1.0,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 5/46 canonical forms, 100.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ");",
+      "in_canonical_forms": [
+        "acc-dedupe",
+        "acc-map-build",
+        "coll-dedupe",
+        "coll-group-by",
+        "coll-membership",
+        "coll-sort-take",
+        "parse-kv-lines",
+        "str-array-render",
+        "str-build-loop",
+        "str-repeat-pad"
+      ],
+      "in_hot_path_forms": [
+        "acc-min-max",
+        "io-write-accumulate",
+        "parse-json",
+        "parse-kv-lines"
+      ],
+      "canonical_occurrences": 15,
+      "corpus_freq": 15448,
+      "corpus_programs": 4084,
+      "corpus_programs_share": 0.8168,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 10/46 canonical forms, 81.7% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "\")",
+      "in_canonical_forms": [
+        "fn-chain-vs-let"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 11719,
+      "corpus_programs": 3249,
+      "corpus_programs_share": 0.6498,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 65.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "))",
+      "in_canonical_forms": [
+        "coll-group-by",
+        "coll-swap"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 2,
+      "corpus_freq": 11250,
+      "corpus_programs": 3397,
+      "corpus_programs_share": 0.6794,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 67.9% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ";<",
+      "in_canonical_forms": [
+        "err-propagate"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 7741,
+      "corpus_programs": 4714,
+      "corpus_programs_share": 0.9428,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 94.3% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "\");",
+      "in_canonical_forms": [
+        "parse-csv-line",
+        "parse-kv-lines",
+        "str-array-render"
+      ],
+      "in_hot_path_forms": [
+        "parse-kv-lines"
+      ],
+      "canonical_occurrences": 5,
+      "corpus_freq": 5848,
+      "corpus_programs": 2291,
+      "corpus_programs_share": 0.4582,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 3/46 canonical forms, 45.8% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "\"}",
+      "in_canonical_forms": [
+        "cond-bool-render"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 5750,
+      "corpus_programs": 2290,
+      "corpus_programs_share": 0.458,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 45.8% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".len",
+      "in_canonical_forms": [
+        "acc-count-if",
+        "acc-dedupe",
+        "acc-map-build",
+        "acc-sum",
+        "coll-dedupe",
+        "coll-group-by",
+        "coll-lookup-default",
+        "coll-membership",
+        "coll-reverse",
+        "coll-swap",
+        "fn-helper-vs-inline",
+        "iter-count",
+        "iter-find-first",
+        "iter-nested-early-exit",
+        "parse-csv-line",
+        "parse-kv-lines",
+        "str-array-render"
+      ],
+      "in_hot_path_forms": [
+        "acc-min-max",
+        "iter-filter-sum",
+        "parse-kv-lines"
+      ],
+      "canonical_occurrences": 26,
+      "corpus_freq": 5481,
+      "corpus_programs": 3105,
+      "corpus_programs_share": 0.621,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 17/46 canonical forms, 62.1% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "\"\\(",
+      "in_canonical_forms": [
+        "coll-dedupe",
+        "coll-membership"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 4,
+      "corpus_freq": 5346,
+      "corpus_programs": 2138,
+      "corpus_programs_share": 0.4276,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 42.8% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".get(",
+      "in_canonical_forms": [
+        "acc-count-if",
+        "acc-dedupe",
+        "acc-map-build",
+        "acc-min-max",
+        "acc-sum",
+        "cli-argv",
+        "coll-dedupe",
+        "coll-group-by",
+        "coll-lookup-default",
+        "coll-membership",
+        "coll-reverse",
+        "coll-sort-take",
+        "coll-swap",
+        "fn-chain-vs-let",
+        "fn-helper-vs-inline",
+        "iter-count",
+        "iter-find-first",
+        "iter-nested-early-exit",
+        "parse-csv-line",
+        "parse-kv-lines",
+        "str-array-render",
+        "str-build-loop"
+      ],
+      "in_hot_path_forms": [
+        "acc-min-max",
+        "iter-filter-sum",
+        "parse-kv-lines"
+      ],
+      "canonical_occurrences": 45,
+      "corpus_freq": 5002,
+      "corpus_programs": 2337,
+      "corpus_programs_share": 0.4674,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 22/46 canonical forms, 46.7% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "));",
+      "in_canonical_forms": [
+        "str-array-render"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 4276,
+      "corpus_programs": 1527,
+      "corpus_programs_share": 0.3054,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 30.5% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "};<",
+      "in_canonical_forms": [
+        "coll-group-by",
+        "coll-lookup-default",
+        "coll-membership",
+        "err-validate-early",
+        "parse-json"
+      ],
+      "in_hot_path_forms": [
+        "fn-recursion-vs-loop",
+        "parse-json"
+      ],
+      "canonical_occurrences": 5,
+      "corpus_freq": 4185,
+      "corpus_programs": 3609,
+      "corpus_programs_share": 0.7218,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 5/46 canonical forms, 72.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "mut.",
+      "in_canonical_forms": [
+        "acc-array",
+        "acc-count-if",
+        "acc-dedupe",
+        "acc-map-build",
+        "acc-sum",
+        "coll-dedupe",
+        "coll-group-by",
+        "coll-lookup-default",
+        "coll-membership",
+        "coll-reverse",
+        "coll-sort-take",
+        "coll-swap",
+        "fn-helper-vs-inline",
+        "iter-count",
+        "parse-csv-line",
+        "parse-kv-lines",
+        "str-array-render",
+        "str-repeat-pad"
+      ],
+      "in_hot_path_forms": [
+        "acc-min-max",
+        "fn-recursion-vs-loop",
+        "iter-filter-sum",
+        "parse-json",
+        "parse-kv-lines"
+      ],
+      "canonical_occurrences": 21,
+      "corpus_freq": 3970,
+      "corpus_programs": 2565,
+      "corpus_programs_share": 0.513,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 18/46 canonical forms, 51.3% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "\";",
+      "in_canonical_forms": [
+        "str-repeat-pad"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 3871,
+      "corpus_programs": 1459,
+      "corpus_programs_share": 0.2918,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 29.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ")}",
+      "in_canonical_forms": [
+        "acc-map-build",
+        "acc-min-max",
+        "cli-flag-filter",
+        "iter-filter",
+        "iter-filter-sum",
+        "iter-map",
+        "parse-fields",
+        "parse-json",
+        "parse-kv-lines",
+        "str-array-render",
+        "str-build-loop"
+      ],
+      "in_hot_path_forms": [
+        "parse-kv-lines"
+      ],
+      "canonical_occurrences": 11,
+      "corpus_freq": 3801,
+      "corpus_programs": 2312,
+      "corpus_programs_share": 0.4624,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 11/46 canonical forms, 46.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "){<",
+      "in_canonical_forms": [
+        "cond-bind-if",
+        "iter-find-first",
+        "iter-nested-early-exit"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 3,
+      "corpus_freq": 3793,
+      "corpus_programs": 2542,
+      "corpus_programs_share": 0.5084,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 3/46 canonical forms, 50.8% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ";\"",
+      "in_canonical_forms": [
+        "fn-chain-vs-let",
+        "io-read-lines",
+        "io-write-accumulate",
+        "parse-csv-line",
+        "parse-delim-split",
+        "parse-json",
+        "parse-kv-lines",
+        "str-array-render"
+      ],
+      "in_hot_path_forms": [
+        "io-write-accumulate",
+        "parse-kv-lines"
+      ],
+      "canonical_occurrences": 10,
+      "corpus_freq": 3658,
+      "corpus_programs": 1245,
+      "corpus_programs_share": 0.249,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 8/46 canonical forms, 24.9% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "}}",
+      "in_canonical_forms": [
+        "cond-bind-if",
+        "cond-bool-combine",
+        "cond-clamp",
+        "cond-elif-chain",
+        "err-default",
+        "parse-int"
+      ],
+      "in_hot_path_forms": [
+        "io-write-accumulate"
+      ],
+      "canonical_occurrences": 6,
+      "corpus_freq": 3182,
+      "corpus_programs": 2290,
+      "corpus_programs_share": 0.458,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 6/46 canonical forms, 45.8% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ")};",
+      "in_canonical_forms": [
+        "coll-membership"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 2864,
+      "corpus_programs": 1969,
+      "corpus_programs_share": 0.3938,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 39.4% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ":str;",
+      "in_canonical_forms": [
+        "cli-print-results",
+        "io-write-accumulate",
+        "str-interp-vs-join"
+      ],
+      "in_hot_path_forms": [
+        "io-write-accumulate"
+      ],
+      "canonical_occurrences": 4,
+      "corpus_freq": 2708,
+      "corpus_programs": 1608,
+      "corpus_programs_share": 0.3216,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 3/46 canonical forms, 32.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "=\"",
+      "in_canonical_forms": [
+        "coll-group-by"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 1849,
+      "corpus_programs": 983,
+      "corpus_programs_share": 0.1966,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 19.7% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ")){",
+      "in_canonical_forms": [
+        "acc-dedupe",
+        "coll-lookup-default"
+      ],
+      "in_hot_path_forms": [
+        "io-write-accumulate"
+      ],
+      "canonical_occurrences": 2,
+      "corpus_freq": 1731,
+      "corpus_programs": 1112,
+      "corpus_programs_share": 0.2224,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 22.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "){\"",
+      "in_canonical_forms": [
+        "cond-bool-render"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 1617,
+      "corpus_programs": 737,
+      "corpus_programs_share": 0.1474,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 14.7% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "}};<",
+      "in_canonical_forms": [
+        "acc-count-if",
+        "coll-dedupe",
+        "fn-helper-vs-inline",
+        "io-write-accumulate",
+        "iter-count"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 5,
+      "corpus_freq": 1250,
+      "corpus_programs": 1157,
+      "corpus_programs_share": 0.2314,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 5/46 canonical forms, 23.1% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".len(",
+      "in_canonical_forms": [
+        "fn-chain-vs-let",
+        "parse-csv-line",
+        "parse-json",
+        "str-repeat-pad"
+      ],
+      "in_hot_path_forms": [
+        "parse-json",
+        "parse-kv-lines"
+      ],
+      "canonical_occurrences": 4,
+      "corpus_freq": 1174,
+      "corpus_programs": 831,
+      "corpus_programs_share": 0.1662,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 4/46 canonical forms, 16.6% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".slice(",
+      "in_canonical_forms": [],
+      "in_hot_path_forms": [
+        "parse-kv-lines"
+      ],
+      "canonical_occurrences": 0,
+      "corpus_freq": 1056,
+      "corpus_programs": 614,
+      "corpus_programs_share": 0.1228,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 0/46 canonical forms, 12.3% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ":i64;",
+      "in_canonical_forms": [
+        "cond-bool-combine",
+        "cond-clamp",
+        "err-validate-early",
+        "str-repeat-pad"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 5,
+      "corpus_freq": 1053,
+      "corpus_programs": 769,
+      "corpus_programs_share": 0.1538,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 4/46 canonical forms, 15.4% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ")==",
+      "in_canonical_forms": [
+        "acc-map-build",
+        "iter-nested-early-exit"
+      ],
+      "in_hot_path_forms": [
+        "parse-json"
+      ],
+      "canonical_occurrences": 2,
+      "corpus_freq": 1022,
+      "corpus_programs": 861,
+      "corpus_programs_share": 0.1722,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 17.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "\"){",
+      "in_canonical_forms": [
+        "io-write-accumulate",
+        "parse-json"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 3,
+      "corpus_freq": 992,
+      "corpus_programs": 558,
+      "corpus_programs_share": 0.1116,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 11.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".split(",
+      "in_canonical_forms": [
+        "fn-chain-vs-let",
+        "io-read-lines",
+        "parse-csv-line",
+        "parse-delim-split",
+        "parse-kv-lines"
+      ],
+      "in_hot_path_forms": [
+        "parse-kv-lines"
+      ],
+      "canonical_occurrences": 7,
+      "corpus_freq": 964,
+      "corpus_programs": 733,
+      "corpus_programs_share": 0.1466,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 5/46 canonical forms, 14.7% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "@();",
+      "in_canonical_forms": [
+        "acc-array",
+        "acc-dedupe",
+        "coll-reverse",
+        "coll-sort-take",
+        "str-array-render"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 5,
+      "corpus_freq": 956,
+      "corpus_programs": 776,
+      "corpus_programs_share": 0.1552,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 5/46 canonical forms, 15.5% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".append(",
+      "in_canonical_forms": [
+        "acc-array",
+        "acc-dedupe",
+        "coll-group-by",
+        "coll-reverse",
+        "coll-sort-take",
+        "io-write-accumulate",
+        "str-array-render"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 7,
+      "corpus_freq": 952,
+      "corpus_programs": 661,
+      "corpus_programs_share": 0.1322,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 7/46 canonical forms, 13.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "el if(",
+      "in_canonical_forms": [
+        "cond-clamp",
+        "cond-elif-chain"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 3,
+      "corpus_freq": 936,
+      "corpus_programs": 280,
+      "corpus_programs_share": 0.056,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 5.6% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "\"}}",
+      "in_canonical_forms": [
+        "cli-argv",
+        "cond-bool-render"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 2,
+      "corpus_freq": 868,
+      "corpus_programs": 749,
+      "corpus_programs_share": 0.1498,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 15.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ":str):i64{",
+      "in_canonical_forms": [
+        "parse-csv-line",
+        "parse-json",
+        "parse-kv-lines"
+      ],
+      "in_hot_path_forms": [
+        "parse-json",
+        "parse-kv-lines"
+      ],
+      "canonical_occurrences": 3,
+      "corpus_freq": 791,
+      "corpus_programs": 686,
+      "corpus_programs_share": 0.1372,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 3/46 canonical forms, 13.7% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ":i64):str{",
+      "in_canonical_forms": [
+        "str-array-render",
+        "str-build-loop",
+        "str-repeat-pad"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 3,
+      "corpus_freq": 787,
+      "corpus_programs": 687,
+      "corpus_programs_share": 0.1374,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 3/46 canonical forms, 13.7% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "$ok:",
+      "in_canonical_forms": [
+        "cli-argv",
+        "coll-dedupe",
+        "coll-group-by",
+        "coll-lookup-default",
+        "coll-membership",
+        "err-default",
+        "io-read-lines",
+        "io-write-accumulate",
+        "parse-int",
+        "parse-json"
+      ],
+      "in_hot_path_forms": [
+        "io-write-accumulate"
+      ],
+      "canonical_occurrences": 12,
+      "corpus_freq": 759,
+      "corpus_programs": 399,
+      "corpus_programs_share": 0.0798,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 10/46 canonical forms, 8.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "$err:",
+      "in_canonical_forms": [
+        "cli-argv",
+        "coll-dedupe",
+        "coll-group-by",
+        "coll-lookup-default",
+        "coll-membership",
+        "err-default",
+        "io-read-lines",
+        "io-write-accumulate",
+        "parse-int",
+        "parse-json"
+      ],
+      "in_hot_path_forms": [
+        "io-write-accumulate"
+      ],
+      "canonical_occurrences": 12,
+      "corpus_freq": 758,
+      "corpus_programs": 398,
+      "corpus_programs_share": 0.0796,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 10/46 canonical forms, 8.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ":i64):i64{",
+      "in_canonical_forms": [
+        "acc-map-build",
+        "cond-bind-if",
+        "err-validate-early",
+        "io-write-accumulate"
+      ],
+      "in_hot_path_forms": [
+        "fn-recursion-vs-loop",
+        "io-write-accumulate"
+      ],
+      "canonical_occurrences": 4,
+      "corpus_freq": 748,
+      "corpus_programs": 631,
+      "corpus_programs_share": 0.1262,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 4/46 canonical forms, 12.6% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ")};<",
+      "in_canonical_forms": [
+        "acc-array",
+        "acc-sum",
+        "str-repeat-pad"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 3,
+      "corpus_freq": 691,
+      "corpus_programs": 623,
+      "corpus_programs_share": 0.1246,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 3/46 canonical forms, 12.5% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ")}}",
+      "in_canonical_forms": [
+        "fn-recursion-vs-loop"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 585,
+      "corpus_programs": 531,
+      "corpus_programs_share": 0.1062,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 10.6% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "@()};",
+      "in_canonical_forms": [
+        "coll-group-by"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 580,
+      "corpus_programs": 560,
+      "corpus_programs_share": 0.112,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 11.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ")\"}",
+      "in_canonical_forms": [
+        "cli-print-results",
+        "str-interp-vs-join",
+        "str-num-format"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 3,
+      "corpus_freq": 577,
+      "corpus_programs": 440,
+      "corpus_programs_share": 0.088,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 3/46 canonical forms, 8.8% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "))}",
+      "in_canonical_forms": [
+        "fn-chain-vs-let"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 573,
+      "corpus_programs": 463,
+      "corpus_programs_share": 0.0926,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 9.3% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".concat(",
+      "in_canonical_forms": [
+        "str-repeat-pad"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 549,
+      "corpus_programs": 283,
+      "corpus_programs_share": 0.0566,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 5.7% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "\")}",
+      "in_canonical_forms": [
+        "io-read-lines",
+        "parse-delim-split"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 2,
+      "corpus_freq": 532,
+      "corpus_programs": 427,
+      "corpus_programs_share": 0.0854,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 8.5% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ":str):@str{",
+      "in_canonical_forms": [
+        "io-read-lines"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 472,
+      "corpus_programs": 472,
+      "corpus_programs_share": 0.0944,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 9.4% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".set(",
+      "in_canonical_forms": [
+        "acc-map-build",
+        "coll-dedupe",
+        "coll-group-by",
+        "coll-membership",
+        "coll-swap",
+        "parse-kv-lines"
+      ],
+      "in_hot_path_forms": [
+        "parse-kv-lines"
+      ],
+      "canonical_occurrences": 7,
+      "corpus_freq": 449,
+      "corpus_programs": 230,
+      "corpus_programs_share": 0.046,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 6/46 canonical forms, 4.6% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ":str):@str{<",
+      "in_canonical_forms": [
+        "parse-delim-split",
+        "parse-fields"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 2,
+      "corpus_freq": 435,
+      "corpus_programs": 435,
+      "corpus_programs_share": 0.087,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 8.7% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".add(",
+      "in_canonical_forms": [
+        "str-array-render",
+        "str-build-loop"
+      ],
+      "in_hot_path_forms": [
+        "io-write-accumulate"
+      ],
+      "canonical_occurrences": 4,
+      "corpus_freq": 415,
+      "corpus_programs": 164,
+      "corpus_programs_share": 0.0328,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 3.3% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ")>",
+      "in_canonical_forms": [
+        "iter-find-first"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 386,
+      "corpus_programs": 342,
+      "corpus_programs_share": 0.0684,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 6.8% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ":i64):str{<",
+      "in_canonical_forms": [
+        "cond-bool-render"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 378,
+      "corpus_programs": 345,
+      "corpus_programs_share": 0.069,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 6.9% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ":str):i64{<",
+      "in_canonical_forms": [
+        "fn-chain-vs-let",
+        "parse-int"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 2,
+      "corpus_freq": 368,
+      "corpus_programs": 340,
+      "corpus_programs_share": 0.068,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 6.8% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ":@i64;",
+      "in_canonical_forms": [
+        "coll-membership",
+        "coll-sort-take"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 2,
+      "corpus_freq": 344,
+      "corpus_programs": 302,
+      "corpus_programs_share": 0.0604,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 6.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ":@str;",
+      "in_canonical_forms": [
+        "acc-map-build",
+        "str-build-loop"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 2,
+      "corpus_freq": 305,
+      "corpus_programs": 260,
+      "corpus_programs_share": 0.052,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 5.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ":i64):i64{<",
+      "in_canonical_forms": [
+        "cond-bool-combine",
+        "cond-clamp",
+        "cond-elif-chain",
+        "err-default",
+        "fn-recursion-vs-loop"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 5,
+      "corpus_freq": 288,
+      "corpus_programs": 224,
+      "corpus_programs_share": 0.0448,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 5/46 canonical forms, 4.5% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ")}};<",
+      "in_canonical_forms": [],
+      "in_hot_path_forms": [
+        "acc-min-max",
+        "iter-filter-sum"
+      ],
+      "canonical_occurrences": 0,
+      "corpus_freq": 286,
+      "corpus_programs": 283,
+      "corpus_programs_share": 0.0566,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 0/46 canonical forms, 5.7% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ");\"",
+      "in_canonical_forms": [
+        "parse-csv-line",
+        "parse-kv-lines"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 2,
+      "corpus_freq": 243,
+      "corpus_programs": 128,
+      "corpus_programs_share": 0.0256,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 2.6% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ":@i64):@i64{",
+      "in_canonical_forms": [
+        "acc-dedupe",
+        "coll-reverse",
+        "coll-swap"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 3,
+      "corpus_freq": 239,
+      "corpus_programs": 218,
+      "corpus_programs_share": 0.0436,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 3/46 canonical forms, 4.4% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ")\";",
+      "in_canonical_forms": [
+        "coll-dedupe",
+        "coll-group-by"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 2,
+      "corpus_freq": 223,
+      "corpus_programs": 181,
+      "corpus_programs_share": 0.0362,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 3.6% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "))};<",
+      "in_canonical_forms": [
+        "coll-reverse",
+        "coll-sort-take",
+        "coll-swap",
+        "str-build-loop"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 4,
+      "corpus_freq": 208,
+      "corpus_programs": 202,
+      "corpus_programs_share": 0.0404,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 4/46 canonical forms, 4.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "}}};<",
+      "in_canonical_forms": [
+        "acc-map-build"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 200,
+      "corpus_programs": 200,
+      "corpus_programs_share": 0.04,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 4.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ")<",
+      "in_canonical_forms": [],
+      "in_hot_path_forms": [
+        "acc-min-max"
+      ],
+      "canonical_occurrences": 0,
+      "corpus_freq": 193,
+      "corpus_programs": 187,
+      "corpus_programs_share": 0.0374,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 0/46 canonical forms, 3.7% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ":i64):@i64{",
+      "in_canonical_forms": [
+        "acc-array",
+        "coll-sort-take"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 2,
+      "corpus_freq": 183,
+      "corpus_programs": 159,
+      "corpus_programs_share": 0.0318,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 3.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".build(",
+      "in_canonical_forms": [
+        "str-array-render",
+        "str-build-loop"
+      ],
+      "in_hot_path_forms": [
+        "io-write-accumulate"
+      ],
+      "canonical_occurrences": 2,
+      "corpus_freq": 178,
+      "corpus_programs": 173,
+      "corpus_programs_share": 0.0346,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 3.5% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".builder(",
+      "in_canonical_forms": [
+        "str-array-render",
+        "str-build-loop"
+      ],
+      "in_hot_path_forms": [
+        "io-write-accumulate"
+      ],
+      "canonical_occurrences": 2,
+      "corpus_freq": 178,
+      "corpus_programs": 173,
+      "corpus_programs_share": 0.0346,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 3.5% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ")\")};",
+      "in_canonical_forms": [
+        "str-array-render"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 175,
+      "corpus_programs": 166,
+      "corpus_programs_share": 0.0332,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 3.3% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "\")};<",
+      "in_canonical_forms": [
+        "str-array-render"
+      ],
+      "in_hot_path_forms": [
+        "io-write-accumulate"
+      ],
+      "canonical_occurrences": 1,
+      "corpus_freq": 166,
+      "corpus_programs": 164,
+      "corpus_programs_share": 0.0328,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 3.3% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ")!=",
+      "in_canonical_forms": [
+        "acc-dedupe"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 151,
+      "corpus_programs": 131,
+      "corpus_programs_share": 0.0262,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 2.6% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ")+",
+      "in_canonical_forms": [
+        "acc-map-build",
+        "iter-nested-early-exit"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 5,
+      "corpus_freq": 144,
+      "corpus_programs": 103,
+      "corpus_programs_share": 0.0206,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 2.1% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "))){",
+      "in_canonical_forms": [
+        "fn-helper-vs-inline"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 143,
+      "corpus_programs": 119,
+      "corpus_programs_share": 0.0238,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 2.4% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "<-",
+      "in_canonical_forms": [
+        "parse-json"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 3,
+      "corpus_freq": 138,
+      "corpus_programs": 110,
+      "corpus_programs_share": 0.022,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 2.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ":@i64):i64{",
+      "in_canonical_forms": [
+        "acc-count-if",
+        "acc-sum",
+        "coll-dedupe",
+        "coll-group-by",
+        "coll-membership",
+        "fn-helper-vs-inline",
+        "iter-count",
+        "iter-find-first",
+        "iter-nested-early-exit"
+      ],
+      "in_hot_path_forms": [
+        "acc-min-max",
+        "iter-filter-sum"
+      ],
+      "canonical_occurrences": 9,
+      "corpus_freq": 134,
+      "corpus_programs": 125,
+      "corpus_programs_share": 0.025,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 9/46 canonical forms, 2.5% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".toint(",
+      "in_canonical_forms": [
+        "parse-int"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 112,
+      "corpus_programs": 111,
+      "corpus_programs_share": 0.0222,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 2.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "+(",
+      "in_canonical_forms": [
+        "coll-group-by"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 110,
+      "corpus_programs": 93,
+      "corpus_programs_share": 0.0186,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 1.9% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".charcode(",
+      "in_canonical_forms": [],
+      "in_hot_path_forms": [
+        "parse-json"
+      ],
+      "canonical_occurrences": 0,
+      "corpus_freq": 102,
+      "corpus_programs": 77,
+      "corpus_programs_share": 0.0154,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 0/46 canonical forms, 1.5% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ")%",
+      "in_canonical_forms": [
+        "acc-count-if",
+        "coll-group-by",
+        "iter-count"
+      ],
+      "in_hot_path_forms": [
+        "iter-filter-sum"
+      ],
+      "canonical_occurrences": 3,
+      "corpus_freq": 100,
+      "corpus_programs": 62,
+      "corpus_programs_share": 0.0124,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 3/46 canonical forms, 1.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ")*",
+      "in_canonical_forms": [
+        "coll-group-by"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 82,
+      "corpus_programs": 62,
+      "corpus_programs_share": 0.0124,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 1.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ":@(",
+      "in_canonical_forms": [
+        "coll-lookup-default"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 80,
+      "corpus_programs": 61,
+      "corpus_programs_share": 0.0122,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 1.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "))}};<",
+      "in_canonical_forms": [
+        "acc-dedupe",
+        "parse-kv-lines"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 2,
+      "corpus_freq": 79,
+      "corpus_programs": 79,
+      "corpus_programs_share": 0.0158,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 1.6% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ":@str):i64{",
+      "in_canonical_forms": [
+        "coll-lookup-default"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 72,
+      "corpus_programs": 72,
+      "corpus_programs_share": 0.0144,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 1.4% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "){<-",
+      "in_canonical_forms": [
+        "err-validate-early"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 2,
+      "corpus_freq": 69,
+      "corpus_programs": 58,
+      "corpus_programs_share": 0.0116,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 1.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".indexof(",
+      "in_canonical_forms": [],
+      "in_hot_path_forms": [
+        "parse-kv-lines"
+      ],
+      "canonical_occurrences": 0,
+      "corpus_freq": 69,
+      "corpus_programs": 45,
+      "corpus_programs_share": 0.009,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 0/46 canonical forms, 0.9% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ":i64):i64!$",
+      "in_canonical_forms": [
+        "err-propagate"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 65,
+      "corpus_programs": 65,
+      "corpus_programs_share": 0.013,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 1.3% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ")))};",
+      "in_canonical_forms": [
+        "coll-group-by"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 53,
+      "corpus_programs": 53,
+      "corpus_programs_share": 0.0106,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 1.1% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "))\";",
+      "in_canonical_forms": [
+        "coll-membership"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 44,
+      "corpus_programs": 40,
+      "corpus_programs_share": 0.008,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.8% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ":i64);",
+      "in_canonical_forms": [
+        "coll-lookup-default"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 41,
+      "corpus_programs": 26,
+      "corpus_programs_share": 0.0052,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.5% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ")!=\"\"){",
+      "in_canonical_forms": [
+        "parse-csv-line"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 30,
+      "corpus_programs": 27,
+      "corpus_programs_share": 0.0054,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.5% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ":i64):str{<\"\\(",
+      "in_canonical_forms": [
+        "cli-print-results",
+        "str-interp-vs-join",
+        "str-num-format"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 3,
+      "corpus_freq": 30,
+      "corpus_programs": 30,
+      "corpus_programs_share": 0.006,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 3/46 canonical forms, 0.6% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".fields(",
+      "in_canonical_forms": [
+        "parse-fields"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 28,
+      "corpus_programs": 28,
+      "corpus_programs_share": 0.0056,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.6% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ")!$",
+      "in_canonical_forms": [
+        "err-propagate"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 26,
+      "corpus_programs": 19,
+      "corpus_programs_share": 0.0038,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.4% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ":@i64):i64{<",
+      "in_canonical_forms": [
+        "acc-min-max",
+        "iter-filter-sum"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 2,
+      "corpus_freq": 19,
+      "corpus_programs": 19,
+      "corpus_programs_share": 0.0038,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 0.4% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "))}}};<",
+      "in_canonical_forms": [
+        "parse-csv-line"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 11,
+      "corpus_programs": 11,
+      "corpus_programs_share": 0.0022,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".fromint(",
+      "in_canonical_forms": [
+        "str-repeat-pad"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 11,
+      "corpus_programs": 9,
+      "corpus_programs_share": 0.0018,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ":@i64):@i64{<",
+      "in_canonical_forms": [
+        "iter-filter",
+        "iter-map"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 2,
+      "corpus_freq": 6,
+      "corpus_programs": 6,
+      "corpus_programs_share": 0.0012,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 0.1% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".map(",
+      "in_canonical_forms": [
+        "iter-map"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 3,
+      "corpus_programs": 3,
+      "corpus_programs_share": 0.0006,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.1% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "():str{<",
+      "in_canonical_forms": [
+        "cli-argv"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 2,
+      "corpus_programs": 2,
+      "corpus_programs_share": 0.0004,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ")\"){",
+      "in_canonical_forms": [
+        "coll-dedupe"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 2,
+      "corpus_programs": 2,
+      "corpus_programs_share": 0.0004,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ":@str):@str{<",
+      "in_canonical_forms": [
+        "cli-flag-filter"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 2,
+      "corpus_programs": 2,
+      "corpus_programs_share": 0.0004,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "<@()};<",
+      "in_canonical_forms": [
+        "io-read-lines"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 2,
+      "corpus_programs": 2,
+      "corpus_programs_share": 0.0004,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "@(\"\":",
+      "in_canonical_forms": [
+        "coll-dedupe",
+        "coll-membership"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 2,
+      "corpus_freq": 2,
+      "corpus_programs": 2,
+      "corpus_programs_share": 0.0004,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "}}};<-",
+      "in_canonical_forms": [
+        "iter-nested-early-exit"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 1,
+      "corpus_programs": 1,
+      "corpus_programs_share": 0.0002,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "))\"){",
+      "in_canonical_forms": [
+        "coll-membership"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 0,
+      "corpus_programs": 0,
+      "corpus_programs_share": 0.0,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ")))}};<",
+      "in_canonical_forms": [],
+      "in_hot_path_forms": [
+        "parse-kv-lines"
+      ],
+      "canonical_occurrences": 0,
+      "corpus_freq": 0,
+      "corpus_programs": 0,
+      "corpus_programs_share": 0.0,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 0/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ")}};<-",
+      "in_canonical_forms": [
+        "iter-find-first"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 0,
+      "corpus_programs": 0,
+      "corpus_programs_share": 0.0,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".dec(",
+      "in_canonical_forms": [
+        "parse-json"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 0,
+      "corpus_programs": 0,
+      "corpus_programs_share": 0.0,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".filter(",
+      "in_canonical_forms": [
+        "cli-flag-filter",
+        "iter-filter"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 2,
+      "corpus_freq": 0,
+      "corpus_programs": 0,
+      "corpus_programs_share": 0.0,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".i64(",
+      "in_canonical_forms": [
+        "parse-json"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 0,
+      "corpus_programs": 0,
+      "corpus_programs_share": 0.0,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".keys(",
+      "in_canonical_forms": [
+        "coll-group-by"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 0,
+      "corpus_programs": 0,
+      "corpus_programs_share": 0.0,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".read(",
+      "in_canonical_forms": [
+        "io-read-lines"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 0,
+      "corpus_programs": 0,
+      "corpus_programs_share": 0.0,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".reduce(",
+      "in_canonical_forms": [
+        "iter-filter-sum"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 0,
+      "corpus_programs": 0,
+      "corpus_programs_share": 0.0,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".sort(",
+      "in_canonical_forms": [
+        "acc-dedupe",
+        "acc-min-max",
+        "coll-sort-take"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 3,
+      "corpus_freq": 0,
+      "corpus_programs": 0,
+      "corpus_programs_share": 0.0,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 3/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".str(",
+      "in_canonical_forms": [
+        "parse-json"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 0,
+      "corpus_programs": 0,
+      "corpus_programs_share": 0.0,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".write(",
+      "in_canonical_forms": [],
+      "in_hot_path_forms": [
+        "io-write-accumulate"
+      ],
+      "canonical_occurrences": 0,
+      "corpus_freq": 0,
+      "corpus_programs": 0,
+      "corpus_programs_share": 0.0,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 0/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ";&",
+      "in_canonical_forms": [
+        "iter-filter-sum"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 0,
+      "corpus_programs": 0,
+      "corpus_programs_share": 0.0,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "@(\"\":\"\");",
+      "in_canonical_forms": [
+        "parse-kv-lines"
+      ],
+      "in_hot_path_forms": [
+        "parse-kv-lines"
+      ],
+      "canonical_occurrences": 1,
+      "corpus_freq": 0,
+      "corpus_programs": 0,
+      "corpus_programs_share": 0.0,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "@(\"\":@());",
+      "in_canonical_forms": [
+        "coll-group-by"
+      ],
+      "in_hot_path_forms": [],
+      "canonical_occurrences": 1,
+      "corpus_freq": 0,
+      "corpus_programs": 0,
+      "corpus_programs_share": 0.0,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    }
+  ],
+  "excluded": [
+    {
+      "fragment": "$i64",
+      "corpus_freq": 0,
+      "corpus_programs": 0,
+      "class": "excluded",
+      "rationale": "D4 type sigil EXCLUDED from forced: 131.20 found zero occurrences in v0.4 text (types are `:i64` / `@i64`; `$` only opens `$ok:`/`$err:` arms and user type names)"
+    },
+    {
+      "fragment": "$f64",
+      "corpus_freq": 0,
+      "corpus_programs": 0,
+      "class": "excluded",
+      "rationale": "D4 type sigil EXCLUDED from forced: 131.20 found zero occurrences in v0.4 text (types are `:i64` / `@i64`; `$` only opens `$ok:`/`$err:` arms and user type names)"
+    },
+    {
+      "fragment": "$str",
+      "corpus_freq": 0,
+      "corpus_programs": 0,
+      "class": "excluded",
+      "rationale": "D4 type sigil EXCLUDED from forced: 131.20 found zero occurrences in v0.4 text (types are `:i64` / `@i64`; `$` only opens `$ok:`/`$err:` arms and user type names)"
+    },
+    {
+      "fragment": "$bool",
+      "corpus_freq": 0,
+      "corpus_programs": 0,
+      "class": "excluded",
+      "rationale": "D4 type sigil EXCLUDED from forced: 131.20 found zero occurrences in v0.4 text (types are `:i64` / `@i64`; `$` only opens `$ok:`/`$err:` arms and user type names)"
+    },
+    {
+      "fragment": "$u64",
+      "corpus_freq": 0,
+      "corpus_programs": 0,
+      "class": "excluded",
+      "rationale": "D4 type sigil EXCLUDED from forced: 131.20 found zero occurrences in v0.4 text (types are `:i64` / `@i64`; `$` only opens `$ok:`/`$err:` arms and user type names)"
+    },
+    {
+      "fragment": "$byte",
+      "corpus_freq": 0,
+      "corpus_programs": 0,
+      "class": "excluded",
+      "rationale": "D4 type sigil EXCLUDED from forced: 131.20 found zero occurrences in v0.4 text (types are `:i64` / `@i64`; `$` only opens `$ok:`/`$err:` arms and user type names)"
+    }
+  ]
+}

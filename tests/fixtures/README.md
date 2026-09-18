@@ -9,3 +9,9 @@ tokenizer in a temp dir at test time.
 No tokenizer artefact is stored here: the provenance rule (story 131.24,
 `scripts/check_provenance.py`) covers `models/` and root `tokenizer*.json`;
 toy models must be generated, never committed.
+
+`must_merge_sample_small.txt` — the first 40 records of
+`data/must_merge_sample_v04.txt` (story 131.23: 5,000 accepted `regen_v04`
+records, `random.Random(131)`, `tkc --min` + D2 masking, `task_id<TAB>text`).
+Hermetic corpus side of `tests/test_derive_must_merge.py`'s synthetic-catalogue
+tests; the derivability test uses the full committed sample.
