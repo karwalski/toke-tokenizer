@@ -1,0 +1,4645 @@
+{
+  "story": "131.20",
+  "generated": "2026-09-18T12:53:32.511088+00:00",
+  "partial_analysis": false,
+  "toke_model": "models/toke.model",
+  "toke_kind": "sentencepiece",
+  "toke_model_sha256": "9a754777212d340b29cd566512bea6d4c68a20ee6e21353905a548769f15de5a",
+  "qwen_model": "Qwen/Qwen2.5-Coder-7B",
+  "transformers_version": "5.8.1",
+  "tkc_version": "toke 2.8.0",
+  "masked": true,
+  "sample_seed": 42,
+  "sample_source": "/tmp/t131/freeze_sample",
+  "sample_ids_file": "data/baseline_sample_ids_v04.txt",
+  "overlap_stats": {
+    "toke_vocab_size": 7910,
+    "qwen_vocab_size": 151651,
+    "intersection_size": 2492,
+    "union_size": 157069,
+    "jaccard_similarity": 0.015866,
+    "overlap_pct": 31.5,
+    "novel_toke_token_count": 5418,
+    "novel_pct": 68.5,
+    "novel_tokens_sample": [
+      " 0",
+      " 1",
+      " 2",
+      "!$",
+      "\"0",
+      "\"1",
+      "\"9",
+      "(0",
+      "(1",
+      "(3",
+      "*2",
+      "+0",
+      "+1",
+      "+2",
+      "+5",
+      "-1",
+      "-2",
+      "-3",
+      "-4",
+      "-5",
+      "-9",
+      ".0",
+      ".1",
+      ".2",
+      "/1",
+      "/2",
+      "/3",
+      "/4",
+      "/5",
+      "/8",
+      "0)",
+      "0+",
+      "0-",
+      "0.",
+      "00",
+      "03",
+      "0;",
+      "0=",
+      "0}",
+      "1)",
+      "1*",
+      "1+",
+      "1-",
+      "1.",
+      "1/",
+      "10",
+      "11",
+      "12",
+      "13",
+      "16",
+      "18",
+      "1:",
+      "1;",
+      "1<",
+      "1=",
+      "1>",
+      "1}",
+      "2(",
+      "2)",
+      "2*",
+      "2+",
+      "2-",
+      "2.",
+      "2/",
+      "23",
+      "25",
+      "26",
+      "29",
+      "2:",
+      "2;",
+      "2<",
+      "2=",
+      "2>",
+      "2}",
+      "3(",
+      "3*",
+      "30",
+      "31",
+      "32",
+      "3;",
+      "3=",
+      "3>",
+      "3}",
+      "4-",
+      "40",
+      "42",
+      "45",
+      "46",
+      "47",
+      "48",
+      "4;",
+      "4=",
+      "4}",
+      "55",
+      "5;",
+      "5=",
+      "5}",
+      "60",
+      "64",
+      "65",
+      "67",
+      "68",
+      "69",
+      "6;",
+      "6}",
+      "70",
+      "72",
+      "73",
+      "74",
+      "75",
+      "79",
+      "7;",
+      "7}",
+      "8)",
+      "8+",
+      "80",
+      "89",
+      "8;",
+      "8=",
+      "8{",
+      "8}",
+      "90",
+      "97",
+      "99",
+      "9;",
+      "9}",
+      ";0",
+      ";1",
+      ";2",
+      "<0",
+      "<1",
+      "<2",
+      "<3",
+      "<4",
+      "<5",
+      "<6",
+      "<7",
+      "<8",
+      "<9",
+      "=0",
+      "=1",
+      "=2",
+      "=3",
+      "=4",
+      "=5",
+      "=6",
+      "=7",
+      "=8",
+      "=9",
+      ">0",
+      ">1",
+      ">2",
+      ">3",
+      ">4",
+      ">5",
+      ">6",
+      ">7",
+      ">8",
+      ">9",
+      "Cn",
+      "Dp",
+      "PQ",
+      "cM",
+      "cN",
+      "f=",
+      "i=",
+      "iU",
+      "m=",
+      "nU",
+      "oF",
+      "t=",
+      "{<",
+      "|{",
+      " <\"",
+      " iU",
+      " iu",
+      " zc",
+      " {<",
+      "\"\";",
+      "\"\"}",
+      "\".-",
+      "\";\"",
+      "\";<",
+      "\"};",
+      "(0-",
+      "(0;",
+      ")!$",
+      "))=",
+      "))}",
+      ")*2",
+      ")+1",
+      ")-1",
+      ")/2",
+      "):@",
+      ");<",
+      ")<0",
+      ")=0",
+      ")=4",
+      ")>0",
+      "){<"
+    ]
+  },
+  "occurrence_coverage": {
+    "toke_token_occurrences": 70533,
+    "covered_by_single_qwen_token": 58738,
+    "coverage_pct": 83.28,
+    "top_uncovered": [
+      {
+        "piece": "i=",
+        "count": 1443
+      },
+      {
+        "piece": "f=",
+        "count": 1126
+      },
+      {
+        "piece": "m=",
+        "count": 560
+      },
+      {
+        "piece": "t=",
+        "count": 501
+      },
+      {
+        "piece": ".get(",
+        "count": 483
+      },
+      {
+        "piece": "64{",
+        "count": 462
+      },
+      {
+        "piece": "+1){",
+        "count": 412
+      },
+      {
+        "piece": "0;",
+        "count": 313
+      },
+      {
+        "piece": "64):",
+        "count": 306
+      },
+      {
+        "piece": "<0};",
+        "count": 257
+      },
+      {
+        "piece": "64;",
+        "count": 241
+      },
+      {
+        "piece": ".0;",
+        "count": 167
+      },
+      {
+        "piece": "{<",
+        "count": 157
+      },
+      {
+        "piece": "\";\"",
+        "count": 150
+      },
+      {
+        "piece": ")};",
+        "count": 135
+      },
+      {
+        "piece": "=0;",
+        "count": 93
+      },
+      {
+        "piece": "1;",
+        "count": 91
+      },
+      {
+        "piece": "\"};",
+        "count": 85
+      },
+      {
+        "piece": "64{<0};",
+        "count": 79
+      },
+      {
+        "piece": "64):@",
+        "count": 77
+      },
+      {
+        "piece": "{<\"\"};",
+        "count": 73
+      },
+      {
+        "piece": "=0){",
+        "count": 67
+      },
+      {
+        "piece": "}};",
+        "count": 62
+      },
+      {
+        "piece": "lookuperr",
+        "count": 56
+      },
+      {
+        "piece": "=0){<",
+        "count": 54
+      },
+      {
+        "piece": "):@",
+        "count": 52
+      },
+      {
+        "piece": ");<",
+        "count": 52
+      },
+      {
+        "piece": "};<",
+        "count": 51
+      },
+      {
+        "piece": "){<",
+        "count": 51
+      },
+      {
+        "piece": "\"}};",
+        "count": 50
+      },
+      {
+        "piece": ")};<",
+        "count": 48
+      },
+      {
+        "piece": "coun",
+        "count": 44
+      },
+      {
+        "piece": " resul",
+        "count": 41
+      },
+      {
+        "piece": "5;",
+        "count": 40
+      },
+      {
+        "piece": ".\"\";",
+        "count": 40
+      },
+      {
+        "piece": "1:",
+        "count": 39
+      },
+      {
+        "piece": "\")){",
+        "count": 39
+      },
+      {
+        "piece": "3;",
+        "count": 38
+      },
+      {
+        "piece": "delim",
+        "count": 37
+      },
+      {
+        "piece": "<0){",
+        "count": 37
+      },
+      {
+        "piece": "2=",
+        "count": 36
+      },
+      {
+        "piece": "}};<",
+        "count": 34
+      },
+      {
+        "piece": "resul",
+        "count": 34
+      },
+      {
+        "piece": "0};",
+        "count": 33
+      },
+      {
+        "piece": "0.",
+        "count": 33
+      },
+      {
+        "piece": ")){<",
+        "count": 32
+      },
+      {
+        "piece": "+1;",
+        "count": 31
+      },
+      {
+        "piece": "2;",
+        "count": 31
+      },
+      {
+        "piece": "llection",
+        "count": 31
+      },
+      {
+        "piece": "+1);",
+        "count": 31
+      },
+      {
+        "piece": "-1;",
+        "count": 29
+      },
+      {
+        "piece": "(1",
+        "count": 28
+      },
+      {
+        "piece": "25",
+        "count": 28
+      },
+      {
+        "piece": "64{<",
+        "count": 27
+      },
+      {
+        "piece": "1=",
+        "count": 26
+      },
+      {
+        "piece": "2)",
+        "count": 26
+      },
+      {
+        "piece": "\"};<",
+        "count": 24
+      },
+      {
+        "piece": "0);",
+        "count": 24
+      },
+      {
+        "piece": "2:",
+        "count": 24
+      },
+      {
+        "piece": "))};",
+        "count": 24
+      },
+      {
+        "piece": ">0){",
+        "count": 23
+      },
+      {
+        "piece": "1;2;",
+        "count": 23
+      },
+      {
+        "piece": ".0",
+        "count": 22
+      },
+      {
+        "piece": "0}",
+        "count": 22
+      },
+      {
+        "piece": "4;",
+        "count": 22
+      },
+      {
+        "piece": ")}};<",
+        "count": 22
+      },
+      {
+        "piece": "10",
+        "count": 21
+      },
+      {
+        "piece": "64!$",
+        "count": 21
+      },
+      {
+        "piece": "quadrant",
+        "count": 20
+      },
+      {
+        "piece": "1.",
+        "count": 20
+      },
+      {
+        "piece": "1)",
+        "count": 20
+      },
+      {
+        "piece": "righ",
+        "count": 20
+      },
+      {
+        "piece": "10;",
+        "count": 19
+      },
+      {
+        "piece": "))};<",
+        "count": 19
+      },
+      {
+        "piece": "+1}",
+        "count": 19
+      },
+      {
+        "piece": "-1};",
+        "count": 19
+      },
+      {
+        "piece": "=0){<$",
+        "count": 18
+      },
+      {
+        "piece": "))){",
+        "count": 18
+      },
+      {
+        "piece": "=0",
+        "count": 17
+      },
+      {
+        "piece": "+1}};<",
+        "count": 17
+      },
+      {
+        "piece": "64);",
+        "count": 17
+      },
+      {
+        "piece": "00",
+        "count": 17
+      },
+      {
+        "piece": "mergesort",
+        "count": 17
+      },
+      {
+        "piece": "(0",
+        "count": 16
+      },
+      {
+        "piece": "(0;",
+        "count": 16
+      },
+      {
+        "piece": "\"\";",
+        "count": 16
+      },
+      {
+        "piece": "0-",
+        "count": 16
+      },
+      {
+        "piece": "\"};<\"",
+        "count": 16
+      },
+      {
+        "piece": "0){",
+        "count": 15
+      },
+      {
+        "piece": "=\"\"){",
+        "count": 15
+      },
+      {
+        "piece": "-1",
+        "count": 15
+      },
+      {
+        "piece": "<0",
+        "count": 15
+      },
+      {
+        "piece": ">0;",
+        "count": 15
+      },
+      {
+        "piece": "+1)=",
+        "count": 15
+      },
+      {
+        "piece": "64",
+        "count": 14
+      },
+      {
+        "piece": "8;",
+        "count": 14
+      },
+      {
+        "piece": "\";<",
+        "count": 14
+      },
+      {
+        "piece": "=0){<0};",
+        "count": 14
+      },
+      {
+        "piece": "1);",
+        "count": 13
+      },
+      {
+        "piece": "parseint",
+        "count": 13
+      }
+    ]
+  },
+  "recommendation": {
+    "action": "use_qwen_tokenizer_directly",
+    "decision_variable": "occurrence_coverage_pct",
+    "occurrence_coverage_pct": 83.28,
+    "novel_token_pct_set_overlap": 68.5,
+    "feasibility_of_qwen_direct": "high",
+    "summary": "83.3% of toke token occurrences on canonical code are already single Qwen tokens (68.5% of toke vocab entries are novel by set overlap). Qwen's tokenizer can be used directly; extension is optional.",
+    "avg_qwen_to_toke_token_ratio": 0.915
+  },
+  "per_sample_comparison": [
+    {
+      "task_id": "D-FIO-0005v134",
+      "category": "D-FIO",
+      "chars": 304,
+      "toke_token_count": 136,
+      "qwen_token_count": 123,
+      "ratio_qwen_to_toke": 0.904
+    },
+    {
+      "task_id": "A-CND-0078v54",
+      "category": "A-CND",
+      "chars": 497,
+      "toke_token_count": 224,
+      "qwen_token_count": 194,
+      "ratio_qwen_to_toke": 0.866
+    },
+    {
+      "task_id": "A-ARR-0049v40",
+      "category": "A-ARR",
+      "chars": 150,
+      "toke_token_count": 72,
+      "qwen_token_count": 70,
+      "ratio_qwen_to_toke": 0.972
+    },
+    {
+      "task_id": "D-NET-0019v218",
+      "category": "D-NET",
+      "chars": 286,
+      "toke_token_count": 123,
+      "qwen_token_count": 117,
+      "ratio_qwen_to_toke": 0.951
+    },
+    {
+      "task_id": "A-SRT-0026v34",
+      "category": "A-SRT",
+      "chars": 266,
+      "toke_token_count": 127,
+      "qwen_token_count": 103,
+      "ratio_qwen_to_toke": 0.811
+    },
+    {
+      "task_id": "A-MTH-0103v6",
+      "category": "A-MTH",
+      "chars": 365,
+      "toke_token_count": 177,
+      "qwen_token_count": 203,
+      "ratio_qwen_to_toke": 1.147
+    },
+    {
+      "task_id": "A-MTH-0066v21",
+      "category": "A-MTH",
+      "chars": 251,
+      "toke_token_count": 114,
+      "qwen_token_count": 120,
+      "ratio_qwen_to_toke": 1.053
+    },
+    {
+      "task_id": "A-ERR-0021v48",
+      "category": "A-ERR",
+      "chars": 203,
+      "toke_token_count": 90,
+      "qwen_token_count": 82,
+      "ratio_qwen_to_toke": 0.911
+    },
+    {
+      "task_id": "D-NET-0017v177",
+      "category": "D-NET",
+      "chars": 239,
+      "toke_token_count": 128,
+      "qwen_token_count": 88,
+      "ratio_qwen_to_toke": 0.688
+    },
+    {
+      "task_id": "A-CND-0068v44",
+      "category": "A-CND",
+      "chars": 299,
+      "toke_token_count": 126,
+      "qwen_token_count": 136,
+      "ratio_qwen_to_toke": 1.079
+    },
+    {
+      "task_id": "D-FIO-0017v332",
+      "category": "D-FIO",
+      "chars": 216,
+      "toke_token_count": 92,
+      "qwen_token_count": 81,
+      "ratio_qwen_to_toke": 0.88
+    },
+    {
+      "task_id": "D-NET-0019v129",
+      "category": "D-NET",
+      "chars": 225,
+      "toke_token_count": 110,
+      "qwen_token_count": 89,
+      "ratio_qwen_to_toke": 0.809
+    },
+    {
+      "task_id": "MIG-P2-A-A-CND-0039v18-7b71273a",
+      "category": "A-CND",
+      "chars": 148,
+      "toke_token_count": 65,
+      "qwen_token_count": 69,
+      "ratio_qwen_to_toke": 1.062
+    },
+    {
+      "task_id": "D-CRY-0016v16",
+      "category": "D-CRY",
+      "chars": 199,
+      "toke_token_count": 114,
+      "qwen_token_count": 100,
+      "ratio_qwen_to_toke": 0.877
+    },
+    {
+      "task_id": "A-CND-0051v48",
+      "category": "A-CND",
+      "chars": 478,
+      "toke_token_count": 224,
+      "qwen_token_count": 257,
+      "ratio_qwen_to_toke": 1.147
+    },
+    {
+      "task_id": "D-DAT-0011v3",
+      "category": "D-DAT",
+      "chars": 469,
+      "toke_token_count": 232,
+      "qwen_token_count": 195,
+      "ratio_qwen_to_toke": 0.841
+    },
+    {
+      "task_id": "D-CFG-0013v350",
+      "category": "D-CFG",
+      "chars": 333,
+      "toke_token_count": 172,
+      "qwen_token_count": 119,
+      "ratio_qwen_to_toke": 0.692
+    },
+    {
+      "task_id": "A-ARR-0068v30",
+      "category": "A-ARR",
+      "chars": 414,
+      "toke_token_count": 205,
+      "qwen_token_count": 196,
+      "ratio_qwen_to_toke": 0.956
+    },
+    {
+      "task_id": "A-ARR-0066v24",
+      "category": "A-ARR",
+      "chars": 298,
+      "toke_token_count": 138,
+      "qwen_token_count": 149,
+      "ratio_qwen_to_toke": 1.08
+    },
+    {
+      "task_id": "A-CND-0054v36",
+      "category": "A-CND",
+      "chars": 540,
+      "toke_token_count": 225,
+      "qwen_token_count": 205,
+      "ratio_qwen_to_toke": 0.911
+    },
+    {
+      "task_id": "A-MTH-0060v48",
+      "category": "A-MTH",
+      "chars": 455,
+      "toke_token_count": 203,
+      "qwen_token_count": 194,
+      "ratio_qwen_to_toke": 0.956
+    },
+    {
+      "task_id": "A-MTH-0081v17",
+      "category": "A-MTH",
+      "chars": 152,
+      "toke_token_count": 82,
+      "qwen_token_count": 92,
+      "ratio_qwen_to_toke": 1.122
+    },
+    {
+      "task_id": "D-CRY-0003v261",
+      "category": "D-CRY",
+      "chars": 347,
+      "toke_token_count": 167,
+      "qwen_token_count": 144,
+      "ratio_qwen_to_toke": 0.862
+    },
+    {
+      "task_id": "D-DAT-0018v212",
+      "category": "D-DAT",
+      "chars": 213,
+      "toke_token_count": 95,
+      "qwen_token_count": 93,
+      "ratio_qwen_to_toke": 0.979
+    },
+    {
+      "task_id": "A-ARR-0052v53",
+      "category": "A-ARR",
+      "chars": 406,
+      "toke_token_count": 198,
+      "qwen_token_count": 189,
+      "ratio_qwen_to_toke": 0.955
+    },
+    {
+      "task_id": "D-CRY-0024v283",
+      "category": "D-CRY",
+      "chars": 201,
+      "toke_token_count": 98,
+      "qwen_token_count": 110,
+      "ratio_qwen_to_toke": 1.122
+    },
+    {
+      "task_id": "A-MTH-0024v44",
+      "category": "A-MTH",
+      "chars": 251,
+      "toke_token_count": 119,
+      "qwen_token_count": 119,
+      "ratio_qwen_to_toke": 1.0
+    },
+    {
+      "task_id": "D-NET-0011v296",
+      "category": "D-NET",
+      "chars": 253,
+      "toke_token_count": 102,
+      "qwen_token_count": 103,
+      "ratio_qwen_to_toke": 1.01
+    },
+    {
+      "task_id": "D-FIO-0007v309",
+      "category": "D-FIO",
+      "chars": 288,
+      "toke_token_count": 144,
+      "qwen_token_count": 97,
+      "ratio_qwen_to_toke": 0.674
+    },
+    {
+      "task_id": "D-NET-0007v132",
+      "category": "D-NET",
+      "chars": 302,
+      "toke_token_count": 153,
+      "qwen_token_count": 121,
+      "ratio_qwen_to_toke": 0.791
+    },
+    {
+      "task_id": "MIG-P2-B-D-TST-0022v254-6bee1db8",
+      "category": "D-TST",
+      "chars": 60,
+      "toke_token_count": 31,
+      "qwen_token_count": 33,
+      "ratio_qwen_to_toke": 1.065
+    },
+    {
+      "task_id": "D-CFG-0013v235",
+      "category": "D-CFG",
+      "chars": 363,
+      "toke_token_count": 162,
+      "qwen_token_count": 141,
+      "ratio_qwen_to_toke": 0.87
+    },
+    {
+      "task_id": "A-MTH-0063v67",
+      "category": "A-MTH",
+      "chars": 165,
+      "toke_token_count": 76,
+      "qwen_token_count": 86,
+      "ratio_qwen_to_toke": 1.132
+    },
+    {
+      "task_id": "D-CLI-0004v244",
+      "category": "D-CLI",
+      "chars": 545,
+      "toke_token_count": 280,
+      "qwen_token_count": 211,
+      "ratio_qwen_to_toke": 0.754
+    },
+    {
+      "task_id": "D-DAT-0011v131",
+      "category": "D-DAT",
+      "chars": 219,
+      "toke_token_count": 107,
+      "qwen_token_count": 104,
+      "ratio_qwen_to_toke": 0.972
+    },
+    {
+      "task_id": "A-SRT-0029v34",
+      "category": "A-SRT",
+      "chars": 399,
+      "toke_token_count": 171,
+      "qwen_token_count": 196,
+      "ratio_qwen_to_toke": 1.146
+    },
+    {
+      "task_id": "D-TST-0025v22",
+      "category": "D-TST",
+      "chars": 228,
+      "toke_token_count": 99,
+      "qwen_token_count": 93,
+      "ratio_qwen_to_toke": 0.939
+    },
+    {
+      "task_id": "D-WEB-0025v30",
+      "category": "D-WEB",
+      "chars": 351,
+      "toke_token_count": 150,
+      "qwen_token_count": 142,
+      "ratio_qwen_to_toke": 0.947
+    },
+    {
+      "task_id": "A-ARR-0018v28",
+      "category": "A-ARR",
+      "chars": 197,
+      "toke_token_count": 101,
+      "qwen_token_count": 79,
+      "ratio_qwen_to_toke": 0.782
+    },
+    {
+      "task_id": "D-TST-0008v200",
+      "category": "D-TST",
+      "chars": 192,
+      "toke_token_count": 87,
+      "qwen_token_count": 79,
+      "ratio_qwen_to_toke": 0.908
+    },
+    {
+      "task_id": "D-TST-0024v52",
+      "category": "D-TST",
+      "chars": 234,
+      "toke_token_count": 102,
+      "qwen_token_count": 84,
+      "ratio_qwen_to_toke": 0.824
+    },
+    {
+      "task_id": "A-ERR-0045v41",
+      "category": "A-ERR",
+      "chars": 476,
+      "toke_token_count": 221,
+      "qwen_token_count": 213,
+      "ratio_qwen_to_toke": 0.964
+    },
+    {
+      "task_id": "D-NET-0005v302",
+      "category": "D-NET",
+      "chars": 261,
+      "toke_token_count": 116,
+      "qwen_token_count": 103,
+      "ratio_qwen_to_toke": 0.888
+    },
+    {
+      "task_id": "D-CFG-0013v69",
+      "category": "D-CFG",
+      "chars": 316,
+      "toke_token_count": 150,
+      "qwen_token_count": 134,
+      "ratio_qwen_to_toke": 0.893
+    },
+    {
+      "task_id": "A-STR-0029v68",
+      "category": "A-STR",
+      "chars": 230,
+      "toke_token_count": 103,
+      "qwen_token_count": 91,
+      "ratio_qwen_to_toke": 0.883
+    },
+    {
+      "task_id": "MIG-P2-B-D-NET-0006v301-8935d440",
+      "category": "D-NET",
+      "chars": 390,
+      "toke_token_count": 180,
+      "qwen_token_count": 165,
+      "ratio_qwen_to_toke": 0.917
+    },
+    {
+      "task_id": "A-ERR-0042v25",
+      "category": "A-ERR",
+      "chars": 352,
+      "toke_token_count": 167,
+      "qwen_token_count": 152,
+      "ratio_qwen_to_toke": 0.91
+    },
+    {
+      "task_id": "A-MTH-0056v7",
+      "category": "A-MTH",
+      "chars": 374,
+      "toke_token_count": 162,
+      "qwen_token_count": 166,
+      "ratio_qwen_to_toke": 1.025
+    },
+    {
+      "task_id": "D-TST-0011v183",
+      "category": "D-TST",
+      "chars": 230,
+      "toke_token_count": 102,
+      "qwen_token_count": 108,
+      "ratio_qwen_to_toke": 1.059
+    },
+    {
+      "task_id": "A-STR-0025v54",
+      "category": "A-STR",
+      "chars": 152,
+      "toke_token_count": 69,
+      "qwen_token_count": 61,
+      "ratio_qwen_to_toke": 0.884
+    },
+    {
+      "task_id": "MIG-P2-B-D-WEB-0008v232-da6994f4",
+      "category": "D-WEB",
+      "chars": 236,
+      "toke_token_count": 123,
+      "qwen_token_count": 102,
+      "ratio_qwen_to_toke": 0.829
+    },
+    {
+      "task_id": "A-CND-0054v18",
+      "category": "A-CND",
+      "chars": 278,
+      "toke_token_count": 123,
+      "qwen_token_count": 121,
+      "ratio_qwen_to_toke": 0.984
+    },
+    {
+      "task_id": "A-STR-0091v31",
+      "category": "A-STR",
+      "chars": 663,
+      "toke_token_count": 388,
+      "qwen_token_count": 305,
+      "ratio_qwen_to_toke": 0.786
+    },
+    {
+      "task_id": "A-CND-0059v6",
+      "category": "A-CND",
+      "chars": 442,
+      "toke_token_count": 218,
+      "qwen_token_count": 197,
+      "ratio_qwen_to_toke": 0.904
+    },
+    {
+      "task_id": "A-STR-0065v42",
+      "category": "A-STR",
+      "chars": 329,
+      "toke_token_count": 163,
+      "qwen_token_count": 122,
+      "ratio_qwen_to_toke": 0.748
+    },
+    {
+      "task_id": "D-WEB-0015v230",
+      "category": "D-WEB",
+      "chars": 384,
+      "toke_token_count": 178,
+      "qwen_token_count": 151,
+      "ratio_qwen_to_toke": 0.848
+    },
+    {
+      "task_id": "A-STR-0034v39",
+      "category": "A-STR",
+      "chars": 480,
+      "toke_token_count": 264,
+      "qwen_token_count": 211,
+      "ratio_qwen_to_toke": 0.799
+    },
+    {
+      "task_id": "D-DAT-0019v151",
+      "category": "D-DAT",
+      "chars": 489,
+      "toke_token_count": 260,
+      "qwen_token_count": 203,
+      "ratio_qwen_to_toke": 0.781
+    },
+    {
+      "task_id": "A-SRT-0010v65",
+      "category": "A-SRT",
+      "chars": 491,
+      "toke_token_count": 239,
+      "qwen_token_count": 222,
+      "ratio_qwen_to_toke": 0.929
+    },
+    {
+      "task_id": "D-TST-0024v65",
+      "category": "D-TST",
+      "chars": 247,
+      "toke_token_count": 116,
+      "qwen_token_count": 95,
+      "ratio_qwen_to_toke": 0.819
+    },
+    {
+      "task_id": "A-ARR-0081v64",
+      "category": "A-ARR",
+      "chars": 198,
+      "toke_token_count": 100,
+      "qwen_token_count": 89,
+      "ratio_qwen_to_toke": 0.89
+    },
+    {
+      "task_id": "D-NET-0015v195",
+      "category": "D-NET",
+      "chars": 277,
+      "toke_token_count": 141,
+      "qwen_token_count": 113,
+      "ratio_qwen_to_toke": 0.801
+    },
+    {
+      "task_id": "D-CLI-0008v62",
+      "category": "D-CLI",
+      "chars": 280,
+      "toke_token_count": 145,
+      "qwen_token_count": 108,
+      "ratio_qwen_to_toke": 0.745
+    },
+    {
+      "task_id": "D-CRY-0013v248",
+      "category": "D-CRY",
+      "chars": 266,
+      "toke_token_count": 120,
+      "qwen_token_count": 95,
+      "ratio_qwen_to_toke": 0.792
+    },
+    {
+      "task_id": "A-CND-0095v46",
+      "category": "A-CND",
+      "chars": 268,
+      "toke_token_count": 119,
+      "qwen_token_count": 125,
+      "ratio_qwen_to_toke": 1.05
+    },
+    {
+      "task_id": "MIG-P2-B-D-CFG-0007v352-0f6e22a3",
+      "category": "D-CFG",
+      "chars": 259,
+      "toke_token_count": 134,
+      "qwen_token_count": 109,
+      "ratio_qwen_to_toke": 0.813
+    },
+    {
+      "task_id": "A-STR-0090v15",
+      "category": "A-STR",
+      "chars": 353,
+      "toke_token_count": 162,
+      "qwen_token_count": 148,
+      "ratio_qwen_to_toke": 0.914
+    },
+    {
+      "task_id": "A-CND-0047v71",
+      "category": "A-CND",
+      "chars": 276,
+      "toke_token_count": 151,
+      "qwen_token_count": 149,
+      "ratio_qwen_to_toke": 0.987
+    },
+    {
+      "task_id": "D-CRY-0018v249",
+      "category": "D-CRY",
+      "chars": 260,
+      "toke_token_count": 132,
+      "qwen_token_count": 148,
+      "ratio_qwen_to_toke": 1.121
+    },
+    {
+      "task_id": "A-SRT-0056v19",
+      "category": "A-SRT",
+      "chars": 411,
+      "toke_token_count": 231,
+      "qwen_token_count": 226,
+      "ratio_qwen_to_toke": 0.978
+    },
+    {
+      "task_id": "D-WEB-0008v139",
+      "category": "D-WEB",
+      "chars": 354,
+      "toke_token_count": 199,
+      "qwen_token_count": 151,
+      "ratio_qwen_to_toke": 0.759
+    },
+    {
+      "task_id": "D-FIO-0001v221",
+      "category": "D-FIO",
+      "chars": 212,
+      "toke_token_count": 103,
+      "qwen_token_count": 73,
+      "ratio_qwen_to_toke": 0.709
+    },
+    {
+      "task_id": "D-DAT-0024v224",
+      "category": "D-DAT",
+      "chars": 390,
+      "toke_token_count": 208,
+      "qwen_token_count": 168,
+      "ratio_qwen_to_toke": 0.808
+    },
+    {
+      "task_id": "MIG-P2-A-A-ARR-0046v19-13f13762",
+      "category": "A-ARR",
+      "chars": 349,
+      "toke_token_count": 150,
+      "qwen_token_count": 153,
+      "ratio_qwen_to_toke": 1.02
+    },
+    {
+      "task_id": "D-WEB-0021v180",
+      "category": "D-WEB",
+      "chars": 224,
+      "toke_token_count": 97,
+      "qwen_token_count": 88,
+      "ratio_qwen_to_toke": 0.907
+    },
+    {
+      "task_id": "A-STR-0067v64",
+      "category": "A-STR",
+      "chars": 310,
+      "toke_token_count": 155,
+      "qwen_token_count": 125,
+      "ratio_qwen_to_toke": 0.806
+    },
+    {
+      "task_id": "D-DAT-0005v44",
+      "category": "D-DAT",
+      "chars": 206,
+      "toke_token_count": 92,
+      "qwen_token_count": 104,
+      "ratio_qwen_to_toke": 1.13
+    },
+    {
+      "task_id": "A-ERR-0095v19",
+      "category": "A-ERR",
+      "chars": 364,
+      "toke_token_count": 150,
+      "qwen_token_count": 154,
+      "ratio_qwen_to_toke": 1.027
+    },
+    {
+      "task_id": "D-NET-0007v59",
+      "category": "D-NET",
+      "chars": 316,
+      "toke_token_count": 170,
+      "qwen_token_count": 132,
+      "ratio_qwen_to_toke": 0.776
+    },
+    {
+      "task_id": "A-CND-0040v16",
+      "category": "A-CND",
+      "chars": 156,
+      "toke_token_count": 78,
+      "qwen_token_count": 74,
+      "ratio_qwen_to_toke": 0.949
+    },
+    {
+      "task_id": "A-ARR-0084v62",
+      "category": "A-ARR",
+      "chars": 443,
+      "toke_token_count": 216,
+      "qwen_token_count": 226,
+      "ratio_qwen_to_toke": 1.046
+    },
+    {
+      "task_id": "D-FIO-0012v241",
+      "category": "D-FIO",
+      "chars": 205,
+      "toke_token_count": 97,
+      "qwen_token_count": 88,
+      "ratio_qwen_to_toke": 0.907
+    },
+    {
+      "task_id": "A-MTH-0074",
+      "category": "A-MTH",
+      "chars": 186,
+      "toke_token_count": 94,
+      "qwen_token_count": 101,
+      "ratio_qwen_to_toke": 1.074
+    },
+    {
+      "task_id": "D-TST-0016v201",
+      "category": "D-TST",
+      "chars": 383,
+      "toke_token_count": 230,
+      "qwen_token_count": 172,
+      "ratio_qwen_to_toke": 0.748
+    },
+    {
+      "task_id": "A-SRT-0050v28",
+      "category": "A-SRT",
+      "chars": 193,
+      "toke_token_count": 91,
+      "qwen_token_count": 93,
+      "ratio_qwen_to_toke": 1.022
+    },
+    {
+      "task_id": "A-CND-0049v27",
+      "category": "A-CND",
+      "chars": 183,
+      "toke_token_count": 119,
+      "qwen_token_count": 103,
+      "ratio_qwen_to_toke": 0.866
+    },
+    {
+      "task_id": "D-WEB-0018v145",
+      "category": "D-WEB",
+      "chars": 263,
+      "toke_token_count": 143,
+      "qwen_token_count": 98,
+      "ratio_qwen_to_toke": 0.685
+    },
+    {
+      "task_id": "MIG-P2-B-D-TST-0002v270-db71ba13",
+      "category": "D-TST",
+      "chars": 193,
+      "toke_token_count": 89,
+      "qwen_token_count": 90,
+      "ratio_qwen_to_toke": 1.011
+    },
+    {
+      "task_id": "D-WEB-0024v108",
+      "category": "D-WEB",
+      "chars": 209,
+      "toke_token_count": 90,
+      "qwen_token_count": 84,
+      "ratio_qwen_to_toke": 0.933
+    },
+    {
+      "task_id": "A-CND-0066v15",
+      "category": "A-CND",
+      "chars": 195,
+      "toke_token_count": 96,
+      "qwen_token_count": 106,
+      "ratio_qwen_to_toke": 1.104
+    },
+    {
+      "task_id": "MIG-P2-B-D-FIO-0007v319-7305c7e8",
+      "category": "D-FIO",
+      "chars": 269,
+      "toke_token_count": 106,
+      "qwen_token_count": 115,
+      "ratio_qwen_to_toke": 1.085
+    },
+    {
+      "task_id": "MIG-P2-B-D-FIO-0013v313-5e9cf1fb",
+      "category": "D-FIO",
+      "chars": 262,
+      "toke_token_count": 121,
+      "qwen_token_count": 108,
+      "ratio_qwen_to_toke": 0.893
+    },
+    {
+      "task_id": "D-CLI-0006v285",
+      "category": "D-CLI",
+      "chars": 201,
+      "toke_token_count": 86,
+      "qwen_token_count": 77,
+      "ratio_qwen_to_toke": 0.895
+    },
+    {
+      "task_id": "D-FIO-0003v345",
+      "category": "D-FIO",
+      "chars": 381,
+      "toke_token_count": 186,
+      "qwen_token_count": 144,
+      "ratio_qwen_to_toke": 0.774
+    },
+    {
+      "task_id": "D-WEB-0009v198",
+      "category": "D-WEB",
+      "chars": 207,
+      "toke_token_count": 103,
+      "qwen_token_count": 97,
+      "ratio_qwen_to_toke": 0.942
+    },
+    {
+      "task_id": "A-STR-0073v30",
+      "category": "A-STR",
+      "chars": 286,
+      "toke_token_count": 147,
+      "qwen_token_count": 130,
+      "ratio_qwen_to_toke": 0.884
+    },
+    {
+      "task_id": "A-ERR-0047v86",
+      "category": "A-ERR",
+      "chars": 232,
+      "toke_token_count": 104,
+      "qwen_token_count": 96,
+      "ratio_qwen_to_toke": 0.923
+    },
+    {
+      "task_id": "A-STR-0078v77",
+      "category": "A-STR",
+      "chars": 372,
+      "toke_token_count": 196,
+      "qwen_token_count": 150,
+      "ratio_qwen_to_toke": 0.765
+    },
+    {
+      "task_id": "A-STR-0056v68",
+      "category": "A-STR",
+      "chars": 421,
+      "toke_token_count": 189,
+      "qwen_token_count": 152,
+      "ratio_qwen_to_toke": 0.804
+    },
+    {
+      "task_id": "A-MTH-0047v12",
+      "category": "A-MTH",
+      "chars": 272,
+      "toke_token_count": 134,
+      "qwen_token_count": 137,
+      "ratio_qwen_to_toke": 1.022
+    },
+    {
+      "task_id": "D-FIO-0016v284",
+      "category": "D-FIO",
+      "chars": 241,
+      "toke_token_count": 123,
+      "qwen_token_count": 118,
+      "ratio_qwen_to_toke": 0.959
+    },
+    {
+      "task_id": "A-SRT-0015v56",
+      "category": "A-SRT",
+      "chars": 830,
+      "toke_token_count": 363,
+      "qwen_token_count": 351,
+      "ratio_qwen_to_toke": 0.967
+    },
+    {
+      "task_id": "D-NET-0007v156",
+      "category": "D-NET",
+      "chars": 285,
+      "toke_token_count": 117,
+      "qwen_token_count": 113,
+      "ratio_qwen_to_toke": 0.966
+    },
+    {
+      "task_id": "D-NET-0001v173",
+      "category": "D-NET",
+      "chars": 210,
+      "toke_token_count": 94,
+      "qwen_token_count": 86,
+      "ratio_qwen_to_toke": 0.915
+    },
+    {
+      "task_id": "D-FIO-0007v258",
+      "category": "D-FIO",
+      "chars": 314,
+      "toke_token_count": 150,
+      "qwen_token_count": 108,
+      "ratio_qwen_to_toke": 0.72
+    },
+    {
+      "task_id": "A-CND-0042v25",
+      "category": "A-CND",
+      "chars": 225,
+      "toke_token_count": 107,
+      "qwen_token_count": 108,
+      "ratio_qwen_to_toke": 1.009
+    },
+    {
+      "task_id": "D-DAT-0021v226",
+      "category": "D-DAT",
+      "chars": 341,
+      "toke_token_count": 152,
+      "qwen_token_count": 131,
+      "ratio_qwen_to_toke": 0.862
+    },
+    {
+      "task_id": "D-FIO-0003v250",
+      "category": "D-FIO",
+      "chars": 306,
+      "toke_token_count": 144,
+      "qwen_token_count": 127,
+      "ratio_qwen_to_toke": 0.882
+    },
+    {
+      "task_id": "A-ERR-0059v14",
+      "category": "A-ERR",
+      "chars": 491,
+      "toke_token_count": 240,
+      "qwen_token_count": 247,
+      "ratio_qwen_to_toke": 1.029
+    },
+    {
+      "task_id": "D-CRY-0012v98",
+      "category": "D-CRY",
+      "chars": 206,
+      "toke_token_count": 92,
+      "qwen_token_count": 99,
+      "ratio_qwen_to_toke": 1.076
+    },
+    {
+      "task_id": "D-NET-0015v183",
+      "category": "D-NET",
+      "chars": 249,
+      "toke_token_count": 141,
+      "qwen_token_count": 111,
+      "ratio_qwen_to_toke": 0.787
+    },
+    {
+      "task_id": "MIG-P2-B-D-WEB-0014v206-9dd1dd17",
+      "category": "D-WEB",
+      "chars": 393,
+      "toke_token_count": 190,
+      "qwen_token_count": 185,
+      "ratio_qwen_to_toke": 0.974
+    },
+    {
+      "task_id": "A-ERR-0048v11",
+      "category": "A-ERR",
+      "chars": 515,
+      "toke_token_count": 256,
+      "qwen_token_count": 218,
+      "ratio_qwen_to_toke": 0.852
+    },
+    {
+      "task_id": "D-CLI-0010v127",
+      "category": "D-CLI",
+      "chars": 265,
+      "toke_token_count": 117,
+      "qwen_token_count": 112,
+      "ratio_qwen_to_toke": 0.957
+    },
+    {
+      "task_id": "A-STR-0090v78",
+      "category": "A-STR",
+      "chars": 350,
+      "toke_token_count": 174,
+      "qwen_token_count": 154,
+      "ratio_qwen_to_toke": 0.885
+    },
+    {
+      "task_id": "A-SRT-0018v29",
+      "category": "A-SRT",
+      "chars": 801,
+      "toke_token_count": 367,
+      "qwen_token_count": 375,
+      "ratio_qwen_to_toke": 1.022
+    },
+    {
+      "task_id": "D-FIO-0005v241",
+      "category": "D-FIO",
+      "chars": 338,
+      "toke_token_count": 165,
+      "qwen_token_count": 126,
+      "ratio_qwen_to_toke": 0.764
+    },
+    {
+      "task_id": "D-NET-0003v192",
+      "category": "D-NET",
+      "chars": 382,
+      "toke_token_count": 169,
+      "qwen_token_count": 155,
+      "ratio_qwen_to_toke": 0.917
+    },
+    {
+      "task_id": "D-CRY-0022v105",
+      "category": "D-CRY",
+      "chars": 187,
+      "toke_token_count": 107,
+      "qwen_token_count": 92,
+      "ratio_qwen_to_toke": 0.86
+    },
+    {
+      "task_id": "A-MTH-0061v1",
+      "category": "A-MTH",
+      "chars": 387,
+      "toke_token_count": 208,
+      "qwen_token_count": 203,
+      "ratio_qwen_to_toke": 0.976
+    },
+    {
+      "task_id": "D-NET-0001v292",
+      "category": "D-NET",
+      "chars": 198,
+      "toke_token_count": 109,
+      "qwen_token_count": 69,
+      "ratio_qwen_to_toke": 0.633
+    },
+    {
+      "task_id": "A-STR-0008v39",
+      "category": "A-STR",
+      "chars": 258,
+      "toke_token_count": 134,
+      "qwen_token_count": 114,
+      "ratio_qwen_to_toke": 0.851
+    },
+    {
+      "task_id": "D-WEB-0013v97",
+      "category": "D-WEB",
+      "chars": 283,
+      "toke_token_count": 156,
+      "qwen_token_count": 139,
+      "ratio_qwen_to_toke": 0.891
+    },
+    {
+      "task_id": "D-TST-0014v249",
+      "category": "D-TST",
+      "chars": 411,
+      "toke_token_count": 208,
+      "qwen_token_count": 171,
+      "ratio_qwen_to_toke": 0.822
+    },
+    {
+      "task_id": "D-TST-0017v108",
+      "category": "D-TST",
+      "chars": 204,
+      "toke_token_count": 95,
+      "qwen_token_count": 89,
+      "ratio_qwen_to_toke": 0.937
+    },
+    {
+      "task_id": "A-ARR-0105v67",
+      "category": "A-ARR",
+      "chars": 171,
+      "toke_token_count": 81,
+      "qwen_token_count": 74,
+      "ratio_qwen_to_toke": 0.914
+    },
+    {
+      "task_id": "A-MTH-0074v42",
+      "category": "A-MTH",
+      "chars": 348,
+      "toke_token_count": 154,
+      "qwen_token_count": 156,
+      "ratio_qwen_to_toke": 1.013
+    },
+    {
+      "task_id": "D-WEB-0006v128",
+      "category": "D-WEB",
+      "chars": 205,
+      "toke_token_count": 105,
+      "qwen_token_count": 88,
+      "ratio_qwen_to_toke": 0.838
+    },
+    {
+      "task_id": "MIG-P2-B-D-TST-0015v268-801bc724",
+      "category": "D-TST",
+      "chars": 234,
+      "toke_token_count": 98,
+      "qwen_token_count": 106,
+      "ratio_qwen_to_toke": 1.082
+    },
+    {
+      "task_id": "D-TST-0024v48",
+      "category": "D-TST",
+      "chars": 207,
+      "toke_token_count": 121,
+      "qwen_token_count": 81,
+      "ratio_qwen_to_toke": 0.669
+    },
+    {
+      "task_id": "A-SRT-0096v32",
+      "category": "A-SRT",
+      "chars": 496,
+      "toke_token_count": 252,
+      "qwen_token_count": 238,
+      "ratio_qwen_to_toke": 0.944
+    },
+    {
+      "task_id": "D-CFG-0007v56",
+      "category": "D-CFG",
+      "chars": 359,
+      "toke_token_count": 191,
+      "qwen_token_count": 140,
+      "ratio_qwen_to_toke": 0.733
+    },
+    {
+      "task_id": "A-SRT-0017v25",
+      "category": "A-SRT",
+      "chars": 421,
+      "toke_token_count": 177,
+      "qwen_token_count": 183,
+      "ratio_qwen_to_toke": 1.034
+    },
+    {
+      "task_id": "A-CND-0020v70",
+      "category": "A-CND",
+      "chars": 242,
+      "toke_token_count": 111,
+      "qwen_token_count": 121,
+      "ratio_qwen_to_toke": 1.09
+    },
+    {
+      "task_id": "A-MTH-0048v65",
+      "category": "A-MTH",
+      "chars": 256,
+      "toke_token_count": 155,
+      "qwen_token_count": 141,
+      "ratio_qwen_to_toke": 0.91
+    },
+    {
+      "task_id": "D-DAT-0002v68",
+      "category": "D-DAT",
+      "chars": 259,
+      "toke_token_count": 120,
+      "qwen_token_count": 97,
+      "ratio_qwen_to_toke": 0.808
+    },
+    {
+      "task_id": "MIG-B-D-CRY-0009v250-d8b6ddd9",
+      "category": "D-CRY",
+      "chars": 122,
+      "toke_token_count": 42,
+      "qwen_token_count": 63,
+      "ratio_qwen_to_toke": 1.5
+    },
+    {
+      "task_id": "D-NET-0012v211",
+      "category": "D-NET",
+      "chars": 274,
+      "toke_token_count": 142,
+      "qwen_token_count": 110,
+      "ratio_qwen_to_toke": 0.775
+    },
+    {
+      "task_id": "A-SRT-0094v14",
+      "category": "A-SRT",
+      "chars": 445,
+      "toke_token_count": 209,
+      "qwen_token_count": 194,
+      "ratio_qwen_to_toke": 0.928
+    },
+    {
+      "task_id": "A-MTH-0054v59",
+      "category": "A-MTH",
+      "chars": 291,
+      "toke_token_count": 133,
+      "qwen_token_count": 129,
+      "ratio_qwen_to_toke": 0.97
+    },
+    {
+      "task_id": "D-FIO-0009v265",
+      "category": "D-FIO",
+      "chars": 195,
+      "toke_token_count": 97,
+      "qwen_token_count": 70,
+      "ratio_qwen_to_toke": 0.722
+    },
+    {
+      "task_id": "D-CRY-0001v103",
+      "category": "D-CRY",
+      "chars": 273,
+      "toke_token_count": 119,
+      "qwen_token_count": 115,
+      "ratio_qwen_to_toke": 0.966
+    },
+    {
+      "task_id": "D-CFG-0005v139",
+      "category": "D-CFG",
+      "chars": 258,
+      "toke_token_count": 110,
+      "qwen_token_count": 94,
+      "ratio_qwen_to_toke": 0.855
+    },
+    {
+      "task_id": "MIG-P2-A-A-ARR-0043v12-154fffbd",
+      "category": "A-ARR",
+      "chars": 191,
+      "toke_token_count": 70,
+      "qwen_token_count": 76,
+      "ratio_qwen_to_toke": 1.086
+    },
+    {
+      "task_id": "D-FIO-0005v346",
+      "category": "D-FIO",
+      "chars": 303,
+      "toke_token_count": 143,
+      "qwen_token_count": 109,
+      "ratio_qwen_to_toke": 0.762
+    },
+    {
+      "task_id": "D-CLI-0008v246",
+      "category": "D-CLI",
+      "chars": 260,
+      "toke_token_count": 134,
+      "qwen_token_count": 98,
+      "ratio_qwen_to_toke": 0.731
+    },
+    {
+      "task_id": "A-ERR-0025v29",
+      "category": "A-ERR",
+      "chars": 644,
+      "toke_token_count": 326,
+      "qwen_token_count": 273,
+      "ratio_qwen_to_toke": 0.837
+    },
+    {
+      "task_id": "A-SRT-0011v24",
+      "category": "A-SRT",
+      "chars": 716,
+      "toke_token_count": 318,
+      "qwen_token_count": 322,
+      "ratio_qwen_to_toke": 1.013
+    },
+    {
+      "task_id": "MIG-P2-B-D-WEB-0010v251-0751b4cc",
+      "category": "D-WEB",
+      "chars": 140,
+      "toke_token_count": 63,
+      "qwen_token_count": 48,
+      "ratio_qwen_to_toke": 0.762
+    },
+    {
+      "task_id": "A-MTH-0104v9",
+      "category": "A-MTH",
+      "chars": 169,
+      "toke_token_count": 83,
+      "qwen_token_count": 86,
+      "ratio_qwen_to_toke": 1.036
+    },
+    {
+      "task_id": "D-NET-0020v218",
+      "category": "D-NET",
+      "chars": 454,
+      "toke_token_count": 219,
+      "qwen_token_count": 161,
+      "ratio_qwen_to_toke": 0.735
+    },
+    {
+      "task_id": "MIG-P2-B-D-NET-0020v316-7d750f1c",
+      "category": "D-NET",
+      "chars": 235,
+      "toke_token_count": 110,
+      "qwen_token_count": 93,
+      "ratio_qwen_to_toke": 0.845
+    },
+    {
+      "task_id": "D-CRY-0014v117",
+      "category": "D-CRY",
+      "chars": 251,
+      "toke_token_count": 125,
+      "qwen_token_count": 91,
+      "ratio_qwen_to_toke": 0.728
+    },
+    {
+      "task_id": "A-SRT-0009v68",
+      "category": "A-SRT",
+      "chars": 551,
+      "toke_token_count": 266,
+      "qwen_token_count": 239,
+      "ratio_qwen_to_toke": 0.898
+    },
+    {
+      "task_id": "D-NET-0020v92",
+      "category": "D-NET",
+      "chars": 405,
+      "toke_token_count": 177,
+      "qwen_token_count": 161,
+      "ratio_qwen_to_toke": 0.91
+    },
+    {
+      "task_id": "D-DAT-0009v175",
+      "category": "D-DAT",
+      "chars": 302,
+      "toke_token_count": 141,
+      "qwen_token_count": 110,
+      "ratio_qwen_to_toke": 0.78
+    },
+    {
+      "task_id": "D-CFG-0015v275",
+      "category": "D-CFG",
+      "chars": 286,
+      "toke_token_count": 141,
+      "qwen_token_count": 110,
+      "ratio_qwen_to_toke": 0.78
+    },
+    {
+      "task_id": "MIG-P2-A-A-MTH-0042v42-b246a5bd",
+      "category": "A-MTH",
+      "chars": 129,
+      "toke_token_count": 43,
+      "qwen_token_count": 56,
+      "ratio_qwen_to_toke": 1.302
+    },
+    {
+      "task_id": "D-DAT-0008v258",
+      "category": "D-DAT",
+      "chars": 308,
+      "toke_token_count": 137,
+      "qwen_token_count": 138,
+      "ratio_qwen_to_toke": 1.007
+    },
+    {
+      "task_id": "D-CFG-0007v17",
+      "category": "D-CFG",
+      "chars": 331,
+      "toke_token_count": 154,
+      "qwen_token_count": 137,
+      "ratio_qwen_to_toke": 0.89
+    },
+    {
+      "task_id": "A-STR-0069v24",
+      "category": "A-STR",
+      "chars": 350,
+      "toke_token_count": 172,
+      "qwen_token_count": 141,
+      "ratio_qwen_to_toke": 0.82
+    },
+    {
+      "task_id": "MIG-P2-A-A-STR-0089v30-08ec95b3",
+      "category": "A-STR",
+      "chars": 222,
+      "toke_token_count": 92,
+      "qwen_token_count": 92,
+      "ratio_qwen_to_toke": 1.0
+    },
+    {
+      "task_id": "A-ERR-0020v67",
+      "category": "A-ERR",
+      "chars": 228,
+      "toke_token_count": 106,
+      "qwen_token_count": 106,
+      "ratio_qwen_to_toke": 1.0
+    },
+    {
+      "task_id": "D-CRY-0004v61",
+      "category": "D-CRY",
+      "chars": 381,
+      "toke_token_count": 202,
+      "qwen_token_count": 180,
+      "ratio_qwen_to_toke": 0.891
+    },
+    {
+      "task_id": "D-CLI-0023v171",
+      "category": "D-CLI",
+      "chars": 209,
+      "toke_token_count": 103,
+      "qwen_token_count": 67,
+      "ratio_qwen_to_toke": 0.65
+    },
+    {
+      "task_id": "A-CND-0053v60",
+      "category": "A-CND",
+      "chars": 207,
+      "toke_token_count": 90,
+      "qwen_token_count": 104,
+      "ratio_qwen_to_toke": 1.156
+    },
+    {
+      "task_id": "D-TST-0005v3",
+      "category": "D-TST",
+      "chars": 263,
+      "toke_token_count": 123,
+      "qwen_token_count": 113,
+      "ratio_qwen_to_toke": 0.919
+    },
+    {
+      "task_id": "A-ARR-0086v57",
+      "category": "A-ARR",
+      "chars": 417,
+      "toke_token_count": 199,
+      "qwen_token_count": 175,
+      "ratio_qwen_to_toke": 0.879
+    },
+    {
+      "task_id": "D-WEB-0021v125",
+      "category": "D-WEB",
+      "chars": 159,
+      "toke_token_count": 75,
+      "qwen_token_count": 68,
+      "ratio_qwen_to_toke": 0.907
+    },
+    {
+      "task_id": "A-CND-0075v32",
+      "category": "A-CND",
+      "chars": 155,
+      "toke_token_count": 86,
+      "qwen_token_count": 84,
+      "ratio_qwen_to_toke": 0.977
+    },
+    {
+      "task_id": "A-ERR-0041v28",
+      "category": "A-ERR",
+      "chars": 225,
+      "toke_token_count": 101,
+      "qwen_token_count": 85,
+      "ratio_qwen_to_toke": 0.842
+    },
+    {
+      "task_id": "D-FIO-0001v149",
+      "category": "D-FIO",
+      "chars": 211,
+      "toke_token_count": 114,
+      "qwen_token_count": 81,
+      "ratio_qwen_to_toke": 0.711
+    },
+    {
+      "task_id": "A-ERR-0045v58",
+      "category": "A-ERR",
+      "chars": 267,
+      "toke_token_count": 105,
+      "qwen_token_count": 102,
+      "ratio_qwen_to_toke": 0.971
+    },
+    {
+      "task_id": "D-TST-0021v260",
+      "category": "D-TST",
+      "chars": 251,
+      "toke_token_count": 105,
+      "qwen_token_count": 105,
+      "ratio_qwen_to_toke": 1.0
+    },
+    {
+      "task_id": "D-FIO-0018v151",
+      "category": "D-FIO",
+      "chars": 389,
+      "toke_token_count": 194,
+      "qwen_token_count": 144,
+      "ratio_qwen_to_toke": 0.742
+    },
+    {
+      "task_id": "MIG-P2-B-D-TST-0019v245-0707d0f2",
+      "category": "D-TST",
+      "chars": 134,
+      "toke_token_count": 58,
+      "qwen_token_count": 58,
+      "ratio_qwen_to_toke": 1.0
+    },
+    {
+      "task_id": "D-DAT-0014v261",
+      "category": "D-DAT",
+      "chars": 246,
+      "toke_token_count": 123,
+      "qwen_token_count": 112,
+      "ratio_qwen_to_toke": 0.911
+    },
+    {
+      "task_id": "A-CND-0012v42",
+      "category": "A-CND",
+      "chars": 156,
+      "toke_token_count": 80,
+      "qwen_token_count": 74,
+      "ratio_qwen_to_toke": 0.925
+    },
+    {
+      "task_id": "D-CFG-0001v224",
+      "category": "D-CFG",
+      "chars": 203,
+      "toke_token_count": 92,
+      "qwen_token_count": 70,
+      "ratio_qwen_to_toke": 0.761
+    },
+    {
+      "task_id": "A-STR-0093v39",
+      "category": "A-STR",
+      "chars": 758,
+      "toke_token_count": 373,
+      "qwen_token_count": 325,
+      "ratio_qwen_to_toke": 0.871
+    },
+    {
+      "task_id": "D-DAT-0014v245",
+      "category": "D-DAT",
+      "chars": 461,
+      "toke_token_count": 249,
+      "qwen_token_count": 190,
+      "ratio_qwen_to_toke": 0.763
+    },
+    {
+      "task_id": "D-CLI-0013v68",
+      "category": "D-CLI",
+      "chars": 397,
+      "toke_token_count": 195,
+      "qwen_token_count": 160,
+      "ratio_qwen_to_toke": 0.821
+    },
+    {
+      "task_id": "D-CRY-0011v52",
+      "category": "D-CRY",
+      "chars": 338,
+      "toke_token_count": 148,
+      "qwen_token_count": 114,
+      "ratio_qwen_to_toke": 0.77
+    },
+    {
+      "task_id": "A-MTH-0110v35",
+      "category": "A-MTH",
+      "chars": 422,
+      "toke_token_count": 208,
+      "qwen_token_count": 211,
+      "ratio_qwen_to_toke": 1.014
+    },
+    {
+      "task_id": "D-CRY-0019v121",
+      "category": "D-CRY",
+      "chars": 220,
+      "toke_token_count": 120,
+      "qwen_token_count": 133,
+      "ratio_qwen_to_toke": 1.108
+    },
+    {
+      "task_id": "D-WEB-0021v123",
+      "category": "D-WEB",
+      "chars": 222,
+      "toke_token_count": 107,
+      "qwen_token_count": 71,
+      "ratio_qwen_to_toke": 0.664
+    },
+    {
+      "task_id": "A-ARR-0028v31",
+      "category": "A-ARR",
+      "chars": 271,
+      "toke_token_count": 123,
+      "qwen_token_count": 129,
+      "ratio_qwen_to_toke": 1.049
+    },
+    {
+      "task_id": "MIG-P2-A-A-CND-0034v59-07537151",
+      "category": "A-CND",
+      "chars": 71,
+      "toke_token_count": 29,
+      "qwen_token_count": 28,
+      "ratio_qwen_to_toke": 0.966
+    },
+    {
+      "task_id": "D-NET-0013v10",
+      "category": "D-NET",
+      "chars": 327,
+      "toke_token_count": 168,
+      "qwen_token_count": 113,
+      "ratio_qwen_to_toke": 0.673
+    },
+    {
+      "task_id": "A-CND-0083v74",
+      "category": "A-CND",
+      "chars": 244,
+      "toke_token_count": 108,
+      "qwen_token_count": 101,
+      "ratio_qwen_to_toke": 0.935
+    },
+    {
+      "task_id": "D-FIO-0018v6",
+      "category": "D-FIO",
+      "chars": 308,
+      "toke_token_count": 149,
+      "qwen_token_count": 131,
+      "ratio_qwen_to_toke": 0.879
+    },
+    {
+      "task_id": "D-CRY-0013v265",
+      "category": "D-CRY",
+      "chars": 195,
+      "toke_token_count": 91,
+      "qwen_token_count": 97,
+      "ratio_qwen_to_toke": 1.066
+    },
+    {
+      "task_id": "D-TST-0003v133",
+      "category": "D-TST",
+      "chars": 197,
+      "toke_token_count": 109,
+      "qwen_token_count": 89,
+      "ratio_qwen_to_toke": 0.817
+    },
+    {
+      "task_id": "MIG-P2-B-D-CFG-0017v354-af88686b",
+      "category": "D-CFG",
+      "chars": 149,
+      "toke_token_count": 67,
+      "qwen_token_count": 71,
+      "ratio_qwen_to_toke": 1.06
+    },
+    {
+      "task_id": "D-TST-0014v50",
+      "category": "D-TST",
+      "chars": 242,
+      "toke_token_count": 114,
+      "qwen_token_count": 117,
+      "ratio_qwen_to_toke": 1.026
+    },
+    {
+      "task_id": "D-FIO-0005v257",
+      "category": "D-FIO",
+      "chars": 315,
+      "toke_token_count": 162,
+      "qwen_token_count": 132,
+      "ratio_qwen_to_toke": 0.815
+    },
+    {
+      "task_id": "MIG-P2-B-D-FIO-0013v374-e5b44242",
+      "category": "D-FIO",
+      "chars": 160,
+      "toke_token_count": 71,
+      "qwen_token_count": 62,
+      "ratio_qwen_to_toke": 0.873
+    },
+    {
+      "task_id": "MIG-P2-B-D-WEB-0024v212-8082c866",
+      "category": "D-WEB",
+      "chars": 233,
+      "toke_token_count": 107,
+      "qwen_token_count": 102,
+      "ratio_qwen_to_toke": 0.953
+    },
+    {
+      "task_id": "A-SRT-0056v53",
+      "category": "A-SRT",
+      "chars": 516,
+      "toke_token_count": 222,
+      "qwen_token_count": 241,
+      "ratio_qwen_to_toke": 1.086
+    },
+    {
+      "task_id": "D-CFG-0017v47",
+      "category": "D-CFG",
+      "chars": 219,
+      "toke_token_count": 111,
+      "qwen_token_count": 69,
+      "ratio_qwen_to_toke": 0.622
+    },
+    {
+      "task_id": "A-ERR-0044v5",
+      "category": "A-ERR",
+      "chars": 644,
+      "toke_token_count": 299,
+      "qwen_token_count": 276,
+      "ratio_qwen_to_toke": 0.923
+    },
+    {
+      "task_id": "D-CLI-0006v62",
+      "category": "D-CLI",
+      "chars": 320,
+      "toke_token_count": 143,
+      "qwen_token_count": 133,
+      "ratio_qwen_to_toke": 0.93
+    },
+    {
+      "task_id": "A-ARR-0009v4",
+      "category": "A-ARR",
+      "chars": 196,
+      "toke_token_count": 100,
+      "qwen_token_count": 94,
+      "ratio_qwen_to_toke": 0.94
+    },
+    {
+      "task_id": "D-NET-0013v147",
+      "category": "D-NET",
+      "chars": 272,
+      "toke_token_count": 133,
+      "qwen_token_count": 107,
+      "ratio_qwen_to_toke": 0.805
+    },
+    {
+      "task_id": "MIG-B-D-CLI-0013v279-c2e9fb64",
+      "category": "D-CLI",
+      "chars": 271,
+      "toke_token_count": 132,
+      "qwen_token_count": 132,
+      "ratio_qwen_to_toke": 1.0
+    },
+    {
+      "task_id": "D-NET-0012v297",
+      "category": "D-NET",
+      "chars": 257,
+      "toke_token_count": 137,
+      "qwen_token_count": 107,
+      "ratio_qwen_to_toke": 0.781
+    },
+    {
+      "task_id": "A-SRT-0010v17",
+      "category": "A-SRT",
+      "chars": 640,
+      "toke_token_count": 287,
+      "qwen_token_count": 290,
+      "ratio_qwen_to_toke": 1.01
+    },
+    {
+      "task_id": "D-CRY-0001v184",
+      "category": "D-CRY",
+      "chars": 491,
+      "toke_token_count": 263,
+      "qwen_token_count": 258,
+      "ratio_qwen_to_toke": 0.981
+    },
+    {
+      "task_id": "D-TST-0009v147",
+      "category": "D-TST",
+      "chars": 268,
+      "toke_token_count": 133,
+      "qwen_token_count": 110,
+      "ratio_qwen_to_toke": 0.827
+    },
+    {
+      "task_id": "A-ERR-0074v23",
+      "category": "A-ERR",
+      "chars": 434,
+      "toke_token_count": 197,
+      "qwen_token_count": 188,
+      "ratio_qwen_to_toke": 0.954
+    },
+    {
+      "task_id": "D-CRY-0004v128",
+      "category": "D-CRY",
+      "chars": 197,
+      "toke_token_count": 102,
+      "qwen_token_count": 68,
+      "ratio_qwen_to_toke": 0.667
+    },
+    {
+      "task_id": "A-CND-0072v17",
+      "category": "A-CND",
+      "chars": 233,
+      "toke_token_count": 97,
+      "qwen_token_count": 116,
+      "ratio_qwen_to_toke": 1.196
+    },
+    {
+      "task_id": "D-WEB-0026v187",
+      "category": "D-WEB",
+      "chars": 340,
+      "toke_token_count": 157,
+      "qwen_token_count": 119,
+      "ratio_qwen_to_toke": 0.758
+    },
+    {
+      "task_id": "D-DAT-0026v236",
+      "category": "D-DAT",
+      "chars": 510,
+      "toke_token_count": 263,
+      "qwen_token_count": 196,
+      "ratio_qwen_to_toke": 0.745
+    },
+    {
+      "task_id": "A-SRT-0063v61",
+      "category": "A-SRT",
+      "chars": 419,
+      "toke_token_count": 175,
+      "qwen_token_count": 186,
+      "ratio_qwen_to_toke": 1.063
+    },
+    {
+      "task_id": "D-WEB-0013v63",
+      "category": "D-WEB",
+      "chars": 319,
+      "toke_token_count": 157,
+      "qwen_token_count": 130,
+      "ratio_qwen_to_toke": 0.828
+    },
+    {
+      "task_id": "D-FIO-0004v67",
+      "category": "D-FIO",
+      "chars": 388,
+      "toke_token_count": 197,
+      "qwen_token_count": 151,
+      "ratio_qwen_to_toke": 0.766
+    },
+    {
+      "task_id": "D-WEB-0027v182",
+      "category": "D-WEB",
+      "chars": 221,
+      "toke_token_count": 107,
+      "qwen_token_count": 94,
+      "ratio_qwen_to_toke": 0.879
+    },
+    {
+      "task_id": "MIG-P2-B-D-CFG-0015v326-4bbca610",
+      "category": "D-CFG",
+      "chars": 136,
+      "toke_token_count": 56,
+      "qwen_token_count": 51,
+      "ratio_qwen_to_toke": 0.911
+    },
+    {
+      "task_id": "MIG-P2-B-D-NET-0018v322-ae4d934a",
+      "category": "D-NET",
+      "chars": 279,
+      "toke_token_count": 132,
+      "qwen_token_count": 113,
+      "ratio_qwen_to_toke": 0.856
+    },
+    {
+      "task_id": "MIG-P2-A-A-CND-0051v1-5c505ede",
+      "category": "A-CND",
+      "chars": 156,
+      "toke_token_count": 63,
+      "qwen_token_count": 96,
+      "ratio_qwen_to_toke": 1.524
+    },
+    {
+      "task_id": "A-STR-0084v2",
+      "category": "A-STR",
+      "chars": 448,
+      "toke_token_count": 191,
+      "qwen_token_count": 176,
+      "ratio_qwen_to_toke": 0.921
+    },
+    {
+      "task_id": "D-TST-0010v155",
+      "category": "D-TST",
+      "chars": 300,
+      "toke_token_count": 145,
+      "qwen_token_count": 117,
+      "ratio_qwen_to_toke": 0.807
+    },
+    {
+      "task_id": "A-ERR-0046v51",
+      "category": "A-ERR",
+      "chars": 381,
+      "toke_token_count": 173,
+      "qwen_token_count": 135,
+      "ratio_qwen_to_toke": 0.78
+    },
+    {
+      "task_id": "D-CRY-0014v146",
+      "category": "D-CRY",
+      "chars": 279,
+      "toke_token_count": 132,
+      "qwen_token_count": 142,
+      "ratio_qwen_to_toke": 1.076
+    },
+    {
+      "task_id": "D-TST-0017v53",
+      "category": "D-TST",
+      "chars": 212,
+      "toke_token_count": 124,
+      "qwen_token_count": 80,
+      "ratio_qwen_to_toke": 0.645
+    },
+    {
+      "task_id": "D-CRY-0012v20",
+      "category": "D-CRY",
+      "chars": 329,
+      "toke_token_count": 146,
+      "qwen_token_count": 126,
+      "ratio_qwen_to_toke": 0.863
+    },
+    {
+      "task_id": "A-ARR-0003v63",
+      "category": "A-ARR",
+      "chars": 165,
+      "toke_token_count": 73,
+      "qwen_token_count": 75,
+      "ratio_qwen_to_toke": 1.027
+    },
+    {
+      "task_id": "D-DAT-0016v201",
+      "category": "D-DAT",
+      "chars": 217,
+      "toke_token_count": 116,
+      "qwen_token_count": 85,
+      "ratio_qwen_to_toke": 0.733
+    },
+    {
+      "task_id": "A-STR-0008v36",
+      "category": "A-STR",
+      "chars": 148,
+      "toke_token_count": 59,
+      "qwen_token_count": 57,
+      "ratio_qwen_to_toke": 0.966
+    },
+    {
+      "task_id": "D-CLI-0021v77",
+      "category": "D-CLI",
+      "chars": 188,
+      "toke_token_count": 108,
+      "qwen_token_count": 73,
+      "ratio_qwen_to_toke": 0.676
+    },
+    {
+      "task_id": "A-ARR-0042v45",
+      "category": "A-ARR",
+      "chars": 363,
+      "toke_token_count": 156,
+      "qwen_token_count": 154,
+      "ratio_qwen_to_toke": 0.987
+    },
+    {
+      "task_id": "A-CND-0078v56",
+      "category": "A-CND",
+      "chars": 149,
+      "toke_token_count": 72,
+      "qwen_token_count": 73,
+      "ratio_qwen_to_toke": 1.014
+    },
+    {
+      "task_id": "A-STR-0070v15",
+      "category": "A-STR",
+      "chars": 552,
+      "toke_token_count": 272,
+      "qwen_token_count": 232,
+      "ratio_qwen_to_toke": 0.853
+    },
+    {
+      "task_id": "D-WEB-0008v75",
+      "category": "D-WEB",
+      "chars": 212,
+      "toke_token_count": 105,
+      "qwen_token_count": 90,
+      "ratio_qwen_to_toke": 0.857
+    },
+    {
+      "task_id": "MIG-P2-B-D-DAT-0016v231-9c55c629",
+      "category": "D-DAT",
+      "chars": 228,
+      "toke_token_count": 90,
+      "qwen_token_count": 82,
+      "ratio_qwen_to_toke": 0.911
+    },
+    {
+      "task_id": "A-SRT-0079v4",
+      "category": "A-SRT",
+      "chars": 836,
+      "toke_token_count": 414,
+      "qwen_token_count": 376,
+      "ratio_qwen_to_toke": 0.908
+    },
+    {
+      "task_id": "A-MTH-0095v9",
+      "category": "A-MTH",
+      "chars": 321,
+      "toke_token_count": 158,
+      "qwen_token_count": 151,
+      "ratio_qwen_to_toke": 0.956
+    },
+    {
+      "task_id": "A-ARR-0112v52",
+      "category": "A-ARR",
+      "chars": 442,
+      "toke_token_count": 216,
+      "qwen_token_count": 210,
+      "ratio_qwen_to_toke": 0.972
+    },
+    {
+      "task_id": "A-MTH-0097v9",
+      "category": "A-MTH",
+      "chars": 464,
+      "toke_token_count": 231,
+      "qwen_token_count": 217,
+      "ratio_qwen_to_toke": 0.939
+    },
+    {
+      "task_id": "MIG-P2-A-A-SRT-0066v19-eb81fcb7",
+      "category": "A-SRT",
+      "chars": 365,
+      "toke_token_count": 139,
+      "qwen_token_count": 160,
+      "ratio_qwen_to_toke": 1.151
+    },
+    {
+      "task_id": "MIG-P2-B-D-CRY-0024v231-ef799997",
+      "category": "D-CRY",
+      "chars": 195,
+      "toke_token_count": 77,
+      "qwen_token_count": 80,
+      "ratio_qwen_to_toke": 1.039
+    },
+    {
+      "task_id": "A-CND-0051v35",
+      "category": "A-CND",
+      "chars": 466,
+      "toke_token_count": 214,
+      "qwen_token_count": 250,
+      "ratio_qwen_to_toke": 1.168
+    },
+    {
+      "task_id": "D-NET-0015v330",
+      "category": "D-NET",
+      "chars": 232,
+      "toke_token_count": 123,
+      "qwen_token_count": 106,
+      "ratio_qwen_to_toke": 0.862
+    },
+    {
+      "task_id": "D-CLI-0021v182",
+      "category": "D-CLI",
+      "chars": 174,
+      "toke_token_count": 83,
+      "qwen_token_count": 77,
+      "ratio_qwen_to_toke": 0.928
+    },
+    {
+      "task_id": "D-WEB-0003v128",
+      "category": "D-WEB",
+      "chars": 322,
+      "toke_token_count": 159,
+      "qwen_token_count": 118,
+      "ratio_qwen_to_toke": 0.742
+    },
+    {
+      "task_id": "A-CND-0038v23",
+      "category": "A-CND",
+      "chars": 291,
+      "toke_token_count": 133,
+      "qwen_token_count": 147,
+      "ratio_qwen_to_toke": 1.105
+    },
+    {
+      "task_id": "D-TST-0008v265",
+      "category": "D-TST",
+      "chars": 294,
+      "toke_token_count": 131,
+      "qwen_token_count": 107,
+      "ratio_qwen_to_toke": 0.817
+    },
+    {
+      "task_id": "D-CRY-0012v269",
+      "category": "D-CRY",
+      "chars": 182,
+      "toke_token_count": 82,
+      "qwen_token_count": 89,
+      "ratio_qwen_to_toke": 1.085
+    },
+    {
+      "task_id": "D-TST-0012v32",
+      "category": "D-TST",
+      "chars": 232,
+      "toke_token_count": 117,
+      "qwen_token_count": 113,
+      "ratio_qwen_to_toke": 0.966
+    },
+    {
+      "task_id": "A-CND-0096v63",
+      "category": "A-CND",
+      "chars": 160,
+      "toke_token_count": 61,
+      "qwen_token_count": 100,
+      "ratio_qwen_to_toke": 1.639
+    },
+    {
+      "task_id": "A-ERR-0003v19",
+      "category": "A-ERR",
+      "chars": 332,
+      "toke_token_count": 159,
+      "qwen_token_count": 160,
+      "ratio_qwen_to_toke": 1.006
+    },
+    {
+      "task_id": "D-FIO-0010v94",
+      "category": "D-FIO",
+      "chars": 253,
+      "toke_token_count": 116,
+      "qwen_token_count": 102,
+      "ratio_qwen_to_toke": 0.879
+    },
+    {
+      "task_id": "D-CLI-0017v172",
+      "category": "D-CLI",
+      "chars": 171,
+      "toke_token_count": 84,
+      "qwen_token_count": 66,
+      "ratio_qwen_to_toke": 0.786
+    },
+    {
+      "task_id": "D-CRY-0017v135",
+      "category": "D-CRY",
+      "chars": 204,
+      "toke_token_count": 99,
+      "qwen_token_count": 91,
+      "ratio_qwen_to_toke": 0.919
+    },
+    {
+      "task_id": "A-ERR-0050v3",
+      "category": "A-ERR",
+      "chars": 192,
+      "toke_token_count": 86,
+      "qwen_token_count": 78,
+      "ratio_qwen_to_toke": 0.907
+    },
+    {
+      "task_id": "MIG-P2-A-A-SRT-0003v19-3b9be894",
+      "category": "A-SRT",
+      "chars": 321,
+      "toke_token_count": 117,
+      "qwen_token_count": 121,
+      "ratio_qwen_to_toke": 1.034
+    },
+    {
+      "task_id": "D-CRY-0011v155",
+      "category": "D-CRY",
+      "chars": 235,
+      "toke_token_count": 97,
+      "qwen_token_count": 102,
+      "ratio_qwen_to_toke": 1.052
+    },
+    {
+      "task_id": "D-DAT-0020v91",
+      "category": "D-DAT",
+      "chars": 388,
+      "toke_token_count": 208,
+      "qwen_token_count": 169,
+      "ratio_qwen_to_toke": 0.812
+    },
+    {
+      "task_id": "D-CFG-0014v127",
+      "category": "D-CFG",
+      "chars": 448,
+      "toke_token_count": 209,
+      "qwen_token_count": 166,
+      "ratio_qwen_to_toke": 0.794
+    },
+    {
+      "task_id": "A-MTH-0050v55",
+      "category": "A-MTH",
+      "chars": 176,
+      "toke_token_count": 77,
+      "qwen_token_count": 77,
+      "ratio_qwen_to_toke": 1.0
+    },
+    {
+      "task_id": "D-WEB-0024v220",
+      "category": "D-WEB",
+      "chars": 211,
+      "toke_token_count": 119,
+      "qwen_token_count": 73,
+      "ratio_qwen_to_toke": 0.613
+    },
+    {
+      "task_id": "D-TST-0005v256",
+      "category": "D-TST",
+      "chars": 181,
+      "toke_token_count": 84,
+      "qwen_token_count": 79,
+      "ratio_qwen_to_toke": 0.94
+    },
+    {
+      "task_id": "MIG-P2-B-D-DAT-0011v260-4218a520",
+      "category": "D-DAT",
+      "chars": 187,
+      "toke_token_count": 82,
+      "qwen_token_count": 69,
+      "ratio_qwen_to_toke": 0.841
+    },
+    {
+      "task_id": "D-NET-0003v283",
+      "category": "D-NET",
+      "chars": 459,
+      "toke_token_count": 221,
+      "qwen_token_count": 186,
+      "ratio_qwen_to_toke": 0.842
+    },
+    {
+      "task_id": "A-MTH-0027v65",
+      "category": "A-MTH",
+      "chars": 143,
+      "toke_token_count": 70,
+      "qwen_token_count": 70,
+      "ratio_qwen_to_toke": 1.0
+    },
+    {
+      "task_id": "D-NET-0010v69",
+      "category": "D-NET",
+      "chars": 185,
+      "toke_token_count": 103,
+      "qwen_token_count": 84,
+      "ratio_qwen_to_toke": 0.816
+    },
+    {
+      "task_id": "A-SRT-0086v38",
+      "category": "A-SRT",
+      "chars": 341,
+      "toke_token_count": 148,
+      "qwen_token_count": 142,
+      "ratio_qwen_to_toke": 0.959
+    },
+    {
+      "task_id": "MIG-P2-A-A-MTH-0048v28-b6993bae",
+      "category": "A-MTH",
+      "chars": 286,
+      "toke_token_count": 152,
+      "qwen_token_count": 152,
+      "ratio_qwen_to_toke": 1.0
+    },
+    {
+      "task_id": "D-FIO-0017v111",
+      "category": "D-FIO",
+      "chars": 280,
+      "toke_token_count": 146,
+      "qwen_token_count": 103,
+      "ratio_qwen_to_toke": 0.705
+    },
+    {
+      "task_id": "MIG-P2-B-D-NET-0015v325-843708ad",
+      "category": "D-NET",
+      "chars": 46,
+      "toke_token_count": 26,
+      "qwen_token_count": 31,
+      "ratio_qwen_to_toke": 1.192
+    },
+    {
+      "task_id": "A-STR-0083v39",
+      "category": "A-STR",
+      "chars": 337,
+      "toke_token_count": 167,
+      "qwen_token_count": 136,
+      "ratio_qwen_to_toke": 0.814
+    },
+    {
+      "task_id": "D-CFG-0019v260",
+      "category": "D-CFG",
+      "chars": 324,
+      "toke_token_count": 154,
+      "qwen_token_count": 115,
+      "ratio_qwen_to_toke": 0.747
+    },
+    {
+      "task_id": "D-CRY-0006v76",
+      "category": "D-CRY",
+      "chars": 253,
+      "toke_token_count": 114,
+      "qwen_token_count": 128,
+      "ratio_qwen_to_toke": 1.123
+    },
+    {
+      "task_id": "D-CLI-0005v285",
+      "category": "D-CLI",
+      "chars": 262,
+      "toke_token_count": 110,
+      "qwen_token_count": 95,
+      "ratio_qwen_to_toke": 0.864
+    },
+    {
+      "task_id": "A-CND-0092v10",
+      "category": "A-CND",
+      "chars": 213,
+      "toke_token_count": 100,
+      "qwen_token_count": 90,
+      "ratio_qwen_to_toke": 0.9
+    },
+    {
+      "task_id": "A-MTH-0106v33",
+      "category": "A-MTH",
+      "chars": 208,
+      "toke_token_count": 100,
+      "qwen_token_count": 100,
+      "ratio_qwen_to_toke": 1.0
+    },
+    {
+      "task_id": "A-MTH-0067v41",
+      "category": "A-MTH",
+      "chars": 397,
+      "toke_token_count": 188,
+      "qwen_token_count": 198,
+      "ratio_qwen_to_toke": 1.053
+    },
+    {
+      "task_id": "A-CND-0013v51",
+      "category": "A-CND",
+      "chars": 326,
+      "toke_token_count": 141,
+      "qwen_token_count": 121,
+      "ratio_qwen_to_toke": 0.858
+    },
+    {
+      "task_id": "A-STR-0027v17",
+      "category": "A-STR",
+      "chars": 355,
+      "toke_token_count": 168,
+      "qwen_token_count": 141,
+      "ratio_qwen_to_toke": 0.839
+    },
+    {
+      "task_id": "A-ARR-0044v11",
+      "category": "A-ARR",
+      "chars": 164,
+      "toke_token_count": 73,
+      "qwen_token_count": 70,
+      "ratio_qwen_to_toke": 0.959
+    },
+    {
+      "task_id": "D-DAT-0010v223",
+      "category": "D-DAT",
+      "chars": 433,
+      "toke_token_count": 201,
+      "qwen_token_count": 186,
+      "ratio_qwen_to_toke": 0.925
+    },
+    {
+      "task_id": "D-CRY-0019v246",
+      "category": "D-CRY",
+      "chars": 267,
+      "toke_token_count": 139,
+      "qwen_token_count": 123,
+      "ratio_qwen_to_toke": 0.885
+    },
+    {
+      "task_id": "A-MTH-0077v25",
+      "category": "A-MTH",
+      "chars": 148,
+      "toke_token_count": 71,
+      "qwen_token_count": 72,
+      "ratio_qwen_to_toke": 1.014
+    },
+    {
+      "task_id": "D-DAT-0010v43",
+      "category": "D-DAT",
+      "chars": 211,
+      "toke_token_count": 100,
+      "qwen_token_count": 108,
+      "ratio_qwen_to_toke": 1.08
+    },
+    {
+      "task_id": "MIG-P2-B-D-NET-0011v320-804c83b1",
+      "category": "D-NET",
+      "chars": 185,
+      "toke_token_count": 98,
+      "qwen_token_count": 94,
+      "ratio_qwen_to_toke": 0.959
+    },
+    {
+      "task_id": "A-ARR-0018v54",
+      "category": "A-ARR",
+      "chars": 295,
+      "toke_token_count": 135,
+      "qwen_token_count": 112,
+      "ratio_qwen_to_toke": 0.83
+    },
+    {
+      "task_id": "A-CND-0041v66",
+      "category": "A-CND",
+      "chars": 288,
+      "toke_token_count": 128,
+      "qwen_token_count": 138,
+      "ratio_qwen_to_toke": 1.078
+    },
+    {
+      "task_id": "D-NET-0008v330",
+      "category": "D-NET",
+      "chars": 337,
+      "toke_token_count": 169,
+      "qwen_token_count": 134,
+      "ratio_qwen_to_toke": 0.793
+    },
+    {
+      "task_id": "D-FIO-0002",
+      "category": "D-FIO",
+      "chars": 198,
+      "toke_token_count": 100,
+      "qwen_token_count": 63,
+      "ratio_qwen_to_toke": 0.63
+    },
+    {
+      "task_id": "A-ARR-0114v12",
+      "category": "A-ARR",
+      "chars": 358,
+      "toke_token_count": 145,
+      "qwen_token_count": 148,
+      "ratio_qwen_to_toke": 1.021
+    },
+    {
+      "task_id": "A-MTH-0074v32",
+      "category": "A-MTH",
+      "chars": 425,
+      "toke_token_count": 204,
+      "qwen_token_count": 196,
+      "ratio_qwen_to_toke": 0.961
+    },
+    {
+      "task_id": "A-CND-0029v48",
+      "category": "A-CND",
+      "chars": 117,
+      "toke_token_count": 59,
+      "qwen_token_count": 55,
+      "ratio_qwen_to_toke": 0.932
+    },
+    {
+      "task_id": "A-ARR-0067v66",
+      "category": "A-ARR",
+      "chars": 156,
+      "toke_token_count": 70,
+      "qwen_token_count": 67,
+      "ratio_qwen_to_toke": 0.957
+    },
+    {
+      "task_id": "A-STR-0014v67",
+      "category": "A-STR",
+      "chars": 442,
+      "toke_token_count": 227,
+      "qwen_token_count": 186,
+      "ratio_qwen_to_toke": 0.819
+    },
+    {
+      "task_id": "D-WEB-0010v29",
+      "category": "D-WEB",
+      "chars": 259,
+      "toke_token_count": 136,
+      "qwen_token_count": 94,
+      "ratio_qwen_to_toke": 0.691
+    },
+    {
+      "task_id": "D-CRY-0005v99",
+      "category": "D-CRY",
+      "chars": 394,
+      "toke_token_count": 166,
+      "qwen_token_count": 172,
+      "ratio_qwen_to_toke": 1.036
+    },
+    {
+      "task_id": "A-MTH-0091v46",
+      "category": "A-MTH",
+      "chars": 240,
+      "toke_token_count": 119,
+      "qwen_token_count": 110,
+      "ratio_qwen_to_toke": 0.924
+    },
+    {
+      "task_id": "A-SRT-0030v35",
+      "category": "A-SRT",
+      "chars": 290,
+      "toke_token_count": 131,
+      "qwen_token_count": 118,
+      "ratio_qwen_to_toke": 0.901
+    },
+    {
+      "task_id": "D-FIO-0016v189",
+      "category": "D-FIO",
+      "chars": 213,
+      "toke_token_count": 104,
+      "qwen_token_count": 106,
+      "ratio_qwen_to_toke": 1.019
+    },
+    {
+      "task_id": "D-CLI-0021v178",
+      "category": "D-CLI",
+      "chars": 171,
+      "toke_token_count": 82,
+      "qwen_token_count": 74,
+      "ratio_qwen_to_toke": 0.902
+    },
+    {
+      "task_id": "A-MTH-0055v56",
+      "category": "A-MTH",
+      "chars": 313,
+      "toke_token_count": 141,
+      "qwen_token_count": 138,
+      "ratio_qwen_to_toke": 0.979
+    },
+    {
+      "task_id": "D-WEB-0015v94",
+      "category": "D-WEB",
+      "chars": 178,
+      "toke_token_count": 77,
+      "qwen_token_count": 75,
+      "ratio_qwen_to_toke": 0.974
+    },
+    {
+      "task_id": "A-ERR-0010v25",
+      "category": "A-ERR",
+      "chars": 179,
+      "toke_token_count": 69,
+      "qwen_token_count": 68,
+      "ratio_qwen_to_toke": 0.986
+    },
+    {
+      "task_id": "D-NET-0013v328",
+      "category": "D-NET",
+      "chars": 247,
+      "toke_token_count": 144,
+      "qwen_token_count": 93,
+      "ratio_qwen_to_toke": 0.646
+    },
+    {
+      "task_id": "D-DAT-0004v1",
+      "category": "D-DAT",
+      "chars": 290,
+      "toke_token_count": 137,
+      "qwen_token_count": 122,
+      "ratio_qwen_to_toke": 0.891
+    },
+    {
+      "task_id": "D-DAT-0005v228",
+      "category": "D-DAT",
+      "chars": 217,
+      "toke_token_count": 95,
+      "qwen_token_count": 107,
+      "ratio_qwen_to_toke": 1.126
+    },
+    {
+      "task_id": "D-CLI-0016v145",
+      "category": "D-CLI",
+      "chars": 159,
+      "toke_token_count": 81,
+      "qwen_token_count": 71,
+      "ratio_qwen_to_toke": 0.877
+    },
+    {
+      "task_id": "A-MTH-0102v68",
+      "category": "A-MTH",
+      "chars": 195,
+      "toke_token_count": 78,
+      "qwen_token_count": 86,
+      "ratio_qwen_to_toke": 1.103
+    },
+    {
+      "task_id": "D-TST-0020v18",
+      "category": "D-TST",
+      "chars": 301,
+      "toke_token_count": 129,
+      "qwen_token_count": 115,
+      "ratio_qwen_to_toke": 0.891
+    },
+    {
+      "task_id": "D-WEB-0007v12",
+      "category": "D-WEB",
+      "chars": 272,
+      "toke_token_count": 113,
+      "qwen_token_count": 109,
+      "ratio_qwen_to_toke": 0.965
+    },
+    {
+      "task_id": "D-TST-0025v162",
+      "category": "D-TST",
+      "chars": 518,
+      "toke_token_count": 249,
+      "qwen_token_count": 179,
+      "ratio_qwen_to_toke": 0.719
+    },
+    {
+      "task_id": "D-CFG-0009v19",
+      "category": "D-CFG",
+      "chars": 199,
+      "toke_token_count": 99,
+      "qwen_token_count": 89,
+      "ratio_qwen_to_toke": 0.899
+    },
+    {
+      "task_id": "A-ERR-0092v26",
+      "category": "A-ERR",
+      "chars": 636,
+      "toke_token_count": 293,
+      "qwen_token_count": 288,
+      "ratio_qwen_to_toke": 0.983
+    },
+    {
+      "task_id": "A-CND-0054v75",
+      "category": "A-CND",
+      "chars": 312,
+      "toke_token_count": 137,
+      "qwen_token_count": 137,
+      "ratio_qwen_to_toke": 1.0
+    },
+    {
+      "task_id": "MIG-P2-B-D-FIO-0006v376-09e089e5",
+      "category": "D-FIO",
+      "chars": 123,
+      "toke_token_count": 64,
+      "qwen_token_count": 55,
+      "ratio_qwen_to_toke": 0.859
+    },
+    {
+      "task_id": "D-FIO-0010v33",
+      "category": "D-FIO",
+      "chars": 227,
+      "toke_token_count": 116,
+      "qwen_token_count": 94,
+      "ratio_qwen_to_toke": 0.81
+    },
+    {
+      "task_id": "D-CFG-0016v215",
+      "category": "D-CFG",
+      "chars": 356,
+      "toke_token_count": 195,
+      "qwen_token_count": 130,
+      "ratio_qwen_to_toke": 0.667
+    },
+    {
+      "task_id": "A-STR-0055v3",
+      "category": "A-STR",
+      "chars": 198,
+      "toke_token_count": 104,
+      "qwen_token_count": 87,
+      "ratio_qwen_to_toke": 0.837
+    },
+    {
+      "task_id": "D-CFG-0014v145",
+      "category": "D-CFG",
+      "chars": 451,
+      "toke_token_count": 219,
+      "qwen_token_count": 171,
+      "ratio_qwen_to_toke": 0.781
+    },
+    {
+      "task_id": "D-CFG-0010v165",
+      "category": "D-CFG",
+      "chars": 281,
+      "toke_token_count": 153,
+      "qwen_token_count": 132,
+      "ratio_qwen_to_toke": 0.863
+    },
+    {
+      "task_id": "D-CLI-0013v267",
+      "category": "D-CLI",
+      "chars": 383,
+      "toke_token_count": 188,
+      "qwen_token_count": 179,
+      "ratio_qwen_to_toke": 0.952
+    },
+    {
+      "task_id": "MIG-P2-B-D-CFG-0009v325-467d8fd6",
+      "category": "D-CFG",
+      "chars": 57,
+      "toke_token_count": 34,
+      "qwen_token_count": 30,
+      "ratio_qwen_to_toke": 0.882
+    },
+    {
+      "task_id": "A-ARR-0099v32",
+      "category": "A-ARR",
+      "chars": 294,
+      "toke_token_count": 123,
+      "qwen_token_count": 116,
+      "ratio_qwen_to_toke": 0.943
+    },
+    {
+      "task_id": "D-FIO-0017v218",
+      "category": "D-FIO",
+      "chars": 281,
+      "toke_token_count": 142,
+      "qwen_token_count": 108,
+      "ratio_qwen_to_toke": 0.761
+    },
+    {
+      "task_id": "D-FIO-0008v296",
+      "category": "D-FIO",
+      "chars": 279,
+      "toke_token_count": 132,
+      "qwen_token_count": 116,
+      "ratio_qwen_to_toke": 0.879
+    },
+    {
+      "task_id": "D-FIO-0007v170",
+      "category": "D-FIO",
+      "chars": 298,
+      "toke_token_count": 150,
+      "qwen_token_count": 114,
+      "ratio_qwen_to_toke": 0.76
+    },
+    {
+      "task_id": "A-CND-0065v17",
+      "category": "A-CND",
+      "chars": 344,
+      "toke_token_count": 163,
+      "qwen_token_count": 140,
+      "ratio_qwen_to_toke": 0.859
+    },
+    {
+      "task_id": "A-ARR-0117v40",
+      "category": "A-ARR",
+      "chars": 257,
+      "toke_token_count": 108,
+      "qwen_token_count": 113,
+      "ratio_qwen_to_toke": 1.046
+    },
+    {
+      "task_id": "D-CFG-0008v229",
+      "category": "D-CFG",
+      "chars": 165,
+      "toke_token_count": 92,
+      "qwen_token_count": 72,
+      "ratio_qwen_to_toke": 0.783
+    },
+    {
+      "task_id": "D-NET-0015v160",
+      "category": "D-NET",
+      "chars": 242,
+      "toke_token_count": 131,
+      "qwen_token_count": 109,
+      "ratio_qwen_to_toke": 0.832
+    },
+    {
+      "task_id": "A-STR-0028v39",
+      "category": "A-STR",
+      "chars": 322,
+      "toke_token_count": 149,
+      "qwen_token_count": 134,
+      "ratio_qwen_to_toke": 0.899
+    },
+    {
+      "task_id": "D-TST-0023v247",
+      "category": "D-TST",
+      "chars": 169,
+      "toke_token_count": 92,
+      "qwen_token_count": 67,
+      "ratio_qwen_to_toke": 0.728
+    },
+    {
+      "task_id": "A-CND-0074v11",
+      "category": "A-CND",
+      "chars": 253,
+      "toke_token_count": 112,
+      "qwen_token_count": 121,
+      "ratio_qwen_to_toke": 1.08
+    },
+    {
+      "task_id": "A-MTH-0108v22",
+      "category": "A-MTH",
+      "chars": 322,
+      "toke_token_count": 161,
+      "qwen_token_count": 157,
+      "ratio_qwen_to_toke": 0.975
+    },
+    {
+      "task_id": "A-ERR-0094v31",
+      "category": "A-ERR",
+      "chars": 291,
+      "toke_token_count": 125,
+      "qwen_token_count": 153,
+      "ratio_qwen_to_toke": 1.224
+    },
+    {
+      "task_id": "D-WEB-0006v177",
+      "category": "D-WEB",
+      "chars": 312,
+      "toke_token_count": 155,
+      "qwen_token_count": 139,
+      "ratio_qwen_to_toke": 0.897
+    },
+    {
+      "task_id": "MIG-P2-B-D-DAT-0002v233-6953d039",
+      "category": "D-DAT",
+      "chars": 261,
+      "toke_token_count": 127,
+      "qwen_token_count": 116,
+      "ratio_qwen_to_toke": 0.913
+    },
+    {
+      "task_id": "D-CLI-0004v171",
+      "category": "D-CLI",
+      "chars": 393,
+      "toke_token_count": 205,
+      "qwen_token_count": 152,
+      "ratio_qwen_to_toke": 0.741
+    },
+    {
+      "task_id": "A-ERR-0022v62",
+      "category": "A-ERR",
+      "chars": 333,
+      "toke_token_count": 137,
+      "qwen_token_count": 124,
+      "ratio_qwen_to_toke": 0.905
+    },
+    {
+      "task_id": "MIG-P2-A-A-CND-0032v58-07ed9fc4",
+      "category": "A-CND",
+      "chars": 113,
+      "toke_token_count": 41,
+      "qwen_token_count": 49,
+      "ratio_qwen_to_toke": 1.195
+    },
+    {
+      "task_id": "A-ERR-0078v33",
+      "category": "A-ERR",
+      "chars": 313,
+      "toke_token_count": 145,
+      "qwen_token_count": 123,
+      "ratio_qwen_to_toke": 0.848
+    },
+    {
+      "task_id": "D-WEB-0008v172",
+      "category": "D-WEB",
+      "chars": 279,
+      "toke_token_count": 130,
+      "qwen_token_count": 97,
+      "ratio_qwen_to_toke": 0.746
+    },
+    {
+      "task_id": "D-CLI-0010v153",
+      "category": "D-CLI",
+      "chars": 320,
+      "toke_token_count": 156,
+      "qwen_token_count": 141,
+      "ratio_qwen_to_toke": 0.904
+    },
+    {
+      "task_id": "A-MTH-0108v29",
+      "category": "A-MTH",
+      "chars": 319,
+      "toke_token_count": 162,
+      "qwen_token_count": 154,
+      "ratio_qwen_to_toke": 0.951
+    },
+    {
+      "task_id": "A-CND-0044v21",
+      "category": "A-CND",
+      "chars": 344,
+      "toke_token_count": 191,
+      "qwen_token_count": 168,
+      "ratio_qwen_to_toke": 0.88
+    },
+    {
+      "task_id": "D-CLI-0002v175",
+      "category": "D-CLI",
+      "chars": 297,
+      "toke_token_count": 143,
+      "qwen_token_count": 115,
+      "ratio_qwen_to_toke": 0.804
+    },
+    {
+      "task_id": "D-CRY-0017v95",
+      "category": "D-CRY",
+      "chars": 234,
+      "toke_token_count": 118,
+      "qwen_token_count": 106,
+      "ratio_qwen_to_toke": 0.898
+    },
+    {
+      "task_id": "A-CND-0064v5",
+      "category": "A-CND",
+      "chars": 350,
+      "toke_token_count": 157,
+      "qwen_token_count": 143,
+      "ratio_qwen_to_toke": 0.911
+    },
+    {
+      "task_id": "A-ARR-0091v64",
+      "category": "A-ARR",
+      "chars": 307,
+      "toke_token_count": 136,
+      "qwen_token_count": 125,
+      "ratio_qwen_to_toke": 0.919
+    },
+    {
+      "task_id": "D-FIO-0008v189",
+      "category": "D-FIO",
+      "chars": 295,
+      "toke_token_count": 147,
+      "qwen_token_count": 104,
+      "ratio_qwen_to_toke": 0.707
+    },
+    {
+      "task_id": "D-CRY-0014v60",
+      "category": "D-CRY",
+      "chars": 261,
+      "toke_token_count": 125,
+      "qwen_token_count": 101,
+      "ratio_qwen_to_toke": 0.808
+    },
+    {
+      "task_id": "A-ARR-0033v2",
+      "category": "A-ARR",
+      "chars": 201,
+      "toke_token_count": 91,
+      "qwen_token_count": 101,
+      "ratio_qwen_to_toke": 1.11
+    },
+    {
+      "task_id": "MIG-P2-B-D-TST-0004v242-2e8154bf",
+      "category": "D-TST",
+      "chars": 94,
+      "toke_token_count": 37,
+      "qwen_token_count": 38,
+      "ratio_qwen_to_toke": 1.027
+    },
+    {
+      "task_id": "D-TST-0005v131",
+      "category": "D-TST",
+      "chars": 252,
+      "toke_token_count": 131,
+      "qwen_token_count": 109,
+      "ratio_qwen_to_toke": 0.832
+    },
+    {
+      "task_id": "A-MTH-0090v45",
+      "category": "A-MTH",
+      "chars": 140,
+      "toke_token_count": 71,
+      "qwen_token_count": 79,
+      "ratio_qwen_to_toke": 1.113
+    },
+    {
+      "task_id": "A-ERR-0052v69",
+      "category": "A-ERR",
+      "chars": 465,
+      "toke_token_count": 204,
+      "qwen_token_count": 207,
+      "ratio_qwen_to_toke": 1.015
+    },
+    {
+      "task_id": "D-CFG-0009v163",
+      "category": "D-CFG",
+      "chars": 262,
+      "toke_token_count": 134,
+      "qwen_token_count": 100,
+      "ratio_qwen_to_toke": 0.746
+    },
+    {
+      "task_id": "D-WEB-0008v147",
+      "category": "D-WEB",
+      "chars": 552,
+      "toke_token_count": 293,
+      "qwen_token_count": 236,
+      "ratio_qwen_to_toke": 0.805
+    },
+    {
+      "task_id": "D-CLI-0019v85",
+      "category": "D-CLI",
+      "chars": 474,
+      "toke_token_count": 240,
+      "qwen_token_count": 181,
+      "ratio_qwen_to_toke": 0.754
+    },
+    {
+      "task_id": "A-MTH-0055v14",
+      "category": "A-MTH",
+      "chars": 291,
+      "toke_token_count": 134,
+      "qwen_token_count": 128,
+      "ratio_qwen_to_toke": 0.955
+    },
+    {
+      "task_id": "MIG-P2-A-A-STR-0027v82-517bed3c",
+      "category": "A-STR",
+      "chars": 66,
+      "toke_token_count": 25,
+      "qwen_token_count": 29,
+      "ratio_qwen_to_toke": 1.16
+    },
+    {
+      "task_id": "D-WEB-0010v178",
+      "category": "D-WEB",
+      "chars": 208,
+      "toke_token_count": 106,
+      "qwen_token_count": 74,
+      "ratio_qwen_to_toke": 0.698
+    },
+    {
+      "task_id": "A-ERR-0049v39",
+      "category": "A-ERR",
+      "chars": 287,
+      "toke_token_count": 140,
+      "qwen_token_count": 137,
+      "ratio_qwen_to_toke": 0.979
+    },
+    {
+      "task_id": "A-STR-0090v66",
+      "category": "A-STR",
+      "chars": 467,
+      "toke_token_count": 222,
+      "qwen_token_count": 199,
+      "ratio_qwen_to_toke": 0.896
+    },
+    {
+      "task_id": "A-ARR-0007v18",
+      "category": "A-ARR",
+      "chars": 93,
+      "toke_token_count": 44,
+      "qwen_token_count": 46,
+      "ratio_qwen_to_toke": 1.045
+    },
+    {
+      "task_id": "D-CFG-0003v217",
+      "category": "D-CFG",
+      "chars": 280,
+      "toke_token_count": 145,
+      "qwen_token_count": 101,
+      "ratio_qwen_to_toke": 0.697
+    },
+    {
+      "task_id": "A-SRT-0013v52",
+      "category": "A-SRT",
+      "chars": 475,
+      "toke_token_count": 203,
+      "qwen_token_count": 193,
+      "ratio_qwen_to_toke": 0.951
+    },
+    {
+      "task_id": "D-TST-0020v161",
+      "category": "D-TST",
+      "chars": 281,
+      "toke_token_count": 134,
+      "qwen_token_count": 115,
+      "ratio_qwen_to_toke": 0.858
+    },
+    {
+      "task_id": "D-TST-0020v190",
+      "category": "D-TST",
+      "chars": 289,
+      "toke_token_count": 140,
+      "qwen_token_count": 122,
+      "ratio_qwen_to_toke": 0.871
+    },
+    {
+      "task_id": "D-CLI-0007v133",
+      "category": "D-CLI",
+      "chars": 191,
+      "toke_token_count": 91,
+      "qwen_token_count": 70,
+      "ratio_qwen_to_toke": 0.769
+    },
+    {
+      "task_id": "A-SRT-0043v46",
+      "category": "A-SRT",
+      "chars": 524,
+      "toke_token_count": 230,
+      "qwen_token_count": 239,
+      "ratio_qwen_to_toke": 1.039
+    },
+    {
+      "task_id": "D-WEB-0016v194",
+      "category": "D-WEB",
+      "chars": 182,
+      "toke_token_count": 76,
+      "qwen_token_count": 73,
+      "ratio_qwen_to_toke": 0.961
+    },
+    {
+      "task_id": "D-NET-0005v270",
+      "category": "D-NET",
+      "chars": 215,
+      "toke_token_count": 124,
+      "qwen_token_count": 83,
+      "ratio_qwen_to_toke": 0.669
+    },
+    {
+      "task_id": "D-NET-0015v21",
+      "category": "D-NET",
+      "chars": 215,
+      "toke_token_count": 100,
+      "qwen_token_count": 94,
+      "ratio_qwen_to_toke": 0.94
+    },
+    {
+      "task_id": "D-TST-0020v15",
+      "category": "D-TST",
+      "chars": 205,
+      "toke_token_count": 89,
+      "qwen_token_count": 91,
+      "ratio_qwen_to_toke": 1.022
+    },
+    {
+      "task_id": "D-CRY-0021v51",
+      "category": "D-CRY",
+      "chars": 198,
+      "toke_token_count": 97,
+      "qwen_token_count": 110,
+      "ratio_qwen_to_toke": 1.134
+    },
+    {
+      "task_id": "D-FIO-0012v252",
+      "category": "D-FIO",
+      "chars": 210,
+      "toke_token_count": 93,
+      "qwen_token_count": 70,
+      "ratio_qwen_to_toke": 0.753
+    },
+    {
+      "task_id": "D-NET-0012v258",
+      "category": "D-NET",
+      "chars": 300,
+      "toke_token_count": 152,
+      "qwen_token_count": 117,
+      "ratio_qwen_to_toke": 0.77
+    },
+    {
+      "task_id": "D-CLI-0021v200",
+      "category": "D-CLI",
+      "chars": 149,
+      "toke_token_count": 76,
+      "qwen_token_count": 66,
+      "ratio_qwen_to_toke": 0.868
+    },
+    {
+      "task_id": "A-ERR-0041v83",
+      "category": "A-ERR",
+      "chars": 362,
+      "toke_token_count": 157,
+      "qwen_token_count": 146,
+      "ratio_qwen_to_toke": 0.93
+    },
+    {
+      "task_id": "A-ERR-0091v33",
+      "category": "A-ERR",
+      "chars": 226,
+      "toke_token_count": 107,
+      "qwen_token_count": 90,
+      "ratio_qwen_to_toke": 0.841
+    },
+    {
+      "task_id": "A-SRT-0061v63",
+      "category": "A-SRT",
+      "chars": 391,
+      "toke_token_count": 178,
+      "qwen_token_count": 181,
+      "ratio_qwen_to_toke": 1.017
+    },
+    {
+      "task_id": "A-MTH-0059v15",
+      "category": "A-MTH",
+      "chars": 260,
+      "toke_token_count": 114,
+      "qwen_token_count": 121,
+      "ratio_qwen_to_toke": 1.061
+    },
+    {
+      "task_id": "A-ARR-0113v39",
+      "category": "A-ARR",
+      "chars": 213,
+      "toke_token_count": 82,
+      "qwen_token_count": 83,
+      "ratio_qwen_to_toke": 1.012
+    },
+    {
+      "task_id": "D-DAT-0006v242",
+      "category": "D-DAT",
+      "chars": 264,
+      "toke_token_count": 135,
+      "qwen_token_count": 118,
+      "ratio_qwen_to_toke": 0.874
+    },
+    {
+      "task_id": "D-NET-0017v119",
+      "category": "D-NET",
+      "chars": 175,
+      "toke_token_count": 89,
+      "qwen_token_count": 59,
+      "ratio_qwen_to_toke": 0.663
+    },
+    {
+      "task_id": "D-CRY-0015v202",
+      "category": "D-CRY",
+      "chars": 273,
+      "toke_token_count": 126,
+      "qwen_token_count": 140,
+      "ratio_qwen_to_toke": 1.111
+    },
+    {
+      "task_id": "D-WEB-0018v68",
+      "category": "D-WEB",
+      "chars": 306,
+      "toke_token_count": 152,
+      "qwen_token_count": 110,
+      "ratio_qwen_to_toke": 0.724
+    },
+    {
+      "task_id": "D-TST-0001v30",
+      "category": "D-TST",
+      "chars": 255,
+      "toke_token_count": 134,
+      "qwen_token_count": 112,
+      "ratio_qwen_to_toke": 0.836
+    },
+    {
+      "task_id": "A-SRT-0091v5",
+      "category": "A-SRT",
+      "chars": 817,
+      "toke_token_count": 414,
+      "qwen_token_count": 398,
+      "ratio_qwen_to_toke": 0.961
+    },
+    {
+      "task_id": "A-ARR-0112v42",
+      "category": "A-ARR",
+      "chars": 469,
+      "toke_token_count": 206,
+      "qwen_token_count": 207,
+      "ratio_qwen_to_toke": 1.005
+    },
+    {
+      "task_id": "A-ARR-0090v13",
+      "category": "A-ARR",
+      "chars": 349,
+      "toke_token_count": 164,
+      "qwen_token_count": 149,
+      "ratio_qwen_to_toke": 0.909
+    },
+    {
+      "task_id": "D-DAT-0008v39",
+      "category": "D-DAT",
+      "chars": 250,
+      "toke_token_count": 103,
+      "qwen_token_count": 129,
+      "ratio_qwen_to_toke": 1.252
+    },
+    {
+      "task_id": "D-CLI-0018v242",
+      "category": "D-CLI",
+      "chars": 161,
+      "toke_token_count": 76,
+      "qwen_token_count": 68,
+      "ratio_qwen_to_toke": 0.895
+    },
+    {
+      "task_id": "D-CRY-0002v249",
+      "category": "D-CRY",
+      "chars": 318,
+      "toke_token_count": 161,
+      "qwen_token_count": 182,
+      "ratio_qwen_to_toke": 1.13
+    },
+    {
+      "task_id": "D-CRY-0012v209",
+      "category": "D-CRY",
+      "chars": 300,
+      "toke_token_count": 144,
+      "qwen_token_count": 110,
+      "ratio_qwen_to_toke": 0.764
+    },
+    {
+      "task_id": "A-ERR-0043v57",
+      "category": "A-ERR",
+      "chars": 335,
+      "toke_token_count": 158,
+      "qwen_token_count": 155,
+      "ratio_qwen_to_toke": 0.981
+    },
+    {
+      "task_id": "A-ARR-0108v11",
+      "category": "A-ARR",
+      "chars": 444,
+      "toke_token_count": 214,
+      "qwen_token_count": 206,
+      "ratio_qwen_to_toke": 0.963
+    },
+    {
+      "task_id": "D-CRY-0004v139",
+      "category": "D-CRY",
+      "chars": 418,
+      "toke_token_count": 203,
+      "qwen_token_count": 173,
+      "ratio_qwen_to_toke": 0.852
+    },
+    {
+      "task_id": "A-CND-0050v18",
+      "category": "A-CND",
+      "chars": 448,
+      "toke_token_count": 208,
+      "qwen_token_count": 234,
+      "ratio_qwen_to_toke": 1.125
+    },
+    {
+      "task_id": "A-ERR-0082v61",
+      "category": "A-ERR",
+      "chars": 535,
+      "toke_token_count": 245,
+      "qwen_token_count": 218,
+      "ratio_qwen_to_toke": 0.89
+    },
+    {
+      "task_id": "A-CND-0034v67",
+      "category": "A-CND",
+      "chars": 315,
+      "toke_token_count": 146,
+      "qwen_token_count": 131,
+      "ratio_qwen_to_toke": 0.897
+    },
+    {
+      "task_id": "D-DAT-0014v116",
+      "category": "D-DAT",
+      "chars": 279,
+      "toke_token_count": 124,
+      "qwen_token_count": 122,
+      "ratio_qwen_to_toke": 0.984
+    },
+    {
+      "task_id": "A-CND-0032v49",
+      "category": "A-CND",
+      "chars": 185,
+      "toke_token_count": 86,
+      "qwen_token_count": 95,
+      "ratio_qwen_to_toke": 1.105
+    },
+    {
+      "task_id": "D-FIO-0017v260",
+      "category": "D-FIO",
+      "chars": 290,
+      "toke_token_count": 142,
+      "qwen_token_count": 107,
+      "ratio_qwen_to_toke": 0.754
+    },
+    {
+      "task_id": "A-MTH-0088v41",
+      "category": "A-MTH",
+      "chars": 353,
+      "toke_token_count": 159,
+      "qwen_token_count": 140,
+      "ratio_qwen_to_toke": 0.881
+    },
+    {
+      "task_id": "D-CFG-0008v242",
+      "category": "D-CFG",
+      "chars": 223,
+      "toke_token_count": 121,
+      "qwen_token_count": 89,
+      "ratio_qwen_to_toke": 0.736
+    },
+    {
+      "task_id": "A-CND-0091v68",
+      "category": "A-CND",
+      "chars": 168,
+      "toke_token_count": 65,
+      "qwen_token_count": 67,
+      "ratio_qwen_to_toke": 1.031
+    },
+    {
+      "task_id": "D-DAT-0003v260",
+      "category": "D-DAT",
+      "chars": 353,
+      "toke_token_count": 166,
+      "qwen_token_count": 132,
+      "ratio_qwen_to_toke": 0.795
+    },
+    {
+      "task_id": "A-MTH-0104v49",
+      "category": "A-MTH",
+      "chars": 118,
+      "toke_token_count": 64,
+      "qwen_token_count": 65,
+      "ratio_qwen_to_toke": 1.016
+    },
+    {
+      "task_id": "D-DAT-0006v225",
+      "category": "D-DAT",
+      "chars": 208,
+      "toke_token_count": 97,
+      "qwen_token_count": 113,
+      "ratio_qwen_to_toke": 1.165
+    },
+    {
+      "task_id": "D-DAT-0013v48",
+      "category": "D-DAT",
+      "chars": 377,
+      "toke_token_count": 192,
+      "qwen_token_count": 157,
+      "ratio_qwen_to_toke": 0.818
+    },
+    {
+      "task_id": "A-ARR-0079v20",
+      "category": "A-ARR",
+      "chars": 541,
+      "toke_token_count": 260,
+      "qwen_token_count": 251,
+      "ratio_qwen_to_toke": 0.965
+    },
+    {
+      "task_id": "D-DAT-0024v72",
+      "category": "D-DAT",
+      "chars": 227,
+      "toke_token_count": 102,
+      "qwen_token_count": 93,
+      "ratio_qwen_to_toke": 0.912
+    },
+    {
+      "task_id": "A-CND-0050v44",
+      "category": "A-CND",
+      "chars": 267,
+      "toke_token_count": 122,
+      "qwen_token_count": 161,
+      "ratio_qwen_to_toke": 1.32
+    },
+    {
+      "task_id": "D-CFG-0013v157",
+      "category": "D-CFG",
+      "chars": 232,
+      "toke_token_count": 142,
+      "qwen_token_count": 83,
+      "ratio_qwen_to_toke": 0.585
+    },
+    {
+      "task_id": "D-FIO-0010v208",
+      "category": "D-FIO",
+      "chars": 203,
+      "toke_token_count": 101,
+      "qwen_token_count": 78,
+      "ratio_qwen_to_toke": 0.772
+    },
+    {
+      "task_id": "MIG-P2-A-A-MTH-0050v45-a689613c",
+      "category": "A-MTH",
+      "chars": 172,
+      "toke_token_count": 76,
+      "qwen_token_count": 82,
+      "ratio_qwen_to_toke": 1.079
+    },
+    {
+      "task_id": "D-DAT-0002v220",
+      "category": "D-DAT",
+      "chars": 228,
+      "toke_token_count": 94,
+      "qwen_token_count": 93,
+      "ratio_qwen_to_toke": 0.989
+    },
+    {
+      "task_id": "D-CRY-0009v275",
+      "category": "D-CRY",
+      "chars": 236,
+      "toke_token_count": 120,
+      "qwen_token_count": 127,
+      "ratio_qwen_to_toke": 1.058
+    },
+    {
+      "task_id": "A-SRT-0096v73",
+      "category": "A-SRT",
+      "chars": 517,
+      "toke_token_count": 258,
+      "qwen_token_count": 259,
+      "ratio_qwen_to_toke": 1.004
+    },
+    {
+      "task_id": "A-SRT-0008v25",
+      "category": "A-SRT",
+      "chars": 799,
+      "toke_token_count": 382,
+      "qwen_token_count": 423,
+      "ratio_qwen_to_toke": 1.107
+    },
+    {
+      "task_id": "A-MTH-0039v35",
+      "category": "A-MTH",
+      "chars": 62,
+      "toke_token_count": 34,
+      "qwen_token_count": 30,
+      "ratio_qwen_to_toke": 0.882
+    },
+    {
+      "task_id": "D-FIO-0016v255",
+      "category": "D-FIO",
+      "chars": 259,
+      "toke_token_count": 134,
+      "qwen_token_count": 123,
+      "ratio_qwen_to_toke": 0.918
+    },
+    {
+      "task_id": "MIG-P2-B-D-NET-0017v319-2eece785",
+      "category": "D-NET",
+      "chars": 66,
+      "toke_token_count": 36,
+      "qwen_token_count": 31,
+      "ratio_qwen_to_toke": 0.861
+    },
+    {
+      "task_id": "A-SRT-0094v13",
+      "category": "A-SRT",
+      "chars": 634,
+      "toke_token_count": 317,
+      "qwen_token_count": 281,
+      "ratio_qwen_to_toke": 0.886
+    },
+    {
+      "task_id": "A-MTH-0094v29",
+      "category": "A-MTH",
+      "chars": 156,
+      "toke_token_count": 77,
+      "qwen_token_count": 81,
+      "ratio_qwen_to_toke": 1.052
+    },
+    {
+      "task_id": "D-TST-0023v146",
+      "category": "D-TST",
+      "chars": 210,
+      "toke_token_count": 109,
+      "qwen_token_count": 77,
+      "ratio_qwen_to_toke": 0.706
+    },
+    {
+      "task_id": "MIG-P2-A-A-SRT-0023v60-c30f8c00",
+      "category": "A-SRT",
+      "chars": 144,
+      "toke_token_count": 49,
+      "qwen_token_count": 63,
+      "ratio_qwen_to_toke": 1.286
+    },
+    {
+      "task_id": "A-ERR-0009v64",
+      "category": "A-ERR",
+      "chars": 355,
+      "toke_token_count": 151,
+      "qwen_token_count": 153,
+      "ratio_qwen_to_toke": 1.013
+    },
+    {
+      "task_id": "D-WEB-0014v228",
+      "category": "D-WEB",
+      "chars": 188,
+      "toke_token_count": 89,
+      "qwen_token_count": 66,
+      "ratio_qwen_to_toke": 0.742
+    },
+    {
+      "task_id": "D-FIO-0006v312",
+      "category": "D-FIO",
+      "chars": 175,
+      "toke_token_count": 85,
+      "qwen_token_count": 67,
+      "ratio_qwen_to_toke": 0.788
+    },
+    {
+      "task_id": "A-SRT-0065v13",
+      "category": "A-SRT",
+      "chars": 266,
+      "toke_token_count": 135,
+      "qwen_token_count": 138,
+      "ratio_qwen_to_toke": 1.022
+    },
+    {
+      "task_id": "D-CLI-0007v276",
+      "category": "D-CLI",
+      "chars": 266,
+      "toke_token_count": 121,
+      "qwen_token_count": 91,
+      "ratio_qwen_to_toke": 0.752
+    },
+    {
+      "task_id": "D-TST-0015v206",
+      "category": "D-TST",
+      "chars": 457,
+      "toke_token_count": 229,
+      "qwen_token_count": 213,
+      "ratio_qwen_to_toke": 0.93
+    },
+    {
+      "task_id": "D-TST-0003v247",
+      "category": "D-TST",
+      "chars": 211,
+      "toke_token_count": 109,
+      "qwen_token_count": 90,
+      "ratio_qwen_to_toke": 0.826
+    },
+    {
+      "task_id": "A-CND-0042v41",
+      "category": "A-CND",
+      "chars": 121,
+      "toke_token_count": 68,
+      "qwen_token_count": 67,
+      "ratio_qwen_to_toke": 0.985
+    },
+    {
+      "task_id": "A-ARR-0024v21",
+      "category": "A-ARR",
+      "chars": 304,
+      "toke_token_count": 133,
+      "qwen_token_count": 150,
+      "ratio_qwen_to_toke": 1.128
+    },
+    {
+      "task_id": "D-CLI-0007v8",
+      "category": "D-CLI",
+      "chars": 246,
+      "toke_token_count": 123,
+      "qwen_token_count": 98,
+      "ratio_qwen_to_toke": 0.797
+    },
+    {
+      "task_id": "D-DAT-0025v206",
+      "category": "D-DAT",
+      "chars": 325,
+      "toke_token_count": 146,
+      "qwen_token_count": 130,
+      "ratio_qwen_to_toke": 0.89
+    },
+    {
+      "task_id": "D-DAT-0001v99",
+      "category": "D-DAT",
+      "chars": 212,
+      "toke_token_count": 92,
+      "qwen_token_count": 92,
+      "ratio_qwen_to_toke": 1.0
+    },
+    {
+      "task_id": "A-CND-0065v58",
+      "category": "A-CND",
+      "chars": 344,
+      "toke_token_count": 163,
+      "qwen_token_count": 140,
+      "ratio_qwen_to_toke": 0.859
+    },
+    {
+      "task_id": "A-CND-0043v45",
+      "category": "A-CND",
+      "chars": 309,
+      "toke_token_count": 155,
+      "qwen_token_count": 141,
+      "ratio_qwen_to_toke": 0.91
+    },
+    {
+      "task_id": "D-CRY-0013v85",
+      "category": "D-CRY",
+      "chars": 173,
+      "toke_token_count": 82,
+      "qwen_token_count": 89,
+      "ratio_qwen_to_toke": 1.085
+    },
+    {
+      "task_id": "A-MTH-0055v1",
+      "category": "A-MTH",
+      "chars": 194,
+      "toke_token_count": 103,
+      "qwen_token_count": 109,
+      "ratio_qwen_to_toke": 1.058
+    },
+    {
+      "task_id": "D-CRY-0003v79",
+      "category": "D-CRY",
+      "chars": 240,
+      "toke_token_count": 126,
+      "qwen_token_count": 101,
+      "ratio_qwen_to_toke": 0.802
+    },
+    {
+      "task_id": "D-TST-0013v81",
+      "category": "D-TST",
+      "chars": 383,
+      "toke_token_count": 200,
+      "qwen_token_count": 177,
+      "ratio_qwen_to_toke": 0.885
+    },
+    {
+      "task_id": "A-ERR-0011v18",
+      "category": "A-ERR",
+      "chars": 185,
+      "toke_token_count": 69,
+      "qwen_token_count": 64,
+      "ratio_qwen_to_toke": 0.928
+    },
+    {
+      "task_id": "A-STR-0037v38",
+      "category": "A-STR",
+      "chars": 552,
+      "toke_token_count": 271,
+      "qwen_token_count": 217,
+      "ratio_qwen_to_toke": 0.801
+    },
+    {
+      "task_id": "D-TST-0018v81",
+      "category": "D-TST",
+      "chars": 251,
+      "toke_token_count": 109,
+      "qwen_token_count": 113,
+      "ratio_qwen_to_toke": 1.037
+    },
+    {
+      "task_id": "A-MTH-0103v59",
+      "category": "A-MTH",
+      "chars": 243,
+      "toke_token_count": 114,
+      "qwen_token_count": 127,
+      "ratio_qwen_to_toke": 1.114
+    },
+    {
+      "task_id": "A-STR-0077v30",
+      "category": "A-STR",
+      "chars": 373,
+      "toke_token_count": 181,
+      "qwen_token_count": 151,
+      "ratio_qwen_to_toke": 0.834
+    },
+    {
+      "task_id": "A-SRT-0043v30",
+      "category": "A-SRT",
+      "chars": 315,
+      "toke_token_count": 168,
+      "qwen_token_count": 152,
+      "ratio_qwen_to_toke": 0.905
+    },
+    {
+      "task_id": "MIG-B-D-WEB-0015v234-dc2f99e3",
+      "category": "D-WEB",
+      "chars": 103,
+      "toke_token_count": 48,
+      "qwen_token_count": 43,
+      "ratio_qwen_to_toke": 0.896
+    },
+    {
+      "task_id": "D-WEB-0014v139",
+      "category": "D-WEB",
+      "chars": 229,
+      "toke_token_count": 109,
+      "qwen_token_count": 77,
+      "ratio_qwen_to_toke": 0.706
+    },
+    {
+      "task_id": "D-CRY-0015v243",
+      "category": "D-CRY",
+      "chars": 273,
+      "toke_token_count": 135,
+      "qwen_token_count": 103,
+      "ratio_qwen_to_toke": 0.763
+    },
+    {
+      "task_id": "D-NET-0007v43",
+      "category": "D-NET",
+      "chars": 324,
+      "toke_token_count": 141,
+      "qwen_token_count": 140,
+      "ratio_qwen_to_toke": 0.993
+    },
+    {
+      "task_id": "A-SRT-0068v81",
+      "category": "A-SRT",
+      "chars": 561,
+      "toke_token_count": 275,
+      "qwen_token_count": 256,
+      "ratio_qwen_to_toke": 0.931
+    },
+    {
+      "task_id": "D-DAT-0022v186",
+      "category": "D-DAT",
+      "chars": 467,
+      "toke_token_count": 246,
+      "qwen_token_count": 193,
+      "ratio_qwen_to_toke": 0.785
+    },
+    {
+      "task_id": "D-FIO-0008v325",
+      "category": "D-FIO",
+      "chars": 390,
+      "toke_token_count": 193,
+      "qwen_token_count": 152,
+      "ratio_qwen_to_toke": 0.788
+    },
+    {
+      "task_id": "MIG-P2-A-A-ARR-0096v20-1f0ac9b4",
+      "category": "A-ARR",
+      "chars": 257,
+      "toke_token_count": 99,
+      "qwen_token_count": 109,
+      "ratio_qwen_to_toke": 1.101
+    },
+    {
+      "task_id": "A-ARR-0021v1",
+      "category": "A-ARR",
+      "chars": 126,
+      "toke_token_count": 63,
+      "qwen_token_count": 58,
+      "ratio_qwen_to_toke": 0.921
+    },
+    {
+      "task_id": "D-FIO-0015v219",
+      "category": "D-FIO",
+      "chars": 274,
+      "toke_token_count": 140,
+      "qwen_token_count": 117,
+      "ratio_qwen_to_toke": 0.836
+    },
+    {
+      "task_id": "D-CRY-0020v180",
+      "category": "D-CRY",
+      "chars": 196,
+      "toke_token_count": 95,
+      "qwen_token_count": 110,
+      "ratio_qwen_to_toke": 1.158
+    },
+    {
+      "task_id": "A-SRT-0064v5",
+      "category": "A-SRT",
+      "chars": 411,
+      "toke_token_count": 177,
+      "qwen_token_count": 179,
+      "ratio_qwen_to_toke": 1.011
+    },
+    {
+      "task_id": "D-FIO-0012v75",
+      "category": "D-FIO",
+      "chars": 241,
+      "toke_token_count": 113,
+      "qwen_token_count": 84,
+      "ratio_qwen_to_toke": 0.743
+    },
+    {
+      "task_id": "A-CND-0069v35",
+      "category": "A-CND",
+      "chars": 394,
+      "toke_token_count": 166,
+      "qwen_token_count": 170,
+      "ratio_qwen_to_toke": 1.024
+    },
+    {
+      "task_id": "A-ERR-0014v15",
+      "category": "A-ERR",
+      "chars": 335,
+      "toke_token_count": 148,
+      "qwen_token_count": 142,
+      "ratio_qwen_to_toke": 0.959
+    },
+    {
+      "task_id": "MIG-P2-B-D-DAT-0016v249-a406dfc4",
+      "category": "D-DAT",
+      "chars": 82,
+      "toke_token_count": 42,
+      "qwen_token_count": 41,
+      "ratio_qwen_to_toke": 0.976
+    },
+    {
+      "task_id": "A-CND-0085v71",
+      "category": "A-CND",
+      "chars": 190,
+      "toke_token_count": 85,
+      "qwen_token_count": 87,
+      "ratio_qwen_to_toke": 1.024
+    },
+    {
+      "task_id": "A-CND-0072v75",
+      "category": "A-CND",
+      "chars": 215,
+      "toke_token_count": 100,
+      "qwen_token_count": 118,
+      "ratio_qwen_to_toke": 1.18
+    },
+    {
+      "task_id": "D-NET-0020v119",
+      "category": "D-NET",
+      "chars": 351,
+      "toke_token_count": 175,
+      "qwen_token_count": 125,
+      "ratio_qwen_to_toke": 0.714
+    },
+    {
+      "task_id": "MIG-P2-A-A-ARR-0053v13-e347d91b",
+      "category": "A-ARR",
+      "chars": 231,
+      "toke_token_count": 88,
+      "qwen_token_count": 86,
+      "ratio_qwen_to_toke": 0.977
+    },
+    {
+      "task_id": "MIG-P2-B-D-FIO-0013v310-85110f2e",
+      "category": "D-FIO",
+      "chars": 399,
+      "toke_token_count": 170,
+      "qwen_token_count": 174,
+      "ratio_qwen_to_toke": 1.024
+    },
+    {
+      "task_id": "A-SRT-0022v37",
+      "category": "A-SRT",
+      "chars": 317,
+      "toke_token_count": 155,
+      "qwen_token_count": 161,
+      "ratio_qwen_to_toke": 1.039
+    },
+    {
+      "task_id": "A-SRT-0039v16",
+      "category": "A-SRT",
+      "chars": 385,
+      "toke_token_count": 179,
+      "qwen_token_count": 182,
+      "ratio_qwen_to_toke": 1.017
+    },
+    {
+      "task_id": "D-DAT-0019v76",
+      "category": "D-DAT",
+      "chars": 564,
+      "toke_token_count": 258,
+      "qwen_token_count": 223,
+      "ratio_qwen_to_toke": 0.864
+    },
+    {
+      "task_id": "A-MTH-0047v51",
+      "category": "A-MTH",
+      "chars": 191,
+      "toke_token_count": 103,
+      "qwen_token_count": 105,
+      "ratio_qwen_to_toke": 1.019
+    },
+    {
+      "task_id": "D-NET-0012v183",
+      "category": "D-NET",
+      "chars": 237,
+      "toke_token_count": 114,
+      "qwen_token_count": 107,
+      "ratio_qwen_to_toke": 0.939
+    },
+    {
+      "task_id": "A-STR-0033v34",
+      "category": "A-STR",
+      "chars": 252,
+      "toke_token_count": 119,
+      "qwen_token_count": 84,
+      "ratio_qwen_to_toke": 0.706
+    },
+    {
+      "task_id": "A-MTH-0037v44",
+      "category": "A-MTH",
+      "chars": 93,
+      "toke_token_count": 41,
+      "qwen_token_count": 38,
+      "ratio_qwen_to_toke": 0.927
+    },
+    {
+      "task_id": "D-NET-0002v215",
+      "category": "D-NET",
+      "chars": 417,
+      "toke_token_count": 213,
+      "qwen_token_count": 166,
+      "ratio_qwen_to_toke": 0.779
+    },
+    {
+      "task_id": "D-FIO-0003v139",
+      "category": "D-FIO",
+      "chars": 315,
+      "toke_token_count": 157,
+      "qwen_token_count": 126,
+      "ratio_qwen_to_toke": 0.803
+    },
+    {
+      "task_id": "A-SRT-0010v43",
+      "category": "A-SRT",
+      "chars": 716,
+      "toke_token_count": 323,
+      "qwen_token_count": 315,
+      "ratio_qwen_to_toke": 0.975
+    },
+    {
+      "task_id": "D-CRY-0003v35",
+      "category": "D-CRY",
+      "chars": 305,
+      "toke_token_count": 145,
+      "qwen_token_count": 177,
+      "ratio_qwen_to_toke": 1.221
+    },
+    {
+      "task_id": "D-WEB-0022v119",
+      "category": "D-WEB",
+      "chars": 197,
+      "toke_token_count": 105,
+      "qwen_token_count": 64,
+      "ratio_qwen_to_toke": 0.61
+    },
+    {
+      "task_id": "MIG-P2-A-A-ARR-0088v34-cb00cec3",
+      "category": "A-ARR",
+      "chars": 433,
+      "toke_token_count": 165,
+      "qwen_token_count": 161,
+      "ratio_qwen_to_toke": 0.976
+    },
+    {
+      "task_id": "A-ARR-0092v1",
+      "category": "A-ARR",
+      "chars": 315,
+      "toke_token_count": 130,
+      "qwen_token_count": 130,
+      "ratio_qwen_to_toke": 1.0
+    },
+    {
+      "task_id": "MIG-P2-B-D-FIO-0007v379-20b5f9c7",
+      "category": "D-FIO",
+      "chars": 138,
+      "toke_token_count": 61,
+      "qwen_token_count": 60,
+      "ratio_qwen_to_toke": 0.984
+    },
+    {
+      "task_id": "D-FIO-0003v167",
+      "category": "D-FIO",
+      "chars": 361,
+      "toke_token_count": 165,
+      "qwen_token_count": 150,
+      "ratio_qwen_to_toke": 0.909
+    },
+    {
+      "task_id": "D-WEB-0005v5",
+      "category": "D-WEB",
+      "chars": 563,
+      "toke_token_count": 268,
+      "qwen_token_count": 210,
+      "ratio_qwen_to_toke": 0.784
+    },
+    {
+      "task_id": "A-SRT-0026v63",
+      "category": "A-SRT",
+      "chars": 321,
+      "toke_token_count": 146,
+      "qwen_token_count": 130,
+      "ratio_qwen_to_toke": 0.89
+    },
+    {
+      "task_id": "A-ARR-0082v45",
+      "category": "A-ARR",
+      "chars": 359,
+      "toke_token_count": 160,
+      "qwen_token_count": 151,
+      "ratio_qwen_to_toke": 0.944
+    },
+    {
+      "task_id": "A-ARR-0010v41",
+      "category": "A-ARR",
+      "chars": 109,
+      "toke_token_count": 57,
+      "qwen_token_count": 57,
+      "ratio_qwen_to_toke": 1.0
+    },
+    {
+      "task_id": "A-STR-0019v2",
+      "category": "A-STR",
+      "chars": 217,
+      "toke_token_count": 114,
+      "qwen_token_count": 84,
+      "ratio_qwen_to_toke": 0.737
+    },
+    {
+      "task_id": "A-ERR-0009v55",
+      "category": "A-ERR",
+      "chars": 191,
+      "toke_token_count": 71,
+      "qwen_token_count": 70,
+      "ratio_qwen_to_toke": 0.986
+    },
+    {
+      "task_id": "D-FIO-0004v110",
+      "category": "D-FIO",
+      "chars": 429,
+      "toke_token_count": 215,
+      "qwen_token_count": 175,
+      "ratio_qwen_to_toke": 0.814
+    },
+    {
+      "task_id": "A-SRT-0009v20",
+      "category": "A-SRT",
+      "chars": 314,
+      "toke_token_count": 162,
+      "qwen_token_count": 149,
+      "ratio_qwen_to_toke": 0.92
+    },
+    {
+      "task_id": "D-WEB-0024v27",
+      "category": "D-WEB",
+      "chars": 316,
+      "toke_token_count": 175,
+      "qwen_token_count": 112,
+      "ratio_qwen_to_toke": 0.64
+    }
+  ]
+}

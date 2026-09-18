@@ -1,0 +1,2337 @@
+{
+  "story": "131.20",
+  "title": "v0.4 syntax single-token coverage (pre-rewrite)",
+  "generated": "2026-09-18T13:02:43.872871+00:00",
+  "tkc_version": "toke 2.8.0",
+  "corpus": "/tmp/t131/freeze_sample",
+  "ids": "data/baseline_sample_ids_v04.txt",
+  "num_programs": 2000,
+  "masked": true,
+  "pattern_frequency_in_sample": {
+    "==": 1892,
+    "!=": 178,
+    "&&": 373,
+    "||": 280,
+    "<=": 321,
+    ">=": 313,
+    "if(": 3787,
+    "el{": 1309,
+    "mt ": 316,
+    "$ok:": 304,
+    "$err:": 304,
+    "\\(": 2584,
+    "@(": 1600,
+    "$i64": 0,
+    "$f64": 0,
+    "$str": 0,
+    "$bool": 0,
+    "$u64": 0,
+    "$byte": 0,
+    "m=": 2097,
+    "f=": 4500,
+    "t=": 179,
+    "i=": 5632,
+    "lp(": 1642,
+    "{<": 2969,
+    ";<": 3095,
+    ":i64": 3201,
+    ":str": 4122,
+    ":bool": 929,
+    ":f64": 246,
+    ":u64": 82,
+    "@i64": 556,
+    "@str": 569,
+    ".get(": 1956,
+    ".len": 2242,
+    "std.io": 1793,
+    "io.println(": 3234,
+    "let ": 6005,
+    "mut.": 1618
+  },
+  "forced_groups": [
+    "operators",
+    "expr_if",
+    "match",
+    "interpolation_open",
+    "collection_open",
+    "type_sigils",
+    "decl_heads",
+    "loop",
+    "early_return"
+  ],
+  "models": {
+    "models/toke.model": {
+      "kind": "sentencepiece",
+      "vocab_size": 8000,
+      "sha256": "9a754777212d340b29cd566512bea6d4c68a20ee6e21353905a548769f15de5a",
+      "standalone": {
+        "operators": [
+          {
+            "pattern": "==",
+            "pieces": [
+              "=",
+              "="
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "!=",
+            "pieces": [
+              "!",
+              "="
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "&&",
+            "pieces": [
+              "&&"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": "||",
+            "pieces": [
+              "||"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": "<=",
+            "pieces": [
+              "<",
+              "="
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": ">=",
+            "pieces": [
+              ">",
+              "="
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          }
+        ],
+        "expr_if": [
+          {
+            "pattern": "if(",
+            "pieces": [
+              "if",
+              "("
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "el{",
+            "pieces": [
+              "el",
+              "{"
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          }
+        ],
+        "match": [
+          {
+            "pattern": "mt ",
+            "pieces": [
+              "m",
+              "t",
+              "▁"
+            ],
+            "num_pieces": 3,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "$ok:",
+            "pieces": [
+              "$",
+              "ok",
+              ":"
+            ],
+            "num_pieces": 3,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "$err:",
+            "pieces": [
+              "$",
+              "err",
+              ":"
+            ],
+            "num_pieces": 3,
+            "is_single_token": false,
+            "lossy": false
+          }
+        ],
+        "interpolation_open": [
+          {
+            "pattern": "\\(",
+            "pieces": [
+              "\\",
+              "("
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          }
+        ],
+        "collection_open": [
+          {
+            "pattern": "@(",
+            "pieces": [
+              "@("
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          }
+        ],
+        "type_sigils": [
+          {
+            "pattern": "$i64",
+            "pieces": [
+              "$i64"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": "$f64",
+            "pieces": [
+              "$f64"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": "$str",
+            "pieces": [
+              "$str"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": "$bool",
+            "pieces": [
+              "$bool"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": "$u64",
+            "pieces": [
+              "$u64"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": "$byte",
+            "pieces": [
+              "$byte"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          }
+        ],
+        "decl_heads": [
+          {
+            "pattern": "m=",
+            "pieces": [
+              "m="
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": "f=",
+            "pieces": [
+              "f="
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": "t=",
+            "pieces": [
+              "t="
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": "i=",
+            "pieces": [
+              "i="
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          }
+        ],
+        "loop": [
+          {
+            "pattern": "lp(",
+            "pieces": [
+              "lp",
+              "("
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          }
+        ],
+        "early_return": [
+          {
+            "pattern": "{<",
+            "pieces": [
+              "{<"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": ";<",
+            "pieces": [
+              ";<"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          }
+        ],
+        "type_annotations": [
+          {
+            "pattern": ":i64",
+            "pieces": [
+              ":",
+              "i",
+              "64"
+            ],
+            "num_pieces": 3,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": ":str",
+            "pieces": [
+              ":",
+              "str"
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": ":bool",
+            "pieces": [
+              ":",
+              "bool"
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": ":f64",
+            "pieces": [
+              ":",
+              "f",
+              "64"
+            ],
+            "num_pieces": 3,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": ":u64",
+            "pieces": [
+              ":",
+              "u",
+              "64"
+            ],
+            "num_pieces": 3,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "@i64",
+            "pieces": [
+              "@",
+              "i",
+              "64"
+            ],
+            "num_pieces": 3,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "@str",
+            "pieces": [
+              "@",
+              "str"
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          }
+        ],
+        "stdlib_surface": [
+          {
+            "pattern": ".get(",
+            "pieces": [
+              ".get("
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": ".len",
+            "pieces": [
+              ".",
+              "len"
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "std.io",
+            "pieces": [
+              "st",
+              "d",
+              ".",
+              "io"
+            ],
+            "num_pieces": 4,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "io.println(",
+            "pieces": [
+              "io",
+              ".",
+              "p",
+              "rint",
+              "l",
+              "n",
+              "("
+            ],
+            "num_pieces": 7,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "let ",
+            "pieces": [
+              "let",
+              "▁"
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "mut.",
+            "pieces": [
+              "mut",
+              "."
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          }
+        ]
+      },
+      "in_context": {
+        "operators": [
+          {
+            "pattern": "==",
+            "occurrences": 1892,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "!=",
+            "occurrences": 178,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "&&",
+            "occurrences": 373,
+            "unsplit": 373,
+            "unsplit_pct": 100.0,
+            "exact": 373,
+            "exact_pct": 100.0
+          },
+          {
+            "pattern": "||",
+            "occurrences": 280,
+            "unsplit": 280,
+            "unsplit_pct": 100.0,
+            "exact": 280,
+            "exact_pct": 100.0
+          },
+          {
+            "pattern": "<=",
+            "occurrences": 321,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": ">=",
+            "occurrences": 313,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          }
+        ],
+        "expr_if": [
+          {
+            "pattern": "if(",
+            "occurrences": 3787,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "el{",
+            "occurrences": 1309,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          }
+        ],
+        "match": [
+          {
+            "pattern": "mt ",
+            "occurrences": 316,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "$ok:",
+            "occurrences": 304,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "$err:",
+            "occurrences": 304,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          }
+        ],
+        "interpolation_open": [
+          {
+            "pattern": "\\(",
+            "occurrences": 2584,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          }
+        ],
+        "collection_open": [
+          {
+            "pattern": "@(",
+            "occurrences": 1600,
+            "unsplit": 1600,
+            "unsplit_pct": 100.0,
+            "exact": 1600,
+            "exact_pct": 100.0
+          }
+        ],
+        "type_sigils": [
+          {
+            "pattern": "$i64",
+            "occurrences": 0,
+            "unsplit": 0,
+            "unsplit_pct": null,
+            "exact": 0,
+            "exact_pct": null
+          },
+          {
+            "pattern": "$f64",
+            "occurrences": 0,
+            "unsplit": 0,
+            "unsplit_pct": null,
+            "exact": 0,
+            "exact_pct": null
+          },
+          {
+            "pattern": "$str",
+            "occurrences": 0,
+            "unsplit": 0,
+            "unsplit_pct": null,
+            "exact": 0,
+            "exact_pct": null
+          },
+          {
+            "pattern": "$bool",
+            "occurrences": 0,
+            "unsplit": 0,
+            "unsplit_pct": null,
+            "exact": 0,
+            "exact_pct": null
+          },
+          {
+            "pattern": "$u64",
+            "occurrences": 0,
+            "unsplit": 0,
+            "unsplit_pct": null,
+            "exact": 0,
+            "exact_pct": null
+          },
+          {
+            "pattern": "$byte",
+            "occurrences": 0,
+            "unsplit": 0,
+            "unsplit_pct": null,
+            "exact": 0,
+            "exact_pct": null
+          }
+        ],
+        "decl_heads": [
+          {
+            "pattern": "m=",
+            "occurrences": 2097,
+            "unsplit": 2097,
+            "unsplit_pct": 100.0,
+            "exact": 2097,
+            "exact_pct": 100.0
+          },
+          {
+            "pattern": "f=",
+            "occurrences": 4500,
+            "unsplit": 4500,
+            "unsplit_pct": 100.0,
+            "exact": 4500,
+            "exact_pct": 100.0
+          },
+          {
+            "pattern": "t=",
+            "occurrences": 179,
+            "unsplit": 179,
+            "unsplit_pct": 100.0,
+            "exact": 179,
+            "exact_pct": 100.0
+          },
+          {
+            "pattern": "i=",
+            "occurrences": 5632,
+            "unsplit": 5632,
+            "unsplit_pct": 100.0,
+            "exact": 5632,
+            "exact_pct": 100.0
+          }
+        ],
+        "loop": [
+          {
+            "pattern": "lp(",
+            "occurrences": 1642,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          }
+        ],
+        "early_return": [
+          {
+            "pattern": "{<",
+            "occurrences": 2969,
+            "unsplit": 2969,
+            "unsplit_pct": 100.0,
+            "exact": 720,
+            "exact_pct": 24.25
+          },
+          {
+            "pattern": ";<",
+            "occurrences": 3095,
+            "unsplit": 2042,
+            "unsplit_pct": 65.98,
+            "exact": 50,
+            "exact_pct": 1.62
+          }
+        ],
+        "type_annotations": [
+          {
+            "pattern": ":i64",
+            "occurrences": 3201,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": ":str",
+            "occurrences": 4122,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": ":bool",
+            "occurrences": 929,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": ":f64",
+            "occurrences": 246,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": ":u64",
+            "occurrences": 82,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "@i64",
+            "occurrences": 556,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "@str",
+            "occurrences": 569,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          }
+        ],
+        "stdlib_surface": [
+          {
+            "pattern": ".get(",
+            "occurrences": 1956,
+            "unsplit": 1956,
+            "unsplit_pct": 100.0,
+            "exact": 1956,
+            "exact_pct": 100.0
+          },
+          {
+            "pattern": ".len",
+            "occurrences": 2242,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "std.io",
+            "occurrences": 1793,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "io.println(",
+            "occurrences": 3234,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "let ",
+            "occurrences": 6005,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "mut.",
+            "occurrences": 1618,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          }
+        ]
+      },
+      "summary": {
+        "forced_patterns_single_token_standalone": "15/26",
+        "forced_patterns_single_token_standalone_pct": 57.7,
+        "forced_occurrences_in_sample": 33675,
+        "forced_unsplit_pct": 58.42,
+        "forced_exact_pct": 45.82,
+        "split_occurrences": 14003
+      }
+    },
+    "models/32k/toke.model": {
+      "kind": "sentencepiece",
+      "vocab_size": 32768,
+      "sha256": "a98ccbdb6181fb3099a1db29f6b59a341e5e3dcfdcbbfa35a71f7405c69fedf0",
+      "standalone": {
+        "operators": [
+          {
+            "pattern": "==",
+            "pieces": [
+              "=",
+              "="
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "!=",
+            "pieces": [
+              "!",
+              "="
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "&&",
+            "pieces": [
+              "&&"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": "||",
+            "pieces": [
+              "|",
+              "|"
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "<=",
+            "pieces": [
+              "<",
+              "="
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": ">=",
+            "pieces": [
+              ">",
+              "="
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          }
+        ],
+        "expr_if": [
+          {
+            "pattern": "if(",
+            "pieces": [
+              "if",
+              "("
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "el{",
+            "pieces": [
+              "el",
+              "{"
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          }
+        ],
+        "match": [
+          {
+            "pattern": "mt ",
+            "pieces": [
+              "m",
+              "t"
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": true
+          },
+          {
+            "pattern": "$ok:",
+            "pieces": [
+              "$",
+              "ok",
+              ":"
+            ],
+            "num_pieces": 3,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "$err:",
+            "pieces": [
+              "$",
+              "err",
+              ":"
+            ],
+            "num_pieces": 3,
+            "is_single_token": false,
+            "lossy": false
+          }
+        ],
+        "interpolation_open": [
+          {
+            "pattern": "\\(",
+            "pieces": [
+              "\\",
+              "("
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          }
+        ],
+        "collection_open": [
+          {
+            "pattern": "@(",
+            "pieces": [
+              "@",
+              "("
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          }
+        ],
+        "type_sigils": [
+          {
+            "pattern": "$i64",
+            "pieces": [
+              "$",
+              "i",
+              "64"
+            ],
+            "num_pieces": 3,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "$f64",
+            "pieces": [
+              "$",
+              "f",
+              "64"
+            ],
+            "num_pieces": 3,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "$str",
+            "pieces": [
+              "$",
+              "str"
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "$bool",
+            "pieces": [
+              "$",
+              "bool"
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "$u64",
+            "pieces": [
+              "$",
+              "u",
+              "64"
+            ],
+            "num_pieces": 3,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "$byte",
+            "pieces": [
+              "$",
+              "byte"
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          }
+        ],
+        "decl_heads": [
+          {
+            "pattern": "m=",
+            "pieces": [
+              "m",
+              "="
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "f=",
+            "pieces": [
+              "f",
+              "="
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "t=",
+            "pieces": [
+              "t",
+              "="
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "i=",
+            "pieces": [
+              "i",
+              "="
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          }
+        ],
+        "loop": [
+          {
+            "pattern": "lp(",
+            "pieces": [
+              "lp",
+              "("
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          }
+        ],
+        "early_return": [
+          {
+            "pattern": "{<",
+            "pieces": [
+              "{<"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": ";<",
+            "pieces": [
+              ";<"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          }
+        ],
+        "type_annotations": [
+          {
+            "pattern": ":i64",
+            "pieces": [
+              ":",
+              "i",
+              "64"
+            ],
+            "num_pieces": 3,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": ":str",
+            "pieces": [
+              ":",
+              "str"
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": ":bool",
+            "pieces": [
+              ":",
+              "bool"
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": ":f64",
+            "pieces": [
+              ":",
+              "f",
+              "64"
+            ],
+            "num_pieces": 3,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": ":u64",
+            "pieces": [
+              ":",
+              "u",
+              "64"
+            ],
+            "num_pieces": 3,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "@i64",
+            "pieces": [
+              "@",
+              "i",
+              "64"
+            ],
+            "num_pieces": 3,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "@str",
+            "pieces": [
+              "@",
+              "str"
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          }
+        ],
+        "stdlib_surface": [
+          {
+            "pattern": ".get(",
+            "pieces": [
+              ".",
+              "get",
+              "("
+            ],
+            "num_pieces": 3,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": ".len",
+            "pieces": [
+              ".",
+              "len"
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "std.io",
+            "pieces": [
+              "std",
+              ".",
+              "io"
+            ],
+            "num_pieces": 3,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "io.println(",
+            "pieces": [
+              "i",
+              "o",
+              ".",
+              "p",
+              "rint",
+              "ln",
+              "("
+            ],
+            "num_pieces": 7,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "let ",
+            "pieces": [
+              "let"
+            ],
+            "num_pieces": 1,
+            "is_single_token": false,
+            "lossy": true
+          },
+          {
+            "pattern": "mut.",
+            "pieces": [
+              "mut",
+              "."
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          }
+        ]
+      },
+      "in_context": {
+        "operators": [
+          {
+            "pattern": "==",
+            "occurrences": 1892,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "!=",
+            "occurrences": 178,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "&&",
+            "occurrences": 373,
+            "unsplit": 373,
+            "unsplit_pct": 100.0,
+            "exact": 373,
+            "exact_pct": 100.0
+          },
+          {
+            "pattern": "||",
+            "occurrences": 280,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "<=",
+            "occurrences": 321,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": ">=",
+            "occurrences": 313,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          }
+        ],
+        "expr_if": [
+          {
+            "pattern": "if(",
+            "occurrences": 3787,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "el{",
+            "occurrences": 1309,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          }
+        ],
+        "match": [
+          {
+            "pattern": "mt ",
+            "occurrences": 316,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "$ok:",
+            "occurrences": 304,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "$err:",
+            "occurrences": 304,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          }
+        ],
+        "interpolation_open": [
+          {
+            "pattern": "\\(",
+            "occurrences": 2584,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          }
+        ],
+        "collection_open": [
+          {
+            "pattern": "@(",
+            "occurrences": 1600,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          }
+        ],
+        "type_sigils": [
+          {
+            "pattern": "$i64",
+            "occurrences": 0,
+            "unsplit": 0,
+            "unsplit_pct": null,
+            "exact": 0,
+            "exact_pct": null
+          },
+          {
+            "pattern": "$f64",
+            "occurrences": 0,
+            "unsplit": 0,
+            "unsplit_pct": null,
+            "exact": 0,
+            "exact_pct": null
+          },
+          {
+            "pattern": "$str",
+            "occurrences": 0,
+            "unsplit": 0,
+            "unsplit_pct": null,
+            "exact": 0,
+            "exact_pct": null
+          },
+          {
+            "pattern": "$bool",
+            "occurrences": 0,
+            "unsplit": 0,
+            "unsplit_pct": null,
+            "exact": 0,
+            "exact_pct": null
+          },
+          {
+            "pattern": "$u64",
+            "occurrences": 0,
+            "unsplit": 0,
+            "unsplit_pct": null,
+            "exact": 0,
+            "exact_pct": null
+          },
+          {
+            "pattern": "$byte",
+            "occurrences": 0,
+            "unsplit": 0,
+            "unsplit_pct": null,
+            "exact": 0,
+            "exact_pct": null
+          }
+        ],
+        "decl_heads": [
+          {
+            "pattern": "m=",
+            "occurrences": 2097,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "f=",
+            "occurrences": 4500,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "t=",
+            "occurrences": 179,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "i=",
+            "occurrences": 5632,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          }
+        ],
+        "loop": [
+          {
+            "pattern": "lp(",
+            "occurrences": 1642,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          }
+        ],
+        "early_return": [
+          {
+            "pattern": "{<",
+            "occurrences": 2969,
+            "unsplit": 2969,
+            "unsplit_pct": 100.0,
+            "exact": 718,
+            "exact_pct": 24.18
+          },
+          {
+            "pattern": ";<",
+            "occurrences": 3095,
+            "unsplit": 2118,
+            "unsplit_pct": 68.43,
+            "exact": 47,
+            "exact_pct": 1.52
+          }
+        ],
+        "type_annotations": [
+          {
+            "pattern": ":i64",
+            "occurrences": 3201,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": ":str",
+            "occurrences": 4122,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": ":bool",
+            "occurrences": 929,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": ":f64",
+            "occurrences": 246,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": ":u64",
+            "occurrences": 82,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "@i64",
+            "occurrences": 556,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "@str",
+            "occurrences": 569,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          }
+        ],
+        "stdlib_surface": [
+          {
+            "pattern": ".get(",
+            "occurrences": 1956,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": ".len",
+            "occurrences": 2242,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "std.io",
+            "occurrences": 1793,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "io.println(",
+            "occurrences": 3234,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "let ",
+            "occurrences": 6005,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "mut.",
+            "occurrences": 1618,
+            "unsplit": 0,
+            "unsplit_pct": 0.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          }
+        ]
+      },
+      "summary": {
+        "forced_patterns_single_token_standalone": "3/26",
+        "forced_patterns_single_token_standalone_pct": 11.5,
+        "forced_occurrences_in_sample": 33675,
+        "forced_unsplit_pct": 16.21,
+        "forced_exact_pct": 3.38,
+        "split_occurrences": 28215
+      }
+    },
+    "tokenizer_v03.json": {
+      "kind": "hf",
+      "vocab_size": 16384,
+      "sha256": "42631f3afddbc9c911770cffbf14e25a59b43485c6e4b12ff93a56dab1330a74",
+      "standalone": {
+        "operators": [
+          {
+            "pattern": "==",
+            "pieces": [
+              "=",
+              "="
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "!=",
+            "pieces": [
+              "!",
+              "="
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "&&",
+            "pieces": [
+              "&&"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": "||",
+            "pieces": [
+              "||"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": "<=",
+            "pieces": [
+              "<",
+              "="
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": ">=",
+            "pieces": [
+              ">",
+              "="
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          }
+        ],
+        "expr_if": [
+          {
+            "pattern": "if(",
+            "pieces": [
+              "if("
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": "el{",
+            "pieces": [
+              "el{"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          }
+        ],
+        "match": [
+          {
+            "pattern": "mt ",
+            "pieces": [
+              "mt "
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": "$ok:",
+            "pieces": [
+              "$ok:"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": "$err:",
+            "pieces": [
+              "$err",
+              ":"
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          }
+        ],
+        "interpolation_open": [
+          {
+            "pattern": "\\(",
+            "pieces": [
+              "("
+            ],
+            "num_pieces": 1,
+            "is_single_token": false,
+            "lossy": true
+          }
+        ],
+        "collection_open": [
+          {
+            "pattern": "@(",
+            "pieces": [
+              "@("
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          }
+        ],
+        "type_sigils": [
+          {
+            "pattern": "$i64",
+            "pieces": [
+              "$",
+              "i64"
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "$f64",
+            "pieces": [
+              "$",
+              "f64"
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "$str",
+            "pieces": [
+              "$str"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": "$bool",
+            "pieces": [
+              "$bool"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": "$u64",
+            "pieces": [
+              "$",
+              "u64"
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "$byte",
+            "pieces": [
+              "$",
+              "byte"
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          }
+        ],
+        "decl_heads": [
+          {
+            "pattern": "m=",
+            "pieces": [
+              "m="
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": "f=",
+            "pieces": [
+              "f="
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": "t=",
+            "pieces": [
+              "t="
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": "i=",
+            "pieces": [
+              "i="
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          }
+        ],
+        "loop": [
+          {
+            "pattern": "lp(",
+            "pieces": [
+              "lp("
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          }
+        ],
+        "early_return": [
+          {
+            "pattern": "{<",
+            "pieces": [
+              "{<"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": ";<",
+            "pieces": [
+              ";<"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          }
+        ],
+        "type_annotations": [
+          {
+            "pattern": ":i64",
+            "pieces": [
+              ":i64"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": ":str",
+            "pieces": [
+              ":str"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": ":bool",
+            "pieces": [
+              ":bool"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": ":f64",
+            "pieces": [
+              ":f64"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": ":u64",
+            "pieces": [
+              ":u64"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": "@i64",
+            "pieces": [
+              "@",
+              "i64"
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "@str",
+            "pieces": [
+              "@",
+              "str"
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          }
+        ],
+        "stdlib_surface": [
+          {
+            "pattern": ".get(",
+            "pieces": [
+              ".get("
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": ".len",
+            "pieces": [
+              ".len"
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": "std.io",
+            "pieces": [
+              "std.",
+              "io"
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          },
+          {
+            "pattern": "io.println(",
+            "pieces": [
+              "io.println("
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": "let ",
+            "pieces": [
+              "let "
+            ],
+            "num_pieces": 1,
+            "is_single_token": true,
+            "lossy": false
+          },
+          {
+            "pattern": "mut.",
+            "pieces": [
+              "m",
+              "ut."
+            ],
+            "num_pieces": 2,
+            "is_single_token": false,
+            "lossy": false
+          }
+        ]
+      },
+      "in_context": {
+        "operators": [
+          {
+            "pattern": "==",
+            "occurrences": 1892,
+            "unsplit": 31,
+            "unsplit_pct": 1.64,
+            "exact": 5,
+            "exact_pct": 0.26
+          },
+          {
+            "pattern": "!=",
+            "occurrences": 178,
+            "unsplit": 1,
+            "unsplit_pct": 0.56,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "&&",
+            "occurrences": 373,
+            "unsplit": 371,
+            "unsplit_pct": 99.46,
+            "exact": 369,
+            "exact_pct": 98.93
+          },
+          {
+            "pattern": "||",
+            "occurrences": 280,
+            "unsplit": 276,
+            "unsplit_pct": 98.57,
+            "exact": 273,
+            "exact_pct": 97.5
+          },
+          {
+            "pattern": "<=",
+            "occurrences": 321,
+            "unsplit": 3,
+            "unsplit_pct": 0.93,
+            "exact": 1,
+            "exact_pct": 0.31
+          },
+          {
+            "pattern": ">=",
+            "occurrences": 313,
+            "unsplit": 3,
+            "unsplit_pct": 0.96,
+            "exact": 0,
+            "exact_pct": 0.0
+          }
+        ],
+        "expr_if": [
+          {
+            "pattern": "if(",
+            "occurrences": 3787,
+            "unsplit": 3703,
+            "unsplit_pct": 97.78,
+            "exact": 876,
+            "exact_pct": 23.13
+          },
+          {
+            "pattern": "el{",
+            "occurrences": 1309,
+            "unsplit": 1210,
+            "unsplit_pct": 92.44,
+            "exact": 4,
+            "exact_pct": 0.31
+          }
+        ],
+        "match": [
+          {
+            "pattern": "mt ",
+            "occurrences": 316,
+            "unsplit": 214,
+            "unsplit_pct": 67.72,
+            "exact": 85,
+            "exact_pct": 26.9
+          },
+          {
+            "pattern": "$ok:",
+            "occurrences": 304,
+            "unsplit": 288,
+            "unsplit_pct": 94.74,
+            "exact": 30,
+            "exact_pct": 9.87
+          },
+          {
+            "pattern": "$err:",
+            "occurrences": 304,
+            "unsplit": 258,
+            "unsplit_pct": 84.87,
+            "exact": 0,
+            "exact_pct": 0.0
+          }
+        ],
+        "interpolation_open": [
+          {
+            "pattern": "\\(",
+            "occurrences": 2584,
+            "unsplit": 1693,
+            "unsplit_pct": 65.52,
+            "exact": 354,
+            "exact_pct": 13.7
+          }
+        ],
+        "collection_open": [
+          {
+            "pattern": "@(",
+            "occurrences": 1600,
+            "unsplit": 1314,
+            "unsplit_pct": 82.12,
+            "exact": 381,
+            "exact_pct": 23.81
+          }
+        ],
+        "type_sigils": [
+          {
+            "pattern": "$i64",
+            "occurrences": 0,
+            "unsplit": 0,
+            "unsplit_pct": null,
+            "exact": 0,
+            "exact_pct": null
+          },
+          {
+            "pattern": "$f64",
+            "occurrences": 0,
+            "unsplit": 0,
+            "unsplit_pct": null,
+            "exact": 0,
+            "exact_pct": null
+          },
+          {
+            "pattern": "$str",
+            "occurrences": 0,
+            "unsplit": 0,
+            "unsplit_pct": null,
+            "exact": 0,
+            "exact_pct": null
+          },
+          {
+            "pattern": "$bool",
+            "occurrences": 0,
+            "unsplit": 0,
+            "unsplit_pct": null,
+            "exact": 0,
+            "exact_pct": null
+          },
+          {
+            "pattern": "$u64",
+            "occurrences": 0,
+            "unsplit": 0,
+            "unsplit_pct": null,
+            "exact": 0,
+            "exact_pct": null
+          },
+          {
+            "pattern": "$byte",
+            "occurrences": 0,
+            "unsplit": 0,
+            "unsplit_pct": null,
+            "exact": 0,
+            "exact_pct": null
+          }
+        ],
+        "decl_heads": [
+          {
+            "pattern": "m=",
+            "occurrences": 2097,
+            "unsplit": 2095,
+            "unsplit_pct": 99.9,
+            "exact": 1501,
+            "exact_pct": 71.58
+          },
+          {
+            "pattern": "f=",
+            "occurrences": 4500,
+            "unsplit": 4492,
+            "unsplit_pct": 99.82,
+            "exact": 5,
+            "exact_pct": 0.11
+          },
+          {
+            "pattern": "t=",
+            "occurrences": 179,
+            "unsplit": 175,
+            "unsplit_pct": 97.77,
+            "exact": 38,
+            "exact_pct": 21.23
+          },
+          {
+            "pattern": "i=",
+            "occurrences": 5632,
+            "unsplit": 5622,
+            "unsplit_pct": 99.82,
+            "exact": 85,
+            "exact_pct": 1.51
+          }
+        ],
+        "loop": [
+          {
+            "pattern": "lp(",
+            "occurrences": 1642,
+            "unsplit": 1642,
+            "unsplit_pct": 100.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          }
+        ],
+        "early_return": [
+          {
+            "pattern": "{<",
+            "occurrences": 2969,
+            "unsplit": 2952,
+            "unsplit_pct": 99.43,
+            "exact": 724,
+            "exact_pct": 24.39
+          },
+          {
+            "pattern": ";<",
+            "occurrences": 3095,
+            "unsplit": 2327,
+            "unsplit_pct": 75.19,
+            "exact": 57,
+            "exact_pct": 1.84
+          }
+        ],
+        "type_annotations": [
+          {
+            "pattern": ":i64",
+            "occurrences": 3201,
+            "unsplit": 2699,
+            "unsplit_pct": 84.32,
+            "exact": 20,
+            "exact_pct": 0.62
+          },
+          {
+            "pattern": ":str",
+            "occurrences": 4122,
+            "unsplit": 2812,
+            "unsplit_pct": 68.22,
+            "exact": 53,
+            "exact_pct": 1.29
+          },
+          {
+            "pattern": ":bool",
+            "occurrences": 929,
+            "unsplit": 469,
+            "unsplit_pct": 50.48,
+            "exact": 84,
+            "exact_pct": 9.04
+          },
+          {
+            "pattern": ":f64",
+            "occurrences": 246,
+            "unsplit": 221,
+            "unsplit_pct": 89.84,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": ":u64",
+            "occurrences": 82,
+            "unsplit": 74,
+            "unsplit_pct": 90.24,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "@i64",
+            "occurrences": 556,
+            "unsplit": 494,
+            "unsplit_pct": 88.85,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "@str",
+            "occurrences": 569,
+            "unsplit": 129,
+            "unsplit_pct": 22.67,
+            "exact": 0,
+            "exact_pct": 0.0
+          }
+        ],
+        "stdlib_surface": [
+          {
+            "pattern": ".get(",
+            "occurrences": 1956,
+            "unsplit": 1878,
+            "unsplit_pct": 96.01,
+            "exact": 113,
+            "exact_pct": 5.78
+          },
+          {
+            "pattern": ".len",
+            "occurrences": 2242,
+            "unsplit": 2195,
+            "unsplit_pct": 97.9,
+            "exact": 122,
+            "exact_pct": 5.44
+          },
+          {
+            "pattern": "std.io",
+            "occurrences": 1793,
+            "unsplit": 1793,
+            "unsplit_pct": 100.0,
+            "exact": 0,
+            "exact_pct": 0.0
+          },
+          {
+            "pattern": "io.println(",
+            "occurrences": 3234,
+            "unsplit": 1486,
+            "unsplit_pct": 45.95,
+            "exact": 1486,
+            "exact_pct": 45.95
+          },
+          {
+            "pattern": "let ",
+            "occurrences": 6005,
+            "unsplit": 5739,
+            "unsplit_pct": 95.57,
+            "exact": 36,
+            "exact_pct": 0.6
+          },
+          {
+            "pattern": "mut.",
+            "occurrences": 1618,
+            "unsplit": 1601,
+            "unsplit_pct": 98.95,
+            "exact": 0,
+            "exact_pct": 0.0
+          }
+        ]
+      },
+      "summary": {
+        "forced_patterns_single_token_standalone": "16/26",
+        "forced_patterns_single_token_standalone_pct": 61.5,
+        "forced_occurrences_in_sample": 33675,
+        "forced_unsplit_pct": 85.14,
+        "forced_exact_pct": 14.22,
+        "split_occurrences": 5005
+      }
+    }
+  }
+}

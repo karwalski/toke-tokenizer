@@ -1,0 +1,173 @@
+{
+  "story": "131.20",
+  "generated": "2026-09-18T12:57:32.311033+00:00",
+  "tkc_version": "toke 2.8.0",
+  "corpus": "/tmp/t131/freeze_full",
+  "ids": null,
+  "num_programs": 23381,
+  "min_failures": [
+    {
+      "task_id": "D-DAT-0003v219",
+      "reason": "tkc --min emitted 8 lines, expected 1"
+    }
+  ],
+  "total_chars": 6834145,
+  "genuine_decl_heads": 127096,
+  "wart_occurrences": 21722,
+  "wart_per_genuine_pct": 17.091,
+  "programs_with_wart": 9142,
+  "programs_with_wart_pct": 39.1,
+  "warts_per_1k_chars": 3.1785,
+  "per_head": {
+    "m=": {
+      "genuine": 23598,
+      "wart": 1608,
+      "wart_per_genuine_pct": 6.81
+    },
+    "f=": {
+      "genuine": 52752,
+      "wart": 159,
+      "wart_per_genuine_pct": 0.3
+    },
+    "t=": {
+      "genuine": 1636,
+      "wart": 19094,
+      "wart_per_genuine_pct": 1167.11
+    },
+    "i=": {
+      "genuine": 49110,
+      "wart": 861,
+      "wart_per_genuine_pct": 1.75
+    }
+  },
+  "wart_followed_by": {
+    "=": 20034,
+    "==": 1688
+  },
+  "per_category": {
+    "A-ARR": {
+      "genuine": 9284,
+      "wart": 2472,
+      "programs": 1714,
+      "programs_with_wart": 1033
+    },
+    "A-CND": {
+      "genuine": 7051,
+      "wart": 1102,
+      "programs": 1714,
+      "programs_with_wart": 457
+    },
+    "A-ERR": {
+      "genuine": 9028,
+      "wart": 839,
+      "programs": 1546,
+      "programs_with_wart": 420
+    },
+    "A-MTH": {
+      "genuine": 7923,
+      "wart": 1756,
+      "programs": 1714,
+      "programs_with_wart": 706
+    },
+    "A-SRT": {
+      "genuine": 10118,
+      "wart": 2784,
+      "programs": 1714,
+      "programs_with_wart": 901
+    },
+    "A-STR": {
+      "genuine": 8822,
+      "wart": 2126,
+      "programs": 1714,
+      "programs_with_wart": 792
+    },
+    "D-CFG": {
+      "genuine": 9016,
+      "wart": 994,
+      "programs": 1596,
+      "programs_with_wart": 448
+    },
+    "D-CLI": {
+      "genuine": 8788,
+      "wart": 1110,
+      "programs": 1636,
+      "programs_with_wart": 534
+    },
+    "D-CRY": {
+      "genuine": 9574,
+      "wart": 912,
+      "programs": 1714,
+      "programs_with_wart": 491
+    },
+    "D-DAT": {
+      "genuine": 10737,
+      "wart": 2669,
+      "programs": 1685,
+      "programs_with_wart": 1076
+    },
+    "D-FIO": {
+      "genuine": 8243,
+      "wart": 1398,
+      "programs": 1546,
+      "programs_with_wart": 662
+    },
+    "D-NET": {
+      "genuine": 9652,
+      "wart": 1161,
+      "programs": 1714,
+      "programs_with_wart": 527
+    },
+    "D-TST": {
+      "genuine": 9902,
+      "wart": 1341,
+      "programs": 1713,
+      "programs_with_wart": 638
+    },
+    "D-WEB": {
+      "genuine": 8958,
+      "wart": 1058,
+      "programs": 1661,
+      "programs_with_wart": 457
+    }
+  },
+  "examples": [
+    "et right=left",
+    "t result=mut.",
+    "t result=mut.",
+    "t result=mut.",
+    "t result=mut.",
+    "t result=mut.",
+    "let part=mut.",
+    ";let sum=mut.",
+    ";let sum=mut.",
+    "t result=mut.",
+    "et count=mut.",
+    "et count=mut."
+  ],
+  "realised_on_sp_models": [
+    {
+      "model": "models/toke.model",
+      "head_pieces_emitted": {
+        "m=": 26226,
+        "i=": 65978,
+        "f=": 52920,
+        "t=": 21096
+      },
+      "head_pieces_preceded_by_identifier_char": {
+        "t=": 19094,
+        "m=": 1608,
+        "i=": 861,
+        "f=": 159
+      },
+      "total_emitted": 166220,
+      "total_mid_identifier": 21722,
+      "mid_identifier_pct": 13.07
+    }
+  ],
+  "rule": {
+    "material_ratio": 0.05,
+    "material_program_share": 0.1
+  },
+  "material": true,
+  "recommendation": "seeded_merges"
+}
