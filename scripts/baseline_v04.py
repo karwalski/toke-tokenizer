@@ -195,7 +195,10 @@ def load_tokenizers(specs: list[tuple[str, str, str]], allow_download: bool) -> 
             else:
                 raise ValueError(f"unknown tokenizer kind {kind}")
             print(f"  loaded {name:14s} {kind:9s} vocab={toks[-1].vocab_size}")
-        except Exception as exc:  # missing file / not in cache / gated
+        # BLE001 suppressed: each backend (sentencepiece, tokenizers, huggingface_hub, tiktoken)
+        # raises its own unrelated exception types for "not available here"; a tokenizer that
+        # cannot be loaded must be reported as SKIPPED rather than abort the whole baseline.
+        except Exception as exc:  # noqa: BLE001 - missing file / not in cache / gated
             reason = str(exc).splitlines()[0][:200]
             skipped.append({"name": name, "kind": kind, "locator": loc, "reason": reason})
             print(f"  SKIPPED {name}: {reason}")
@@ -272,7 +275,11 @@ def measure(tok: Tok, recs: list[dict[str, Any]]) -> dict[str, Any]:
         try:
             if tok.decode(ids) == r["text"]:
                 roundtrip_ok += 1
-        except Exception:
+        # BLE001/S110 suppressed: any decode failure *is* the measurement — a record that will not
+        # round-trip simply does not increment roundtrip_ok. Backends raise unrelated types
+        # (UnicodeDecodeError, RuntimeError, KeyError), so the counter must not be narrowed
+        # or made noisy; roundtrip_pct in the report is the visible signal.
+        except Exception:  # noqa: BLE001, S110 - a failed decode counts as a round-trip miss
             pass
         counts_unmasked.append(len(tok.encode(r["min"])))
     chars = [len(r["text"]) for r in recs]
@@ -314,7 +321,7 @@ def add_ratios(results: dict[str, Any], base: str) -> None:
     if base not in results:
         return
     b = np.array(results[base]["per_record_counts"], dtype=float)
-    for name, r in results.items():
+    for r in results.values():
         c = np.array(r["per_record_counts"], dtype=float)
         ratio = float(c.sum() / b.sum())
         r["vs_" + base] = {
@@ -368,10 +375,10 @@ def write_markdown(path: Path, report: dict[str, Any]) -> None:
         L.append(f"| {n} | {r['vocab_size']} | {mk['total_tokens']:,} | {mk['tokens_per_program_mean']:.1f} {fmt_ci(ci['tokens_per_program_mean'])} "
                  f"| {mk['tokens_per_program_median']:.0f} | {mk['tokens_per_program_p95']:.0f} | {mk['fertility_mean']:.4f} {fmt_ci(ci['fertility_mean'], 4)} "
                  f"| {mk['chars_per_token']:.3f} | {100 * r['vocab_utilization']:.1f}% | {vs_s} | {r['roundtrip_pct']:.1f}% | {r['lossy_chars_total']:,} |")
-    L += ["", "Ratio < 1 means fewer tokens than cl100k_base on the same text (TEMSpec §2.2 compression-ratio form; "
-          "same source language, different tokenizers — informational cross-tokenizer density, §6.2, not the §6.1 gate metric). "
-          "`lossy chars` = characters dropped (HF file with `unk_token: null`) or mapped to `<unk>` (SentencePiece without "
-          "byte fallback); a tokenizer with lossy chars > 0 under-counts and its row is informational only.", ""]
+    L += ["", ("Ratio < 1 means fewer tokens than cl100k_base on the same text (TEMSpec §2.2 compression-ratio form; "
+               "same source language, different tokenizers — informational cross-tokenizer density, §6.2, not the §6.1 gate metric). "
+               "`lossy chars` = characters dropped (HF file with `unk_token: null`) or mapped to `<unk>` (SentencePiece without "
+               "byte fallback); a tokenizer with lossy chars > 0 under-counts and its row is informational only."), ""]
     lossy_rows = [(n, res[n]["lossy_chars_top"]) for n in order if res[n]["lossy_chars_total"]]
     if lossy_rows:
         L += ["Lossy tokenizers — most frequent dropped/unk surfaces (surface, count):", ""]
@@ -411,19 +418,19 @@ def write_markdown(path: Path, report: dict[str, Any]) -> None:
     for s in report["skipped_tokenizers"]:
         L.append(f"| {s['name']} | {s['kind']} | — | SKIPPED: {s['reason']} |")
     L += ["", "## Methodology", "",
-          f"- Sample: {m['n_records']} records, ids file `{m['ids_file']}` (sha256 `{m['ids_file_sha256']}`), "
-          f"stratified by category × difficulty, seed 131, drawn from the freeze-129 `MANIFEST.jsonl`.",
+          (f"- Sample: {m['n_records']} records, ids file `{m['ids_file']}` (sha256 `{m['ids_file_sha256']}`), "
+           f"stratified by category × difficulty, seed 131, drawn from the freeze-129 `MANIFEST.jsonl`."),
           f"- Corpus source: `{m['corpus']}` ({m['corpus_note']}).",
           f"- Record integrity: {m['record_sha_matches']}/{m['n_records']} record files match the freeze-129 sha256 in the ids file"
           + (f"; MISMATCHES: {m['record_sha_mismatches'][:10]}" if m["record_sha_mismatches"] else "") + ".",
           f"- Records dropped (failed `tkc --min`): {len(m['failures'])}.",
-          f"- Canonical form: `tkc --min` ({m['tkc_version']}), one program per line; strings masked to `_` per plan D2 "
-          f"(`toke/scripts/patterns/mask_strings.py`, keeps `\\(...)` interpolation interiors).",
-          f"- sample sha256 (sha256 over the sorted per-record `min_sha256`s): `{m['sample_min_sha256']}`; "
-          f"masked-text sha256: `{m['sample_masked_sha256']}`.",
+          (f"- Canonical form: `tkc --min` ({m['tkc_version']}), one program per line; strings masked to `_` per plan D2 "
+           f"(`toke/scripts/patterns/mask_strings.py`, keeps `\\(...)` interpolation interiors)."),
+          (f"- sample sha256 (sha256 over the sorted per-record `min_sha256`s): `{m['sample_min_sha256']}`; "
+           f"masked-text sha256: `{m['sample_masked_sha256']}`."),
           "- Token counts: `len(encode(text))` with default settings (TEMSpec §3.3); Qwen adds no BOS/EOS by default.",
-          f"- CIs: percentile bootstrap, {BOOTSTRAP_N:,} resamples, seed 131 (TEMSpec §5.2). Fertility = tokens/char (§2.4). "
-          "Vocab utilisation = unique ids used / vocab size (§2.5).",
+          (f"- CIs: percentile bootstrap, {BOOTSTRAP_N:,} resamples, seed 131 (TEMSpec §5.2). Fertility = tokens/char (§2.4). "
+           "Vocab utilisation = unique ids used / vocab size (§2.5)."),
           f"- Per-record counts: `{m['csv_file']}` (TEMSpec §5.3).", ""]
     if report.get("notes_md"):
         L += ["", report["notes_md"].rstrip(), ""]
@@ -438,9 +445,9 @@ def syntax_section(report: dict[str, Any]) -> list[str]:
         return []
     d = json.loads(p.read_text(encoding="utf-8"))
     L = ["", "## v0.4 syntax single-token coverage (plan D4 forced list)", "",
-         f"From `{p.relative_to(REPO)}` ({d['num_programs']} canonical programs). "
-         "`standalone` = pattern alone encodes to one piece; `unsplit` = in-context occurrences that lie inside one token "
-         "(fragment merges count); `exact` = occurrences that are a token by themselves.", "",
+         (f"From `{p.relative_to(REPO)}` ({d['num_programs']} canonical programs). "
+          "`standalone` = pattern alone encodes to one piece; `unsplit` = in-context occurrences that lie inside one token "
+          "(fragment merges count); `exact` = occurrences that are a token by themselves."), "",
          "| model | vocab | standalone single-token | in-context occurrences | unsplit | exact | split occurrences |",
          "|---|---:|---:|---:|---:|---:|---:|"]
     for name, mres in d["models"].items():
@@ -461,11 +468,11 @@ def wart_section(report: dict[str, Any]) -> list[str]:
         return []
     d = json.loads(p.read_text(encoding="utf-8"))
     L = ["", "## D4 AddedToken substring wart (`m= f= t= i=`)", "",
-         f"From `{p.relative_to(REPO)}` over {d['num_programs']:,} canonical programs "
-         f"({d['total_chars']:,} chars; {len(d.get('min_failures', []))} failed `--min`).", "",
+         (f"From `{p.relative_to(REPO)}` over {d['num_programs']:,} canonical programs "
+          f"({d['total_chars']:,} chars; {len(d.get('min_failures', []))} failed `--min`)."), "",
          f"- boundary-aligned `[mfti]=` occurrences (decl heads + `;i=i+1` loop steps): **{d['genuine_decl_heads']:,}**",
-         f"- wart occurrences (identifier char + `[mfti]` + `=`, e.g. `result=`, `sum=`, `xi=`): **{d['wart_occurrences']:,}** "
-         f"= {d['wart_per_genuine_pct']}% of boundary-aligned; followed by `=` {d['wart_followed_by'].get('=', 0):,} / `==` {d['wart_followed_by'].get('==', 0):,}",
+         (f"- wart occurrences (identifier char + `[mfti]` + `=`, e.g. `result=`, `sum=`, `xi=`): **{d['wart_occurrences']:,}** "
+          f"= {d['wart_per_genuine_pct']}% of boundary-aligned; followed by `=` {d['wart_followed_by'].get('=', 0):,} / `==` {d['wart_followed_by'].get('==', 0):,}"),
          f"- programs touched: {d['programs_with_wart']:,} ({d['programs_with_wart_pct']}%); {d['warts_per_1k_chars']} per 1k chars",
          "", "| head | boundary-aligned | wart | wart / aligned |", "|---|---:|---:|---:|"]
     for h, v in d["per_head"].items():
@@ -474,8 +481,8 @@ def wart_section(report: dict[str, Any]) -> list[str]:
         L.append(f"\nRealised on `{Path(r['model']).relative_to(REPO) if r['model'].startswith(str(REPO)) else r['model']}` "
                  f"(user_defined_symbols): {r['total_mid_identifier']:,} of {r['total_emitted']:,} emitted head pieces "
                  f"({r['mid_identifier_pct']}%) are preceded by an identifier character.")
-    L += ["", f"**Recommendation: `{d['recommendation']}`** (material={d['material']}; rule: wart/aligned ≥ "
-          f"{d['rule']['material_ratio']:.0%} or programs touched ≥ {d['rule']['material_program_share']:.0%})."]
+    L += ["", (f"**Recommendation: `{d['recommendation']}`** (material={d['material']}; rule: wart/aligned ≥ "
+               f"{d['rule']['material_ratio']:.0%} or programs touched ≥ {d['rule']['material_program_share']:.0%}).")]
     return L
 
 

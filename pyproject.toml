@@ -19,10 +19,21 @@ eval = [
 ]
 dev = [
     "pytest>=7",
-    "ruff>=0.4",
+    # Pinned to a minor series on purpose (story 130.19): ruff's DEFAULT rule set grows
+    # between minors, so an unpinned `ruff>=0.4` makes `make lint` red or green depending
+    # on the day CI ran. The repo is clean under the 0.16 default set.
+    "ruff>=0.16,<0.17",
     "mypy>=1.8",
+    # Typed deps that the checked sources import: mypy must see the same types in CI as
+    # locally, otherwise they degrade to Any there and the two runs disagree.
+    "numpy>=1.26",
+    "tiktoken>=0.7",
 ]
 
+# Lint/typecheck policy (story 130.19) is deliberately IDENTICAL to ~/tk/toke-corpus and
+# ~/tk/toke-model: ruff's default rule set (no bespoke `select`/`ignore`), line-length 100,
+# target py311, and mypy `strict`. Suppressions live at the offending line with a reason,
+# never as a file- or project-level disable.
 [tool.ruff]
 line-length = 100
 target-version = "py311"
@@ -30,3 +41,18 @@ target-version = "py311"
 [tool.mypy]
 strict = true
 python_version = "3.11"
+# `python/` holds the toke_tokenizer package source (not installed); scripts/hf_spike.py
+# imports it, so it must resolve for mypy the same way it does at runtime.
+mypy_path = "python"
+
+# Untyped third-party packages: no stubs, no py.typed marker, and not installed in CI
+# (they are training-box deps). Both facts produce a module-level error under `strict`,
+# and both make the module Any either way -- so silencing the import keeps the CI result
+# identical to the local one instead of environment-dependent.
+[[tool.mypy.overrides]]
+module = [
+    "sentencepiece.*",
+    "tokenizers.*",
+    "transformers.*",
+]
+ignore_missing_imports = true

@@ -12,7 +12,7 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 
-import check_provenance as cp  # noqa: E402
+import check_provenance as cp
 
 
 def _git(root: Path, *args: str) -> str:

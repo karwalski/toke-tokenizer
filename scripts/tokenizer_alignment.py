@@ -174,7 +174,10 @@ def _uses_bytelevel(data: dict[str, Any]) -> bool:
 def load_qwen(model_name: str, local_files_only: bool) -> Any:
     try:
         return AutoTokenizer.from_pretrained(model_name, local_files_only=local_files_only)
-    except Exception as exc:  # network / cache miss
+    # BLE001 suppressed: transformers raises a wide, version-dependent family here (OSError,
+    # HFValidationError, requests errors); the handler only reports and exits, so narrowing
+    # it would change which failures are reported cleanly vs. tracebacked.
+    except Exception as exc:  # noqa: BLE001 - network / cache miss
         print(
             f"ERROR: could not load Qwen tokenizer {model_name!r}: {exc}\n"
             "If offline, make sure the model is in the HF cache (~/.cache/huggingface/hub).",
@@ -326,8 +329,8 @@ def write_reports(out_dir: Path, report: dict[str, Any]) -> tuple[Path, Path]:
         "## Occurrence-weighted coverage on canonical code",
         "",
         f"- toke token occurrences: {c['toke_token_occurrences']}",
-        f"- covered by a single Qwen token: {c['covered_by_single_qwen_token']} "
-        f"(**{c['coverage_pct']:.1f}%**)",
+        (f"- covered by a single Qwen token: {c['covered_by_single_qwen_token']} "
+         f"(**{c['coverage_pct']:.1f}%**)"),
         "",
         "Top uncovered toke pieces (surface text, count):",
         "",
@@ -352,9 +355,9 @@ def write_reports(out_dir: Path, report: dict[str, Any]) -> tuple[Path, Path]:
         "",
         r["summary"],
         "",
-        "Thresholds: coverage >= 80% -> use Qwen directly; 50-80% -> targeted extension; "
-        "< 50% -> extension prototype.  Set-overlap novelty is reported for continuity with "
-        "the 9.8.2 run but is not the decision variable (it counts every rare merge equally).",
+        ("Thresholds: coverage >= 80% -> use Qwen directly; 50-80% -> targeted extension; "
+         "< 50% -> extension prototype.  Set-overlap novelty is reported for continuity with "
+         "the 9.8.2 run but is not the decision variable (it counts every rare merge equally)."),
         "",
     ]
     mp = out_dir / "alignment_recommendation.md"

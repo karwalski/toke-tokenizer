@@ -3,9 +3,21 @@
 ## Rules
 
 - Tokenizer vocabulary files (.model, .vocab) are never committed to git.
-- All Python code must pass `ruff check .` and `mypy .` before commit.
+- All Python code must pass `make lint` (ruff) and `make typecheck` (mypy) before commit;
+  `make check` runs both plus the tests and the provenance check, in CI's order.
 - Changes to tokenizer training parameters require a documented rationale
   in docs/tokenizer-design.md.
+
+## Lint and typecheck policy
+
+- The rule set is deliberately identical to `toke-corpus` and `toke-model`: ruff's **default**
+  rules (no bespoke `select`/`ignore`), `line-length = 100`, `target-version = "py311"`, and
+  mypy `strict`. See `pyproject.toml`.
+- `ruff` is pinned to one minor series (`>=0.16,<0.17`) because ruff's default rule set grows
+  between minors; an unpinned range makes the gate pass or fail depending on the day CI ran.
+- A violation is fixed, not hidden. Where a fix would change behaviour, suppress it at the
+  offending line with `# noqa: RULE` / `# type: ignore[code]` **and a comment saying why**.
+  File-level or project-level disables are not allowed.
 
 ## Tokenizer artefact provenance
 

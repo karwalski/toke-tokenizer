@@ -20,14 +20,16 @@ jobs:
       - name: Install dependencies
         run: pip install -e ".[dev]"
 
+      # Each step is the matching make target, so local `make lint` / `make typecheck`
+      # and CI cannot drift apart (story 130.19).
       - name: Lint
-        run: ruff check .
+        run: make lint
 
       - name: Type check
-        run: mypy .
+        run: make typecheck
 
       - name: Test
-        run: python -m pytest tests/ -v
+        run: make test
 
       - name: Tokenizer artefact provenance
-        run: python scripts/check_provenance.py
+        run: make check-provenance

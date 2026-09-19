@@ -5,15 +5,14 @@ from __future__ import annotations
 import json
 import re
 from pathlib import Path
-from typing import Optional
 
 _DATA_PATH = Path(__file__).parent / "data" / "tokenizer_v03.json"
 
 # Module-level cache
-_tokenizer: Optional["TokeTokenizer"] = None
+_tokenizer: TokeTokenizer | None = None
 
 
-def _get_tokenizer() -> "TokeTokenizer":
+def _get_tokenizer() -> TokeTokenizer:
     global _tokenizer
     if _tokenizer is None:
         _tokenizer = TokeTokenizer.from_file(_DATA_PATH)
@@ -42,7 +41,7 @@ class TokeTokenizer:
         }
 
     @classmethod
-    def from_file(cls, path: Path | str) -> "TokeTokenizer":
+    def from_file(cls, path: Path | str) -> TokeTokenizer:
         path = Path(path)
         with path.open("r", encoding="utf-8") as f:
             data = json.load(f)
@@ -76,7 +75,7 @@ class TokeTokenizer:
 
         while True:
             # Find the pair with the lowest merge rank
-            best_pair: Optional[tuple[str, str]] = None
+            best_pair: tuple[str, str] | None = None
             best_rank = len(self.merges)
 
             for i in range(len(word) - 1):

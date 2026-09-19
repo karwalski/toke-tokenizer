@@ -101,11 +101,12 @@ import os
 import random
 import re
 import sys
+from collections.abc import Callable
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import tkcanon  # noqa: E402
+import tkcanon
 
 REPO = Path(__file__).resolve().parent.parent
 GRAMMAR_VERSION = 1
@@ -170,14 +171,13 @@ def fragments(text: str) -> list[str]:
         c = text[i]
         prev = text[i - 1] if i > 0 else ""
         # --- heads (only at an identifier boundary) ------------------------
-        if c in _IDENT_START or c == "$":
-            if prev not in _IDENT_CHAR:
-                head = next((h for h in HEADS if text.startswith(h, i)), None)
-                if head is not None:
-                    flush()
-                    out.append(head)
-                    i += len(head)
-                    continue
+        if (c in _IDENT_START or c == "$") and prev not in _IDENT_CHAR:
+            head = next((h for h in HEADS if text.startswith(h, i)), None)
+            if head is not None:
+                flush()
+                out.append(head)
+                i += len(head)
+                continue
         if c in _IDENT_START:
             j = _ident_end(text, i)
             word = text[i:j]
@@ -407,7 +407,10 @@ def derive(cats: list[dict[str, Any]], extract: Callable[[Path], str], toke_repo
             continue
         try:
             text = extract(fixture)
-        except Exception as e:  # tkc failure, no `pat`, unbalanced braces ...
+        # BLE001 suppressed: `extract` shells out to tkc and parses its output, so the failure modes
+        # are open-ended (CalledProcessError, ValueError, IndexError, UnicodeDecodeError).
+        # Every one of them must land in `unparsed` with its type recorded, never abort the run.
+        except Exception as e:  # noqa: BLE001 - tkc failure, no `pat`, unbalanced braces ...
             unparsed.append({**{k: str(v) for k, v in f.items()},
                              "reason": f"{type(e).__name__}: {str(e)[:200]}"})
             continue

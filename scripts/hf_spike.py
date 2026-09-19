@@ -99,7 +99,7 @@ def load_fixture(limit: int | None = None) -> list[str]:
 
 def load_pip_runtime() -> Any:
     sys.path.insert(0, str(REPO / "python"))
-    from toke_tokenizer.tokenizer import TokeTokenizer  # type: ignore[import-not-found]
+    from toke_tokenizer.tokenizer import TokeTokenizer
 
     return TokeTokenizer
 

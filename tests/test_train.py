@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
+from typing import Any
 from unittest.mock import patch
 
 import pytest
@@ -11,7 +12,6 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import train
-
 
 # ---------------------------------------------------------------------------
 # Config generation
@@ -189,7 +189,8 @@ class TestTrainFunction:
         """train() passes config to SentencePieceTrainer.train()."""
         config = train.build_config(tmp_path / "in.txt", tmp_path / "out")
 
-        mock_spm = type(sys)("sentencepiece")
+        # Deliberately a stand-in module object; Any so mypy allows the faked attribute.
+        mock_spm: Any = type(sys)("sentencepiece")
         mock_trainer = type("Trainer", (), {"train": staticmethod(lambda **kw: None)})
         mock_spm.SentencePieceTrainer = mock_trainer
 
@@ -204,7 +205,8 @@ class TestTrainFunction:
         def raise_error(**kw: object) -> None:
             raise RuntimeError("training exploded")
 
-        mock_spm = type(sys)("sentencepiece")
+        # Deliberately a stand-in module object; Any so mypy allows the faked attribute.
+        mock_spm: Any = type(sys)("sentencepiece")
         mock_trainer = type("Trainer", (), {"train": staticmethod(raise_error)})
         mock_spm.SentencePieceTrainer = mock_trainer
 

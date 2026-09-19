@@ -290,7 +290,7 @@ def main(argv: list[str] | None = None) -> int:
         print("ERROR: sentencepiece is not installed", file=sys.stderr)
         return 1
     try:
-        import tiktoken  # type: ignore[import-untyped]
+        import tiktoken
     except ImportError:
         print("ERROR: tiktoken is not installed", file=sys.stderr)
         return 1
