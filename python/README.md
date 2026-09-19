@@ -1,8 +1,27 @@
 # toke-tokenizer
 
-A pure Python BPE tokenizer for the [toke programming language](https://github.com/karwalski/toke). Trained on normalised toke source code with a 16,384-token vocabulary.
+A pure Python BPE tokenizer for the [toke programming language](https://github.com/karwalski/toke). Trained on normalised **v0.3** toke source code with a 16,384-token vocabulary.
 
-Achieves approximately 52% token reduction compared to OpenAI's cl100k_base tokenizer on toke source code.
+**Token-efficiency claims — read before quoting.** This package previously advertised
+"approximately 52% token reduction compared to cl100k_base". That claim is **withdrawn**.
+It described Toke-16K encoding toke source versus cl100k_base encoding *the same toke
+source* (one text, two tokenizers, N = 42 v0.3 benchmark programs) — never a comparison
+with Python — and it no longer holds: on canonical `tkc --min` v0.4 text (N = 2,000
+stratified corpus records) every shipped toke tokenizer needs **more** tokens than
+cl100k_base, and this v0.3 vocabulary's apparent margin is inflated by an `unk_token` of
+`null` that silently drops backslashes. Use it to count tokens, not to make a claim.
+
+Two rules for anyone measuring with it:
+
+1. **Never tokenize Python (or any non-toke source) with this tokenizer** for a
+   comparison. It is trained on toke text; off-domain it inflates the other side and
+   measures its own training bias.
+2. **A cross-language number uses one tokenizer on both sides.** Under cl100k_base on
+   both sides, toke currently costs about 1.3x the tokens of equivalent Python
+   (1.34x [1.22, 1.48], N = 60 Gate-1 tasks).
+
+Current measurements and the approved wording for any public claim:
+[`docs/metrics-baseline.md`](https://github.com/karwalski/toke/blob/main/docs/metrics-baseline.md).
 
 ## Installation
 

@@ -1,5 +1,11 @@
 ## Findings and decisions (131.20, hand-written; appended via `--notes`)
 
+**Basis for every number below** (TEMSpec §6.3): N = 2,000 stratified records from the
+2026-08-19 corpus freeze, canonical `tkc --min` text with string bodies masked to `"_"`;
+ids in `data/baseline_sample_ids_v04.txt`. All comparisons are *one text, several
+tokenizers* (§2.2 compression ratio) — none of them is a comparison with another
+language.
+
 ### Headline reading
 - **Every shipped toke tokenizer is worse than cl100k_base on canonical v0.4 text.** `sp8k` (`models/toke.model`, the TEMSpec `toke-bpe-8k`) needs **15.4% more** tokens than cl100k_base (ratio 1.154, CI [1.147, 1.160]); `sp32k` the same (1.152). Qwen2.5-Coder needs 3.2% more than cl100k; o200k 1.2% more. The v0.3-era "12.5% better than cl100k" prior does not survive `--min` + masking (plan D7 predicted this).
 - `tokenizer_v03.json` *appears* to win (ratio 0.545) but is **lossy on v0.4 code**: its model has `unk_token: null` and no `\` or `^` in the vocab, so HF `tokenizers` silently drops every `\` — i.e. every `\(...)` interpolation opener and every escape — and it has no decoder (generic decode joins pieces with spaces). Its numbers are informational only; it cannot be the pre/post reference and must not ship as the runtime vocab. `sp32k` is also lossy (13,605 `<unk>` tokens: no byte fallback, trained on the 80-char syntax).

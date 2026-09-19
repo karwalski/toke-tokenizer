@@ -4,11 +4,48 @@ BPE tokenizer for the [toke programming language](https://github.com/karwalski/t
 training/evaluation pipeline plus the packaged `toke_tokenizer` Python library.
 
 The current production vocabulary is **v0.3** (16,384 tokens, trained on
-default-syntax toke source, ~52% token reduction vs cl100k_base). A v0.4
-retrain is planned under Epic 116.9 — see
+default-syntax toke source). A v0.4 retrain is planned under Epic 116.9 — see
 `toke/docs/architecture/tokenizer-v04-plan.md`. The original design doc
 (`docs/tokenizer-design.md`, 32K vocab / 2.5–4x targets) is superseded;
 measured results are in the eval reports under `docs/` and `output/`.
+
+## Token efficiency — read this before quoting a number
+
+**No toke tokenizer shipped so far beats cl100k_base.** On canonical `tkc --min`
+v0.4 text with string bodies masked (N = 2,000 stratified corpus records,
+2026-09-18, `docs/baseline_v04_pre131.md`):
+
+| tokenizer | tokens/program | vs cl100k_base |
+|---|---:|---:|
+| cl100k_base | 121.2 [118.9, 123.6] | 1.000 |
+| o200k_base | 122.6 | 1.012 |
+| Qwen2.5-Coder | 125.1 | 1.032 |
+| **SentencePiece 8k (shipped)** | 139.8 | **1.154 — 15.4% MORE tokens** |
+| SentencePiece 32k | 139.6 | 1.152 |
+| `tokenizer_v03.json` (16,384) | 66.0 | 0.545 — **lossy, not creditable** |
+
+`tokenizer_v03.json` only appears to win because its `unk_token` is `null`: it
+silently drops every backslash (2,606 of them in that sample) and therefore
+under-counts. Its row is informational only.
+
+The **"~52% token reduction vs cl100k_base"** that this README and the PyPI
+description used to carry is **withdrawn**. As published it meant Toke-16K
+encoding toke source versus cl100k_base encoding *the same toke source* —
+one text, two tokenizers (TEMSpec §2.2), N = 42 v0.3 benchmark programs — and it
+was never a comparison with Python. It is withdrawn because it is superseded by
+the v0.4 measurement above *and* because it does not reconcile with its own
+published dataset (`toke/docs/reference/token-comparison.md`, the same N = 42
+set, gives 61.6%). A "purpose-built tokenizer beats cl100k" claim becomes
+supportable only when 116.9 trains and locks a v0.4 vocabulary against the
+pinned baseline (cl100k_base = 242,427 tokens on that sample).
+
+**Cross-language numbers.** A toke-trained tokenizer must **never** be run over
+Python, C or Java source: it is out of domain there and inflates the baseline
+mechanically, measuring its own training bias. Any toke-vs-other-language figure
+uses one tokenizer on both sides. Under cl100k_base on both sides toke currently
+costs **1.34x [1.22, 1.48]** the tokens of equivalent Python over the 60 Gate-1
+tasks (N = 60) — more, not fewer. Canonical wording for any public claim:
+`toke/docs/metrics-baseline.md`.
 
 ## Layout
 
