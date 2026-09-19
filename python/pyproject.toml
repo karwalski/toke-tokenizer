@@ -4,13 +4,17 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "toke-tokenizer"
-version = "0.1.0"
-description = "BPE tokenizer for the toke programming language (16K vocab)"
+version = "0.1.1"
+# Story 132.4: the published wheel IS the v0.3 tokenizer (16,384 vocab, trained on
+# v0.3-syntax source). Say so in the summary rather than implying it is current; the
+# v0.4 retrain is Epic 116.9 and is not shipped. The sentence after the dash is the
+# canonical one-liner from toke/docs/about/canonical.json, reproduced word for word.
+description = "The v0.3 BPE tokenizer for toke (16,384 vocab, v0.3-syntax source; the v0.4 retrain is not yet shipped). toke: a compiled language designed for LLM code generation, with a small grammar, one canonical form and compiler verification."
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.10"
 authors = [{name = "Matt Watt"}]
-keywords = ["tokenizer", "bpe", "toke", "programming-language"]
+keywords = ["tokenizer", "bpe", "toke", "programming-language", "llm", "code-generation", "token-efficiency"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -23,8 +27,11 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/karwalski/toke-tokenizer"
+Homepage = "https://tokelang.dev"
+Source = "https://github.com/karwalski/toke"
 Repository = "https://github.com/karwalski/toke-tokenizer"
+"Canonical description" = "https://github.com/karwalski/toke/blob/main/docs/about/canonical.md"
+"Measured numbers" = "https://github.com/karwalski/toke/blob/main/docs/metrics-baseline.md"
 
 [project.optional-dependencies]
 dev = [

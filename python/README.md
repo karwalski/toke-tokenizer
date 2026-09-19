@@ -1,6 +1,28 @@
 # toke-tokenizer
 
-A pure Python BPE tokenizer for the [toke programming language](https://github.com/karwalski/toke). Trained on normalised **v0.3** toke source code with a 16,384-token vocabulary.
+A pure Python BPE tokenizer for the [toke programming language](https://tokelang.dev).
+
+**This package is the v0.3 tokenizer, not a current one.** The vocabulary shipped here is
+the 16,384-token BPE trained on **v0.3-syntax** toke source. toke is on **v0.4**; the v0.4
+retrain is tracked as Epic 116.9 and has not shipped. Use this package to reproduce v0.3
+measurements and to count tokens against that vocabulary — not as "the toke tokenizer".
+
+## About toke
+
+> toke: a compiled language designed for LLM code generation, with a small grammar, one
+> canonical form and compiler verification.
+
+- Website: [tokelang.dev](https://tokelang.dev)
+- Compiler, specification and standard library:
+  [github.com/karwalski/toke](https://github.com/karwalski/toke)
+- This tokenizer:
+  [github.com/karwalski/toke-tokenizer](https://github.com/karwalski/toke-tokenizer)
+
+*The one-liner above is reproduced word for word from the canonical description,
+[`docs/about/canonical.md`](https://github.com/karwalski/toke/blob/main/docs/about/canonical.md).
+Every number published about toke comes from
+[`docs/metrics-baseline.md`](https://github.com/karwalski/toke/blob/main/docs/metrics-baseline.md)
+and nowhere else.*
 
 **Token-efficiency claims — read before quoting.** This package previously advertised
 "approximately 52% token reduction compared to cl100k_base". That claim is **withdrawn**.
