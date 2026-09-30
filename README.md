@@ -75,7 +75,7 @@ tasks (N = 60) — more, not fewer. Canonical wording for any public claim:
 | `scripts/retrain_bpe.py` | Retrains BPE on the default-syntax corpus (`corpus_default.jsonl`), with single-token coverage + compression eval |
 | `scripts/eval_syntax_tokens.py`, `scripts/tokenizer_alignment.py` | Syntax-token coverage eval; vocab overlap analysis vs base-model tokenizers |
 | `python/` | Packaged `toke_tokenizer` library (pure-Python encode/decode/count_tokens; pip-installable, own pyproject/README) |
-| `tokenizer_v03.json` | v0.3 vocab retrain (May 2026), HF tokenizer format. Kept at repo root pending the v0.4 retrain (116.9) |
+| `tokenizer_v03.json` | v0.3 vocab retrain (May 2026), HF tokenizer format. A symlink to `python/toke_tokenizer/data/tokenizer_v03.json`, the tracked copy `count_tokens()` loads (132.109); kept at the root path pending the v0.4 retrain (116.9) |
 | `tests/` | Unit tests for prepare/train/eval |
 
 ## Usage
