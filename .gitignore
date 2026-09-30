@@ -12,6 +12,9 @@ tokenizer-data/
 # Corpus data — large, local only
 *.jsonl
 data/*
+# prepare.py output written under output/ (story 132.110): output/data/train.txt is ~22 MB.
+# Narrow on purpose: output/eval_retrain_11_6_2.json is tracked.
+output/data/
 # models/ stays ignored, but provenance records (story 131.24) are tracked.
 **/models/**
 !**/models/**/
