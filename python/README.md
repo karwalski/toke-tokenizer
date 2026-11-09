@@ -100,4 +100,4 @@ count_tokens('let msg:str = "hello world"', normalise_strings=True)
 
 ## License
 
-MIT
+Apache-2.0. See [LICENSE](https://github.com/karwalski/toke-tokenizer/blob/main/python/LICENSE).
