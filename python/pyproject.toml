@@ -11,9 +11,9 @@ version = "0.1.1"
 # canonical one-liner from toke/docs/about/canonical.json, reproduced word for word.
 description = "The v0.3 BPE tokenizer for toke (16,384 vocab, v0.3-syntax source; the v0.4 retrain is not yet shipped). toke: a compiled language designed for LLM code generation, with a small grammar, one canonical form and compiler verification."
 readme = "README.md"
-license = "MIT"
+license = "Apache-2.0"
 requires-python = ">=3.10"
-authors = [{name = "Matt Watt"}]
+authors = [{name = "Matthew Watt"}]
 keywords = ["tokenizer", "bpe", "toke", "programming-language", "llm", "code-generation", "token-efficiency"]
 classifiers = [
     "Development Status :: 3 - Alpha",

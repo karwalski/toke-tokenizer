@@ -113,4 +113,5 @@ directories (at any depth, including under `output/`), `*.jsonl`, and
 
 ## Licence
 
-Apache 2.0 (the `python/` package ships under its own MIT licence).
+Apache 2.0, including the `python/` package published to PyPI as `toke-tokenizer`.
+See [LICENSE](LICENSE) and [NOTICE](NOTICE).
