@@ -32,7 +32,7 @@
     "hot_path_forms": 9,
     "unparsed": 0,
     "forced": 18,
-    "verify": 121
+    "verify": 122
   },
   "forms": [
     {
@@ -351,7 +351,7 @@
       "fixture": "patterns/acc-dedupe/d.tk",
       "status": "provisional",
       "catalogue": "catalogue.json",
-      "masked_pat": "f=pat(xs:@i64):@i64{let seen=mut.@(\"\":0);let out=mut.@();lp(let i=0;i<xs.len;i=i+1){let v=xs.get(i);let k=\"\\(v)\";if(seen.get(k)==0){seen=seen.set(k;1);out=out.append(v)}};<out}",
+      "masked_pat": "f=pat(xs:@i64):@i64{let seen=mut.@(\"\":0);let out=mut.@();lp(let i=0;i<xs.len;i=i+1){let v=xs.get(i);let k=\"\\(v)\";if(seen.getor(k;0)==0){seen=seen.set(k;1);out=out.append(v)}};<out}",
       "fragments": {
         "f=": 1,
         "(": 1,
@@ -363,15 +363,16 @@
         ");": 3,
         "@();": 1,
         "lp(": 1,
-        ";": 3,
+        ";": 4,
         "<": 1,
         ".len": 1,
         "+": 1,
         "){": 2,
-        ".get(": 2,
+        ".get(": 1,
         "=\"\\(": 1,
         ")\";": 1,
         "if(": 1,
+        ".getor(": 1,
         ")==": 1,
         ".set(": 1,
         ".append(": 1,
@@ -3702,6 +3703,19 @@
       "corpus_programs_share": 0.0,
       "class": "verify",
       "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": ".getor(",
+      "in_canonical_forms": [],
+      "in_hot_path_forms": [
+        "acc-dedupe"
+      ],
+      "canonical_occurrences": 0,
+      "corpus_freq": 0,
+      "corpus_programs": 0,
+      "corpus_programs_share": 0.0,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 0/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".i64(",
