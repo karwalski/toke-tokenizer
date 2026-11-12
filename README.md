@@ -1,10 +1,13 @@
 # toke-tokenizer
 
-BPE tokenizer for the [toke programming language](https://github.com/karwalski/toke-spec):
+BPE tokenizer for the [toke programming language](https://github.com/karwalski/toke):
 training/evaluation pipeline plus the packaged `toke_tokenizer` Python library.
 
-The current production vocabulary is **v0.3** (16,384 tokens, trained on
-default-syntax toke source). A v0.4 retrain is planned under Epic 116.9 — see
+Two toke vocabularies are on record, and neither is a v0.4 tokenizer: the 8K
+SentencePiece model (`models/toke.model`, TEMSpec `toke-bpe-8k`, the "shipped"
+tokenizer in the table below) and the v0.3 16,384-token vocabulary
+(`tokenizer_v03.json`), which the `toke_tokenizer` Python package loads. A v0.4
+retrain is planned under story 116.9 — see
 `toke/docs/architecture/tokenizer-v04-plan.md`. The original design doc
 (`docs/tokenizer-design.md`, 32K vocab / 2.5–4x targets) is superseded;
 measured results are in the eval reports under `docs/` and `output/`.
@@ -74,6 +77,9 @@ tasks (N = 60) — more, not fewer. Canonical wording for any public claim:
 | `prepare.py` / `train.py` / `eval.py` | Corpus prep, SentencePiece BPE training wrapper, evaluation vs cl100k_base |
 | `scripts/retrain_bpe.py` | Retrains BPE on the default-syntax corpus (`corpus_default.jsonl`), with single-token coverage + compression eval |
 | `scripts/eval_syntax_tokens.py`, `scripts/tokenizer_alignment.py` | Syntax-token coverage eval; vocab overlap analysis vs base-model tokenizers |
+| `scripts/baseline_v04.py`, `scripts/baseline_sample.py` | The v0.4 baseline measurement (`docs/baseline_v04_pre131.md`) and its stratified sample |
+| `scripts/check_provenance.py` | Fails on any tokenizer artefact without a valid `*.provenance.json` record (see CONTRIBUTING.md) |
+| `models/` | SentencePiece models — the `.model`/`.vocab` files are local only; their `*.provenance.json` records are tracked |
 | `python/` | Packaged `toke_tokenizer` library (pure-Python encode/decode/count_tokens; pip-installable, own pyproject/README) |
 | `tokenizer_v03.json` | v0.3 vocab retrain (May 2026), HF tokenizer format. A symlink to `python/toke_tokenizer/data/tokenizer_v03.json`, the tracked copy `count_tokens()` loads (132.109); kept at the root path pending the v0.4 retrain (116.9) |
 | `tests/` | Unit tests for prepare/train/eval |
@@ -97,6 +103,9 @@ tasks (N = 60) — more, not fewer. Canonical wording for any public claim:
 Optional dependencies: `pip install .[train]` (sentencepiece) or `.[eval]`
 (sentencepiece + tiktoken).
 
+`make check` runs what CI runs, in CI's order: `make lint` (ruff), `make typecheck`
+(mypy), `make test` (pytest) and `make check-provenance`.
+
 ## Data
 
 Large artifacts are gitignored and live locally only: `data/` and `models/`
@@ -108,8 +117,8 @@ directories (at any depth, including under `output/`), `*.jsonl`, and
 ## Related repos
 
 - **toke-corpus** — source of the training text (validated toke programs).
-- **toke-mcp**, **toke-website** — consume the trained vocabulary for token
-  counting and display.
+- **toke-mcp**, **toke-web** (local checkout `toke-website`) — consume the trained
+  vocabulary for token counting and display.
 
 ## Licence
 
