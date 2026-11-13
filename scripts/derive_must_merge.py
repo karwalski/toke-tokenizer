@@ -15,7 +15,11 @@ Pipeline
    is isolated (``count_tokens.function_extent``, story 131.4) and its string
    bodies are masked to ``_`` (``mask_strings.py``, plan D2).  A fixture that
    cannot be minified / has no ``pat`` / only exists as ``<form>.blocked.tk`` is
-   reported under ``unparsed`` and skipped -- never silently.
+   reported under ``unparsed`` and skipped -- never silently.  Each form records
+   ``fixture_sha256`` (story 131.119) so a later fixture edit in toke is named by
+   path in ``fixture_drift()`` / the pytest input check, and toke's own gate
+   (``scripts/patterns/check_mustmerge_pins.py``, run by ``make check-patterns``)
+   pins the same hashes in ``patterns/must_merge_inputs.json``.
 2. The masked ``pat`` text is split into **syntax fragments** (grammar below).
 3. Each fragment is counted over the canonical forms (extraction identity) and
    over a corpus sample (substring occurrences, identifier-boundary guarded --
@@ -400,9 +404,11 @@ def derive(cats: list[dict[str, Any]], extract: Callable[[Path], str], toke_repo
     unparsed: list[dict[str, str]] = []
     for f in forms:
         fixture = toke_repo / f["fixture"]
+        # 131.119: fingerprint every input fixture so drift is named, not inferred from a diff
+        fsha: dict[str, Any] = {"fixture_sha256": sha256_file(fixture) if fixture.is_file() else None}
         if not fixture.is_file():
             alt = fixture.with_name(f"{f['form']}.blocked.tk")
-            unparsed.append({**{k: str(v) for k, v in f.items()},
+            unparsed.append({**{k: str(v) for k, v in f.items()}, **fsha,
                              "reason": f"fixture missing ({'blocked: ' + alt.name if alt.is_file() else 'no file'})"})
             continue
         try:
@@ -411,14 +417,14 @@ def derive(cats: list[dict[str, Any]], extract: Callable[[Path], str], toke_repo
         # are open-ended (CalledProcessError, ValueError, IndexError, UnicodeDecodeError).
         # Every one of them must land in `unparsed` with its type recorded, never abort the run.
         except Exception as e:  # noqa: BLE001 - tkc failure, no `pat`, unbalanced braces ...
-            unparsed.append({**{k: str(v) for k, v in f.items()},
+            unparsed.append({**{k: str(v) for k, v in f.items()}, **fsha,
                              "reason": f"{type(e).__name__}: {str(e)[:200]}"})
             continue
         fr = fragments(text)
         counts: dict[str, int] = {}
         for x in fr:
             counts[x] = counts.get(x, 0) + 1
-        per_form.append({**f, "masked_pat": text, "fragments": counts})
+        per_form.append({**f, **fsha, "masked_pat": text, "fragments": counts})
 
     canonical = [p for p in per_form if p["role"] == "canonical"]
     n_canonical = len(canonical)
@@ -485,6 +491,25 @@ def derive(cats: list[dict[str, Any]], extract: Callable[[Path], str], toke_repo
         "fragments": rows,
         "excluded": excluded,
     }
+
+
+def fixture_drift(committed: dict[str, Any], toke_repo: Path) -> list[str]:
+    """One line per recorded fixture whose live sha256 differs (story 131.119).
+
+    Covers ``forms`` and ``unparsed``; a fixture recorded as missing (``None``) that now exists,
+    or recorded but now gone, is drift too.  Empty list == no fixture drift.
+    """
+    out = []
+    for f in list(committed.get("forms", [])) + list(committed.get("unparsed", [])):
+        if "fixture_sha256" not in f:
+            out.append(f"{f['fixture']}: no fixture_sha256 recorded (list predates 131.119)")
+            continue
+        p = toke_repo / f["fixture"]
+        live = sha256_file(p) if p.is_file() else None
+        if live != f["fixture_sha256"]:
+            out.append(f"{f['fixture']} ({f['id']} {f['role']} form {f['form']}): recorded "
+                       f"{str(f['fixture_sha256'])[:12]}, live {str(live)[:12]}")
+    return out
 
 
 def render(result: dict[str, Any]) -> str:
