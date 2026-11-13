@@ -225,6 +225,40 @@ def test_unparsed_fixtures_are_reported_not_silent(tmp_path: Path) -> None:
     assert {r["fragment"] for r in res["fragments"]} == set(dmm.FORCED_D4)
 
 
+def test_forms_record_fixture_sha256(tmp_path: Path, synthetic: dict[str, Any]) -> None:
+    """131.119: every extracted form fingerprints its fixture; a missing one records None."""
+    assert all(len(f["fixture_sha256"]) == 64 for f in synthetic["forms"])
+    toke = tmp_path / "toke2"
+    (toke / "patterns" / "two").mkdir(parents=True)
+    (toke / "patterns" / "two" / "b.tk").write_text("// no pat\n")
+    cat = _catalogue(tmp_path / "c", [_entry("two", "b"), _entry("three", "a", None, ("a",))])
+    meta, rows = dmm.read_sample(SMALL_SAMPLE)
+    res = dmm.derive(dmm.load_catalogues([cat]), _stub_extract(toke), toke, dict(meta), rows, "0" * 64)
+    sha = {(u["id"], u["form"]): u["fixture_sha256"] for u in res["unparsed"]}
+    assert sha[("two", "b")] == dmm.sha256_file(toke / "patterns" / "two" / "b.tk")
+    assert sha[("three", "a")] is None
+
+
+def test_fixture_drift_names_the_edited_fixture(tmp_path: Path) -> None:
+    toke = tmp_path / "toke"
+    for key in _PAT:
+        f = toke / "patterns" / key
+        f.parent.mkdir(parents=True, exist_ok=True)
+        f.write_text(f"// {key}\n")
+    cat = _catalogue(tmp_path, [_entry("one", "a", "b"), _entry("two", "c")])
+    meta, rows = dmm.read_sample(SMALL_SAMPLE)
+    res = json.loads(dmm.render(dmm.derive(dmm.load_catalogues([cat]), _stub_extract(toke), toke,
+                                           dict(meta), rows, "0" * 64)))
+    assert dmm.fixture_drift(res, toke) == []
+    (toke / "patterns" / "one" / "b.tk").write_text("// edited\n")
+    drift = dmm.fixture_drift(res, toke)
+    assert len(drift) == 1 and drift[0].startswith("patterns/one/b.tk (one hot_path form b)")
+    (toke / "patterns" / "two" / "c.tk").unlink()
+    assert len(dmm.fixture_drift(res, toke)) == 2
+    del res["forms"][0]["fixture_sha256"]
+    assert any("predates 131.119" in d for d in dmm.fixture_drift(res, toke))
+
+
 def test_multiple_catalogues_are_merged(tmp_path: Path) -> None:
     toke = tmp_path / "toke"
     for key in _PAT:
@@ -289,7 +323,16 @@ def test_committed_list_records_its_inputs() -> None:
     assert d["unparsed"] == []
     assert {r["fragment"] for r in d["fragments"] if r["class"] == "forced"} >= set(dmm.FORCED_D4)
     assert all(e["corpus_freq"] == 0 for e in d["excluded"])
+    assert all(len(f["fixture_sha256"]) == 64 for f in d["forms"])  # 131.119
     live = _live()
     if live is not None:
         current = {c.name: dmm.sha256_file(c) for c in dmm.default_catalogues(live[0])}
         assert {c["path"]: c["sha256"] for c in d["catalogues"]} == current
+        drift = dmm.fixture_drift(d, live[0])
+        if drift:
+            pytest.fail(
+                f"{len(drift)} pattern fixture(s) in {live[0]} changed since data/must_merge_v04.json "
+                "was derived (131.119):\n  " + "\n  ".join(drift) + "\nre-run "
+                "scripts/derive_must_merge.py and commit; in toke, `make pin-mustmerge` re-pins "
+                "patterns/must_merge_inputs.json"
+            )
