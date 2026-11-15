@@ -6,7 +6,7 @@
   "catalogues": [
     {
       "path": "catalogue.json",
-      "sha256": "0adbc9cf3172a32d274c42c68dda29e0b6ecf13123e68e32a93f791a7cd986cc",
+      "sha256": "01211376909de28eaf222fd7e7888a1f4b3071c93679269d6f694e190fb738b7",
       "protocol": "0.4",
       "entries": 46
     }
