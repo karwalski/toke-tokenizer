@@ -6,7 +6,7 @@
   "catalogues": [
     {
       "path": "catalogue.json",
-      "sha256": "f307ce04ec2e8fea02889b6d5b6fc9c81326ad6a94e9830fa0e205e9f3362472",
+      "sha256": "01211376909de28eaf222fd7e7888a1f4b3071c93679269d6f694e190fb738b7",
       "protocol": "0.4",
       "entries": 46
     }
@@ -837,7 +837,7 @@
       "fixture": "patterns/parse-kv-lines/a.tk",
       "status": "provisional",
       "catalogue": "catalogue.json",
-      "fixture_sha256": "bbec75b640dcebf396b2f2a8beda4574ceaf74b94f556b4d43cd09811f963e61",
+      "fixture_sha256": "c8178aacab03b1ca94b4bb7148d7ccd6f2c4a00a64a841e9afecb1e88a763ab8",
       "masked_pat": "f=pat(txt:str):i64{let m=mut.@(\"\":\"\");let ls=s.split(txt;\"_\");lp(let i=0;i<ls.len;i=i+1){let kv=s.split(ls.get(i);\"_\");if(kv.len==2){m=m.set(kv.get(0);kv.get(1))}};<chk(m)}",
       "fragments": {
         "f=": 1,
@@ -873,8 +873,8 @@
       "fixture": "patterns/parse-kv-lines/b.tk",
       "status": "provisional",
       "catalogue": "catalogue.json",
-      "fixture_sha256": "19bbef732ed4020d421d8fca3a97512502c6493f68a5e7f4bf0dd2c10bf58936",
-      "masked_pat": "f=pat(txt:str):i64{let m=mut.@(\"\":\"\");let ls=s.split(txt;\"_\");lp(let i=0;i<ls.len;i=i+1){let l=ls.get(i);let p=s.indexof(l;\"_\");if(p>0){m=m.set(s.slice(l;0;p);s.slice(l;p+1;s.len(l)))}};<chk(m)}",
+      "fixture_sha256": "18d8c5713dbb70af45aa9bfc2781888721fe6f749fbd868347184bcbb96e6e3e",
+      "masked_pat": "f=pat(txt:str):i64{let m=mut.@(\"\":\"\");let ls=s.split(txt;\"_\");lp(let i=0;i<ls.len;i=i+1){let l=ls.get(i);let p=s.indexof(l;\"_\");if(p>0){m=m.set(mt s.slice(l;0;p){$ok:v v;$err:e<-1};mt s.slice(l;p+1;s.len(l)){$ok:v v;$err:e<-1})}};<chk(m)}",
       "fragments": {
         "f=": 1,
         "(": 2,
@@ -887,20 +887,27 @@
         ";\"": 2,
         "\");": 2,
         "lp(": 1,
-        ";": 6,
+        ";": 8,
         "<": 1,
         ".len": 1,
         "+": 2,
-        "){": 2,
+        "){": 3,
         ".get(": 1,
-        ");": 2,
+        ");": 1,
         ".indexof(": 1,
         "if(": 1,
         ">": 1,
         ".set(": 1,
+        "mt ": 2,
         ".slice(": 2,
+        "$ok:": 2,
+        " ": 2,
+        "$err:": 2,
+        "<-": 2,
+        "};": 1,
         ".len(": 1,
-        ")))}};<": 1,
+        ")){": 1,
+        "})}};<": 1,
         ")}": 1
       }
     },
@@ -1968,7 +1975,9 @@
         "parse-int",
         "parse-json"
       ],
-      "in_hot_path_forms": [],
+      "in_hot_path_forms": [
+        "parse-kv-lines"
+      ],
       "canonical_occurrences": 11,
       "corpus_freq": 777,
       "corpus_programs": 403,
@@ -2025,7 +2034,8 @@
       ],
       "in_hot_path_forms": [
         "parse-int",
-        "parse-json"
+        "parse-json",
+        "parse-kv-lines"
       ],
       "canonical_occurrences": 6,
       "corpus_freq": 21040,
@@ -2455,7 +2465,9 @@
         "coll-lookup-default",
         "io-write-accumulate"
       ],
-      "in_hot_path_forms": [],
+      "in_hot_path_forms": [
+        "parse-kv-lines"
+      ],
       "canonical_occurrences": 3,
       "corpus_freq": 1731,
       "corpus_programs": 1112,
@@ -2711,7 +2723,9 @@
         "parse-int",
         "parse-json"
       ],
-      "in_hot_path_forms": [],
+      "in_hot_path_forms": [
+        "parse-kv-lines"
+      ],
       "canonical_occurrences": 11,
       "corpus_freq": 759,
       "corpus_programs": 399,
@@ -2732,7 +2746,9 @@
         "parse-int",
         "parse-json"
       ],
-      "in_hot_path_forms": [],
+      "in_hot_path_forms": [
+        "parse-kv-lines"
+      ],
       "canonical_occurrences": 11,
       "corpus_freq": 758,
       "corpus_programs": 398,
@@ -3240,7 +3256,9 @@
       "in_canonical_forms": [
         "parse-json"
       ],
-      "in_hot_path_forms": [],
+      "in_hot_path_forms": [
+        "parse-kv-lines"
+      ],
       "canonical_occurrences": 3,
       "corpus_freq": 138,
       "corpus_programs": 110,
@@ -3707,19 +3725,6 @@
       "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
-      "fragment": ")))}};<",
-      "in_canonical_forms": [],
-      "in_hot_path_forms": [
-        "parse-kv-lines"
-      ],
-      "canonical_occurrences": 0,
-      "corpus_freq": 0,
-      "corpus_programs": 0,
-      "corpus_programs_share": 0.0,
-      "class": "verify",
-      "rationale": "open-class / contextual fragment: in 0/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
-    },
-    {
       "fragment": ")}};<-",
       "in_canonical_forms": [
         "iter-find-first"
@@ -3904,6 +3909,19 @@
       "corpus_programs_share": 0.0,
       "class": "verify",
       "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+    },
+    {
+      "fragment": "})}};<",
+      "in_canonical_forms": [],
+      "in_hot_path_forms": [
+        "parse-kv-lines"
+      ],
+      "canonical_occurrences": 0,
+      "corpus_freq": 0,
+      "corpus_programs": 0,
+      "corpus_programs_share": 0.0,
+      "class": "verify",
+      "rationale": "open-class / contextual fragment: in 0/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     }
   ],
   "excluded": [
