@@ -1,12 +1,16 @@
 [build-system]
-requires = ["setuptools>=68"]
-build-backend = "setuptools.backends.legacy:build"
+# Story 127.481: the standard PEP 517 backend. The former "setuptools.backends.legacy:build"
+# does not exist, so every `pip install -e .` (CI's install step) failed.
+# setuptools>=77 for the SPDX-string `project.license` below (the TOML-table form is
+# deprecated and stops building in 2027).
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "toke-tokenizer"
 version = "0.1.0"
 requires-python = ">=3.11"
-license = {text = "Apache-2.0"}
+license = "Apache-2.0"
 authors = [{name = "Matthew Watt"}]
 
 [project.optional-dependencies]
@@ -29,6 +33,14 @@ dev = [
     "numpy>=1.26",
     "tiktoken>=0.7",
 ]
+
+# This root project exists to install the dev/train/eval dependencies (CI runs
+# `pip install -e ".[dev]"`); it ships no code. The published package is python/ (its own
+# pyproject.toml), and tests/ reach the root scripts via sys.path. An empty package list
+# stops setuptools' flat-layout auto-discovery from refusing the repo's several top-level
+# modules and directories (story 127.481).
+[tool.setuptools]
+packages = []
 
 # Lint/typecheck policy (story 130.19) is deliberately IDENTICAL to ~/tk/toke-corpus and
 # ~/tk/toke-model: ruff's default rule set (no bespoke `select`/`ignore`), line-length 100,
