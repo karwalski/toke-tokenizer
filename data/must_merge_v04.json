@@ -6,9 +6,9 @@
   "catalogues": [
     {
       "path": "catalogue.json",
-      "sha256": "ea9b223e363cd577e0c5aa3c10ff73cccc82b15e00ff0382631341c8f9b3e14c",
+      "sha256": "27ff5afb07e883b951f76a16c57ede886a810f340e74a2a464f39da20e7242ed",
       "protocol": "0.4",
-      "entries": 46
+      "entries": 47
     }
   ],
   "corpus_sample": {
@@ -27,8 +27,8 @@
     "min_fragment_length": 2
   },
   "summary": {
-    "forms_extracted": 55,
-    "canonical_forms": 46,
+    "forms_extracted": 56,
+    "canonical_forms": 47,
     "hot_path_forms": 9,
     "unparsed": 0,
     "forced": 18,
@@ -1584,6 +1584,36 @@
         "$err:": 1,
         "}}": 1
       }
+    },
+    {
+      "id": "str-char-read",
+      "role": "canonical",
+      "form": "a",
+      "fixture": "patterns/str-char-read/a.tk",
+      "status": "provisional",
+      "catalogue": "catalogue.json",
+      "fixture_sha256": "6b5d215f7f70c0359a0e8e6872b4e26ec60d32c5c181a423fb5ae47353262afc",
+      "masked_pat": "f=pat(line:str):i64{let c=mut.0;lp(let i=0;i<s.len(line);i=i+1){if(s.charcode(line;i)==44){c=c+1}};<c}",
+      "fragments": {
+        "f=": 1,
+        "(": 1,
+        ":str):i64{": 1,
+        "let ": 2,
+        "=": 4,
+        "mut.": 1,
+        ";": 3,
+        "lp(": 1,
+        "<": 1,
+        ".len(": 1,
+        ");": 1,
+        "+": 2,
+        "){": 2,
+        "if(": 1,
+        ".charcode(": 1,
+        ")==": 1,
+        "}};<": 1,
+        "}": 1
+      }
     }
   ],
   "unparsed": [],
@@ -1614,6 +1644,7 @@
         "parse-kv-lines",
         "str-array-render",
         "str-build-loop",
+        "str-char-read",
         "str-repeat-pad"
       ],
       "in_hot_path_forms": [
@@ -1627,12 +1658,12 @@
         "parse-kv-lines",
         "str-repeat-pad"
       ],
-      "canonical_occurrences": 70,
+      "canonical_occurrences": 72,
       "corpus_freq": 14764,
       "corpus_programs": 4044,
       "corpus_programs_share": 0.8088,
       "class": "forced",
-      "rationale": "promoted: in 24/46 canonical forms (>= 50%) and 80.9% of corpus programs (>= 5%)"
+      "rationale": "promoted: in 25/47 canonical forms (>= 50%) and 80.9% of corpus programs (>= 5%)"
     },
     {
       "fragment": "){",
@@ -1665,6 +1696,7 @@
         "parse-kv-lines",
         "str-array-render",
         "str-build-loop",
+        "str-char-read",
         "str-repeat-pad"
       ],
       "in_hot_path_forms": [
@@ -1678,12 +1710,12 @@
         "parse-kv-lines",
         "str-repeat-pad"
       ],
-      "canonical_occurrences": 44,
+      "canonical_occurrences": 46,
       "corpus_freq": 13934,
       "corpus_programs": 4429,
       "corpus_programs_share": 0.8858,
       "class": "forced",
-      "rationale": "promoted: in 29/46 canonical forms (>= 50%) and 88.6% of corpus programs (>= 5%)"
+      "rationale": "promoted: in 30/47 canonical forms (>= 50%) and 88.6% of corpus programs (>= 5%)"
     },
     {
       "fragment": "i=",
@@ -1742,6 +1774,7 @@
         "parse-kv-lines",
         "str-array-render",
         "str-build-loop",
+        "str-char-read",
         "str-interp-vs-join",
         "str-num-format",
         "str-repeat-pad"
@@ -1757,7 +1790,7 @@
         "parse-kv-lines",
         "str-repeat-pad"
       ],
-      "canonical_occurrences": 46,
+      "canonical_occurrences": 47,
       "corpus_freq": 11348,
       "corpus_programs": 5000,
       "corpus_programs_share": 1.0,
@@ -1784,7 +1817,8 @@
         "iter-find-first",
         "iter-nested-early-exit",
         "parse-csv-line",
-        "parse-kv-lines"
+        "parse-kv-lines",
+        "str-char-read"
       ],
       "in_hot_path_forms": [
         "acc-dedupe",
@@ -1795,7 +1829,7 @@
         "parse-kv-lines",
         "str-repeat-pad"
       ],
-      "canonical_occurrences": 19,
+      "canonical_occurrences": 20,
       "corpus_freq": 9325,
       "corpus_programs": 4112,
       "corpus_programs_share": 0.8224,
@@ -1875,6 +1909,7 @@
         "parse-kv-lines",
         "str-array-render",
         "str-build-loop",
+        "str-char-read",
         "str-repeat-pad"
       ],
       "in_hot_path_forms": [
@@ -1887,7 +1922,7 @@
         "parse-json",
         "parse-kv-lines"
       ],
-      "canonical_occurrences": 27,
+      "canonical_occurrences": 28,
       "corpus_freq": 3885,
       "corpus_programs": 2636,
       "corpus_programs_share": 0.5272,
@@ -2042,7 +2077,7 @@
       "corpus_programs": 5000,
       "corpus_programs_share": 1.0,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 5/46 canonical forms, 100.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 5/47 canonical forms, 100.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ");",
@@ -2056,6 +2091,7 @@
         "parse-kv-lines",
         "str-array-render",
         "str-build-loop",
+        "str-char-read",
         "str-repeat-pad"
       ],
       "in_hot_path_forms": [
@@ -2066,12 +2102,12 @@
         "parse-kv-lines",
         "str-repeat-pad"
       ],
-      "canonical_occurrences": 15,
+      "canonical_occurrences": 16,
       "corpus_freq": 15448,
       "corpus_programs": 4084,
       "corpus_programs_share": 0.8168,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 10/46 canonical forms, 81.7% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 11/47 canonical forms, 81.7% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "\")",
@@ -2084,7 +2120,7 @@
       "corpus_programs": 3249,
       "corpus_programs_share": 0.6498,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 65.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 65.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "))",
@@ -2098,7 +2134,7 @@
       "corpus_programs": 3397,
       "corpus_programs_share": 0.6794,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 67.9% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 2/47 canonical forms, 67.9% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ";<",
@@ -2111,7 +2147,7 @@
       "corpus_programs": 4714,
       "corpus_programs_share": 0.9428,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 94.3% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 94.3% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "\");",
@@ -2128,7 +2164,7 @@
       "corpus_programs": 2291,
       "corpus_programs_share": 0.4582,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 3/46 canonical forms, 45.8% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 3/47 canonical forms, 45.8% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "\"}",
@@ -2141,7 +2177,7 @@
       "corpus_programs": 2290,
       "corpus_programs_share": 0.458,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 45.8% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 45.8% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".len",
@@ -2176,7 +2212,7 @@
       "corpus_programs": 3105,
       "corpus_programs_share": 0.621,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 17/46 canonical forms, 62.1% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 17/47 canonical forms, 62.1% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "\"\\(",
@@ -2190,7 +2226,7 @@
       "corpus_programs": 2138,
       "corpus_programs_share": 0.4276,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 42.8% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 2/47 canonical forms, 42.8% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".get(",
@@ -2229,7 +2265,7 @@
       "corpus_programs": 2337,
       "corpus_programs_share": 0.4674,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 21/46 canonical forms, 46.7% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 21/47 canonical forms, 46.7% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "));",
@@ -2242,7 +2278,7 @@
       "corpus_programs": 1527,
       "corpus_programs_share": 0.3054,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 30.5% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 30.5% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "};<",
@@ -2264,7 +2300,7 @@
       "corpus_programs": 3609,
       "corpus_programs_share": 0.7218,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 6/46 canonical forms, 72.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 6/47 canonical forms, 72.2% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "mut.",
@@ -2285,6 +2321,7 @@
         "parse-csv-line",
         "parse-kv-lines",
         "str-array-render",
+        "str-char-read",
         "str-repeat-pad"
       ],
       "in_hot_path_forms": [
@@ -2297,12 +2334,12 @@
         "parse-json",
         "parse-kv-lines"
       ],
-      "canonical_occurrences": 20,
+      "canonical_occurrences": 21,
       "corpus_freq": 3970,
       "corpus_programs": 2565,
       "corpus_programs_share": 0.513,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 17/46 canonical forms, 51.3% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 18/47 canonical forms, 51.3% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "\";",
@@ -2317,7 +2354,7 @@
       "corpus_programs": 1459,
       "corpus_programs_share": 0.2918,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 29.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 29.2% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ")}",
@@ -2345,7 +2382,7 @@
       "corpus_programs": 2312,
       "corpus_programs_share": 0.4624,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 13/46 canonical forms, 46.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 13/47 canonical forms, 46.2% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "){<",
@@ -2360,7 +2397,7 @@
       "corpus_programs": 2542,
       "corpus_programs_share": 0.5084,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 3/46 canonical forms, 50.8% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 3/47 canonical forms, 50.8% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ";\"",
@@ -2382,7 +2419,7 @@
       "corpus_programs": 1245,
       "corpus_programs_share": 0.249,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 8/46 canonical forms, 24.9% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 8/47 canonical forms, 24.9% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ");<",
@@ -2395,7 +2432,7 @@
       "corpus_programs": 2876,
       "corpus_programs_share": 0.5752,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 0/46 canonical forms, 57.5% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 0/47 canonical forms, 57.5% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "}}",
@@ -2415,7 +2452,7 @@
       "corpus_programs": 2290,
       "corpus_programs_share": 0.458,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 6/46 canonical forms, 45.8% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 6/47 canonical forms, 45.8% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ")};",
@@ -2428,7 +2465,7 @@
       "corpus_programs": 1969,
       "corpus_programs_share": 0.3938,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 39.4% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 39.4% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ":str;",
@@ -2443,7 +2480,7 @@
       "corpus_programs": 1608,
       "corpus_programs_share": 0.3216,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 3/46 canonical forms, 32.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 3/47 canonical forms, 32.2% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "=\"",
@@ -2456,7 +2493,7 @@
       "corpus_programs": 983,
       "corpus_programs_share": 0.1966,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 19.7% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 19.7% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ")){",
@@ -2473,7 +2510,7 @@
       "corpus_programs": 1112,
       "corpus_programs_share": 0.2224,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 3/46 canonical forms, 22.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 3/47 canonical forms, 22.2% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "){\"",
@@ -2486,7 +2523,7 @@
       "corpus_programs": 737,
       "corpus_programs_share": 0.1474,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 14.7% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 14.7% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "}};<",
@@ -2494,15 +2531,16 @@
         "acc-count-if",
         "coll-dedupe",
         "fn-helper-vs-inline",
-        "iter-count"
+        "iter-count",
+        "str-char-read"
       ],
       "in_hot_path_forms": [],
-      "canonical_occurrences": 4,
+      "canonical_occurrences": 5,
       "corpus_freq": 1250,
       "corpus_programs": 1157,
       "corpus_programs_share": 0.2314,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 4/46 canonical forms, 23.1% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 5/47 canonical forms, 23.1% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".len(",
@@ -2510,6 +2548,7 @@
         "fn-chain-vs-let",
         "parse-csv-line",
         "parse-json",
+        "str-char-read",
         "str-repeat-pad"
       ],
       "in_hot_path_forms": [
@@ -2518,12 +2557,12 @@
         "parse-kv-lines",
         "str-repeat-pad"
       ],
-      "canonical_occurrences": 4,
+      "canonical_occurrences": 5,
       "corpus_freq": 1174,
       "corpus_programs": 831,
       "corpus_programs_share": 0.1662,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 4/46 canonical forms, 16.6% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 5/47 canonical forms, 16.6% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".slice(",
@@ -2538,7 +2577,7 @@
       "corpus_programs": 614,
       "corpus_programs_share": 0.1228,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 12.3% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 12.3% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ":i64;",
@@ -2556,24 +2595,25 @@
       "corpus_programs": 769,
       "corpus_programs_share": 0.1538,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 4/46 canonical forms, 15.4% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 4/47 canonical forms, 15.4% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ")==",
       "in_canonical_forms": [
         "acc-map-build",
-        "iter-nested-early-exit"
+        "iter-nested-early-exit",
+        "str-char-read"
       ],
       "in_hot_path_forms": [
         "acc-dedupe",
         "parse-json"
       ],
-      "canonical_occurrences": 2,
+      "canonical_occurrences": 3,
       "corpus_freq": 1022,
       "corpus_programs": 861,
       "corpus_programs_share": 0.1722,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 17.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 3/47 canonical forms, 17.2% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "\"){",
@@ -2586,7 +2626,7 @@
       "corpus_programs": 558,
       "corpus_programs_share": 0.1116,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 11.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 11.2% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".split(",
@@ -2605,7 +2645,7 @@
       "corpus_programs": 733,
       "corpus_programs_share": 0.1466,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 5/46 canonical forms, 14.7% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 5/47 canonical forms, 14.7% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "@();",
@@ -2624,7 +2664,7 @@
       "corpus_programs": 776,
       "corpus_programs_share": 0.1552,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 4/46 canonical forms, 15.5% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 4/47 canonical forms, 15.5% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".append(",
@@ -2644,7 +2684,7 @@
       "corpus_programs": 661,
       "corpus_programs_share": 0.1322,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 5/46 canonical forms, 13.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 5/47 canonical forms, 13.2% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "el if(",
@@ -2658,7 +2698,7 @@
       "corpus_programs": 280,
       "corpus_programs_share": 0.056,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 5.6% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 2/47 canonical forms, 5.6% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "\"}}",
@@ -2672,26 +2712,27 @@
       "corpus_programs": 749,
       "corpus_programs_share": 0.1498,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 15.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 2/47 canonical forms, 15.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ":str):i64{",
       "in_canonical_forms": [
         "parse-csv-line",
         "parse-json",
-        "parse-kv-lines"
+        "parse-kv-lines",
+        "str-char-read"
       ],
       "in_hot_path_forms": [
         "parse-int",
         "parse-json",
         "parse-kv-lines"
       ],
-      "canonical_occurrences": 3,
+      "canonical_occurrences": 4,
       "corpus_freq": 791,
       "corpus_programs": 686,
       "corpus_programs_share": 0.1372,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 3/46 canonical forms, 13.7% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 4/47 canonical forms, 13.7% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ":i64):str{",
@@ -2708,7 +2749,7 @@
       "corpus_programs": 687,
       "corpus_programs_share": 0.1374,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 3/46 canonical forms, 13.7% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 3/47 canonical forms, 13.7% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "$ok:",
@@ -2731,7 +2772,7 @@
       "corpus_programs": 399,
       "corpus_programs_share": 0.0798,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 9/46 canonical forms, 8.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 9/47 canonical forms, 8.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "$err:",
@@ -2754,7 +2795,7 @@
       "corpus_programs": 398,
       "corpus_programs_share": 0.0796,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 9/46 canonical forms, 8.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 9/47 canonical forms, 8.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ":i64):i64{",
@@ -2773,7 +2814,7 @@
       "corpus_programs": 631,
       "corpus_programs_share": 0.1262,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 5/46 canonical forms, 12.6% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 5/47 canonical forms, 12.6% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ")};<",
@@ -2790,7 +2831,7 @@
       "corpus_programs": 623,
       "corpus_programs_share": 0.1246,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 3/46 canonical forms, 12.5% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 3/47 canonical forms, 12.5% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ")}}",
@@ -2803,7 +2844,7 @@
       "corpus_programs": 531,
       "corpus_programs_share": 0.1062,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 10.6% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 10.6% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "@()};",
@@ -2816,7 +2857,7 @@
       "corpus_programs": 560,
       "corpus_programs_share": 0.112,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 11.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 11.2% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ")\"}",
@@ -2830,7 +2871,7 @@
       "corpus_programs": 440,
       "corpus_programs_share": 0.088,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 8.8% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 2/47 canonical forms, 8.8% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "))}",
@@ -2843,7 +2884,7 @@
       "corpus_programs": 463,
       "corpus_programs_share": 0.0926,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 9.3% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 9.3% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".concat(",
@@ -2858,7 +2899,7 @@
       "corpus_programs": 283,
       "corpus_programs_share": 0.0566,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 5.7% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 5.7% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "\")}",
@@ -2872,7 +2913,7 @@
       "corpus_programs": 427,
       "corpus_programs_share": 0.0854,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 8.5% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 2/47 canonical forms, 8.5% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ":str):@str{",
@@ -2885,7 +2926,7 @@
       "corpus_programs": 472,
       "corpus_programs_share": 0.0944,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 9.4% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 9.4% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".set(",
@@ -2906,7 +2947,7 @@
       "corpus_programs": 230,
       "corpus_programs_share": 0.046,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 6/46 canonical forms, 4.6% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 6/47 canonical forms, 4.6% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ":str):@str{<",
@@ -2920,7 +2961,7 @@
       "corpus_programs": 435,
       "corpus_programs_share": 0.087,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 8.7% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 2/47 canonical forms, 8.7% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".add(",
@@ -2935,7 +2976,7 @@
       "corpus_programs": 164,
       "corpus_programs_share": 0.0328,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 3/46 canonical forms, 3.3% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 3/47 canonical forms, 3.3% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ")>",
@@ -2948,7 +2989,7 @@
       "corpus_programs": 342,
       "corpus_programs_share": 0.0684,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 6.8% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 6.8% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ":i64):str{<",
@@ -2962,7 +3003,7 @@
       "corpus_programs": 345,
       "corpus_programs_share": 0.069,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 6.9% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 2/47 canonical forms, 6.9% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ":str):i64{<",
@@ -2976,7 +3017,7 @@
       "corpus_programs": 340,
       "corpus_programs_share": 0.068,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 6.8% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 2/47 canonical forms, 6.8% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ":@i64;",
@@ -2990,7 +3031,7 @@
       "corpus_programs": 302,
       "corpus_programs_share": 0.0604,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 6.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 2/47 canonical forms, 6.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ":@str;",
@@ -3004,7 +3045,7 @@
       "corpus_programs": 260,
       "corpus_programs_share": 0.052,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 5.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 2/47 canonical forms, 5.2% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ":i64):i64{<",
@@ -3020,7 +3061,7 @@
       "corpus_programs": 224,
       "corpus_programs_share": 0.0448,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 4/46 canonical forms, 4.5% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 4/47 canonical forms, 4.5% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ")}};<",
@@ -3037,7 +3078,7 @@
       "corpus_programs": 283,
       "corpus_programs_share": 0.0566,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 5.7% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 5.7% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "=\"\\(",
@@ -3050,7 +3091,7 @@
       "corpus_programs": 232,
       "corpus_programs_share": 0.0464,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 0/46 canonical forms, 4.6% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 0/47 canonical forms, 4.6% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".contains(",
@@ -3063,7 +3104,7 @@
       "corpus_programs": 213,
       "corpus_programs_share": 0.0426,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 4.3% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 4.3% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ");\"",
@@ -3077,7 +3118,7 @@
       "corpus_programs": 128,
       "corpus_programs_share": 0.0256,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 2.6% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 2/47 canonical forms, 2.6% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ":@i64):@i64{",
@@ -3095,7 +3136,7 @@
       "corpus_programs": 218,
       "corpus_programs_share": 0.0436,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 3/46 canonical forms, 4.4% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 3/47 canonical forms, 4.4% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ")\";",
@@ -3111,7 +3152,7 @@
       "corpus_programs": 181,
       "corpus_programs_share": 0.0362,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 3.6% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 2/47 canonical forms, 3.6% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "))};<",
@@ -3126,7 +3167,7 @@
       "corpus_programs": 202,
       "corpus_programs_share": 0.0404,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 3/46 canonical forms, 4.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 3/47 canonical forms, 4.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "}}};<",
@@ -3139,7 +3180,7 @@
       "corpus_programs": 200,
       "corpus_programs_share": 0.04,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 4.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 4.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ")<",
@@ -3152,7 +3193,7 @@
       "corpus_programs": 187,
       "corpus_programs_share": 0.0374,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 0/46 canonical forms, 3.7% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 0/47 canonical forms, 3.7% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ":i64):@i64{",
@@ -3165,7 +3206,7 @@
       "corpus_programs": 159,
       "corpus_programs_share": 0.0318,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 3.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 3.2% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".build(",
@@ -3180,7 +3221,7 @@
       "corpus_programs": 173,
       "corpus_programs_share": 0.0346,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 3/46 canonical forms, 3.5% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 3/47 canonical forms, 3.5% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".builder(",
@@ -3195,7 +3236,7 @@
       "corpus_programs": 173,
       "corpus_programs_share": 0.0346,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 3/46 canonical forms, 3.5% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 3/47 canonical forms, 3.5% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ")\")};",
@@ -3208,7 +3249,7 @@
       "corpus_programs": 166,
       "corpus_programs_share": 0.0332,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 3.3% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 3.3% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "\")};<",
@@ -3222,7 +3263,7 @@
       "corpus_programs": 164,
       "corpus_programs_share": 0.0328,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 3.3% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 2/47 canonical forms, 3.3% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ")+",
@@ -3236,7 +3277,7 @@
       "corpus_programs": 103,
       "corpus_programs_share": 0.0206,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 2.1% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 2/47 canonical forms, 2.1% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "))){",
@@ -3249,7 +3290,7 @@
       "corpus_programs": 119,
       "corpus_programs_share": 0.0238,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 2.4% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 2.4% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "<-",
@@ -3264,7 +3305,7 @@
       "corpus_programs": 110,
       "corpus_programs_share": 0.022,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 2.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 2.2% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ":@i64):i64{",
@@ -3288,7 +3329,7 @@
       "corpus_programs": 125,
       "corpus_programs_share": 0.025,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 9/46 canonical forms, 2.5% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 9/47 canonical forms, 2.5% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".toint(",
@@ -3301,7 +3342,7 @@
       "corpus_programs": 111,
       "corpus_programs_share": 0.0222,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 2.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 2.2% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "+(",
@@ -3314,21 +3355,23 @@
       "corpus_programs": 93,
       "corpus_programs_share": 0.0186,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 1.9% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 1.9% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".charcode(",
-      "in_canonical_forms": [],
+      "in_canonical_forms": [
+        "str-char-read"
+      ],
       "in_hot_path_forms": [
         "parse-int",
         "parse-json"
       ],
-      "canonical_occurrences": 0,
+      "canonical_occurrences": 1,
       "corpus_freq": 102,
       "corpus_programs": 77,
       "corpus_programs_share": 0.0154,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 0/46 canonical forms, 1.5% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 1.5% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ")%",
@@ -3345,7 +3388,7 @@
       "corpus_programs": 62,
       "corpus_programs_share": 0.0124,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 3/46 canonical forms, 1.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 3/47 canonical forms, 1.2% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ")*",
@@ -3360,7 +3403,7 @@
       "corpus_programs": 62,
       "corpus_programs_share": 0.0124,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 1.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 1.2% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ":@(",
@@ -3373,7 +3416,7 @@
       "corpus_programs": 61,
       "corpus_programs_share": 0.0122,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 1.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 1.2% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "))}};<",
@@ -3386,7 +3429,7 @@
       "corpus_programs": 79,
       "corpus_programs_share": 0.0158,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 1.6% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 1.6% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ":@str):i64{",
@@ -3399,7 +3442,7 @@
       "corpus_programs": 72,
       "corpus_programs_share": 0.0144,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 1.4% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 1.4% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "){<-",
@@ -3415,7 +3458,7 @@
       "corpus_programs": 58,
       "corpus_programs_share": 0.0116,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 1.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 2/47 canonical forms, 1.2% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".indexof(",
@@ -3428,7 +3471,7 @@
       "corpus_programs": 45,
       "corpus_programs_share": 0.009,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 0/46 canonical forms, 0.9% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 0/47 canonical forms, 0.9% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ":i64):i64!$",
@@ -3441,7 +3484,7 @@
       "corpus_programs": 65,
       "corpus_programs_share": 0.013,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 1.3% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 1.3% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ")))};",
@@ -3454,7 +3497,7 @@
       "corpus_programs": 53,
       "corpus_programs_share": 0.0106,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 1.1% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 1.1% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ":i64):@i64{<",
@@ -3467,7 +3510,7 @@
       "corpus_programs": 52,
       "corpus_programs_share": 0.0104,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 1.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 1.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "))\";",
@@ -3480,7 +3523,7 @@
       "corpus_programs": 40,
       "corpus_programs_share": 0.008,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.8% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 0.8% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ":i64);",
@@ -3493,7 +3536,7 @@
       "corpus_programs": 26,
       "corpus_programs_share": 0.0052,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.5% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 0.5% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ")!=\"\"){",
@@ -3506,7 +3549,7 @@
       "corpus_programs": 27,
       "corpus_programs_share": 0.0054,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.5% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 0.5% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ":i64):str{<\"\\(",
@@ -3520,7 +3563,7 @@
       "corpus_programs": 30,
       "corpus_programs_share": 0.006,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 0.6% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 2/47 canonical forms, 0.6% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".fields(",
@@ -3533,7 +3576,7 @@
       "corpus_programs": 28,
       "corpus_programs_share": 0.0056,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.6% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 0.6% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ")!$",
@@ -3546,7 +3589,7 @@
       "corpus_programs": 19,
       "corpus_programs_share": 0.0038,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.4% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 0.4% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".repeat(",
@@ -3559,7 +3602,7 @@
       "corpus_programs": 15,
       "corpus_programs_share": 0.003,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 0/46 canonical forms, 0.3% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 0/47 canonical forms, 0.3% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ":@i64):i64{<",
@@ -3573,7 +3616,7 @@
       "corpus_programs": 19,
       "corpus_programs_share": 0.0038,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 0.4% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 2/47 canonical forms, 0.4% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "))}}};<",
@@ -3586,7 +3629,7 @@
       "corpus_programs": 11,
       "corpus_programs_share": 0.0022,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 0.2% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".fromint(",
@@ -3601,7 +3644,7 @@
       "corpus_programs": 9,
       "corpus_programs_share": 0.0018,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.2% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 0.2% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ":@i64):@i64{<",
@@ -3615,7 +3658,7 @@
       "corpus_programs": 6,
       "corpus_programs_share": 0.0012,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 0.1% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 2/47 canonical forms, 0.1% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".map(",
@@ -3628,7 +3671,7 @@
       "corpus_programs": 3,
       "corpus_programs_share": 0.0006,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.1% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 0.1% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "():str{<",
@@ -3641,7 +3684,7 @@
       "corpus_programs": 2,
       "corpus_programs_share": 0.0004,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ")\"){",
@@ -3654,7 +3697,7 @@
       "corpus_programs": 2,
       "corpus_programs_share": 0.0004,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ":@str):@str{<",
@@ -3667,7 +3710,7 @@
       "corpus_programs": 2,
       "corpus_programs_share": 0.0004,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "<@()};<",
@@ -3680,7 +3723,7 @@
       "corpus_programs": 2,
       "corpus_programs_share": 0.0004,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "@(\"\":",
@@ -3696,7 +3739,7 @@
       "corpus_programs": 2,
       "corpus_programs_share": 0.0004,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 2/47 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "}}};<-",
@@ -3709,7 +3752,7 @@
       "corpus_programs": 1,
       "corpus_programs_share": 0.0002,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "))\"){",
@@ -3722,7 +3765,7 @@
       "corpus_programs": 0,
       "corpus_programs_share": 0.0,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ")}};<-",
@@ -3735,7 +3778,7 @@
       "corpus_programs": 0,
       "corpus_programs_share": 0.0,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".dec(",
@@ -3748,7 +3791,7 @@
       "corpus_programs": 0,
       "corpus_programs_share": 0.0,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".filter(",
@@ -3762,7 +3805,7 @@
       "corpus_programs": 0,
       "corpus_programs_share": 0.0,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 2/47 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".getor(",
@@ -3775,7 +3818,7 @@
       "corpus_programs": 0,
       "corpus_programs_share": 0.0,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 0/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 0/47 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".i64(",
@@ -3788,7 +3831,7 @@
       "corpus_programs": 0,
       "corpus_programs_share": 0.0,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".keys(",
@@ -3801,7 +3844,7 @@
       "corpus_programs": 0,
       "corpus_programs_share": 0.0,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".read(",
@@ -3814,7 +3857,7 @@
       "corpus_programs": 0,
       "corpus_programs_share": 0.0,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".reduce(",
@@ -3827,7 +3870,7 @@
       "corpus_programs": 0,
       "corpus_programs_share": 0.0,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".sort(",
@@ -3841,7 +3884,7 @@
       "corpus_programs": 0,
       "corpus_programs_share": 0.0,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 2/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 2/47 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".str(",
@@ -3854,7 +3897,7 @@
       "corpus_programs": 0,
       "corpus_programs_share": 0.0,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ".write(",
@@ -3867,7 +3910,7 @@
       "corpus_programs": 0,
       "corpus_programs_share": 0.0,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": ";&",
@@ -3880,7 +3923,7 @@
       "corpus_programs": 0,
       "corpus_programs_share": 0.0,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "@(\"\":\"\");",
@@ -3895,7 +3938,7 @@
       "corpus_programs": 0,
       "corpus_programs_share": 0.0,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "@(\"\":@());",
@@ -3908,7 +3951,7 @@
       "corpus_programs": 0,
       "corpus_programs_share": 0.0,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 1/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 1/47 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     },
     {
       "fragment": "})}};<",
@@ -3921,7 +3964,7 @@
       "corpus_programs": 0,
       "corpus_programs_share": 0.0,
       "class": "verify",
-      "rationale": "open-class / contextual fragment: in 0/46 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
+      "rationale": "open-class / contextual fragment: in 0/47 canonical forms, 0.0% of corpus programs -- must merge naturally (Phase 3 gate)"
     }
   ],
   "excluded": [
